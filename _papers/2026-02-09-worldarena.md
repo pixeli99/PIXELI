@@ -36,6 +36,7 @@ EWMScore 单点化是双刃——leaderboard 好看，但 perception 和 functio
 
 ## 引用
 
+{% raw %}
 ```bibtex
 @article{tsinghua2026worldarena,
   title   = {WorldArena: A Unified Benchmark for Evaluating Perception and Functional Utility of Embodied World Models},
@@ -44,3 +45,4 @@ EWMScore 单点化是双刃——leaderboard 好看，但 perception 和 functio
   year    = {2026}
 }
 ```
+{% endraw %}

@@ -38,6 +38,7 @@ V3 训练完之后回头写的 hardware co-design 复盘：在 2048 张 H800 上
 
 ## 引用
 
+{% raw %}
 ```bibtex
 @inproceedings{deepseek2025hardware,
   title     = {Insights into DeepSeek-V3: Scaling Challenges and Reflections on Hardware for AI Architectures},
@@ -46,3 +47,4 @@ V3 训练完之后回头写的 hardware co-design 复盘：在 2048 张 H800 上
   year      = {2025}
 }
 ```
+{% endraw %}

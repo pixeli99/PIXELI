@@ -28,6 +28,7 @@ math: true
 
 ## 引用
 
+{% raw %}
 ```bibtex
 @inproceedings{gale2023megablocks,
   title={{MegaBlocks}: Efficient Sparse Training with Mixture-of-Experts},
@@ -36,3 +37,4 @@ math: true
   year={2023}
 }
 ```
+{% endraw %}

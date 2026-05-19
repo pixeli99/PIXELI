@@ -33,6 +33,7 @@ video-imagination + inverse-dynamics 这种解耦看起来比端到端 VLA 更�
 
 ## 引用
 
+{% raw %}
 ```bibtex
 @misc{1x2026worldmodel,
   title  = {1X World Model: Evaluating Bits, not Atoms},
@@ -42,3 +43,4 @@ video-imagination + inverse-dynamics 这种解耦看起来比端到端 VLA 更�
   howpublished = {\url{https://www.1x.tech/1x-world-model.pdf}}
 }
 ```
+{% endraw %}

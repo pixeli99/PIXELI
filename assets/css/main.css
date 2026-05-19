@@ -35,6 +35,17 @@ body {
   font-feature-settings: "kern", "liga", "calt";
 }
 
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 .site-header,
 .site-content,
 .site-footer {

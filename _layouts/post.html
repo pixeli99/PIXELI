@@ -4,11 +4,24 @@ layout: default
 <article class="post">
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
-    {% if page.date %}
-      <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">
-        {{ page.date | date: "%Y 年 %-m 月 %-d 日" }}
-      </time>
-    {% endif %}
+    <div class="post-meta">
+      {% if page.date %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">
+          {{ page.date | date: "%Y 年 %-m 月 %-d 日" }}
+        </time>
+      {% endif %}
+      {% assign words = content | strip_html | number_of_words %}
+      {% if words > 0 %}
+        <span class="dot">·</span>
+        <span>约 {{ words | divided_by: 350 | plus: 1 }} 分钟</span>
+      {% endif %}
+      {% if page.tags and page.tags.size > 0 %}
+        <span class="dot">·</span>
+        <span class="post-tags">
+          {% for t in page.tags %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | slugify }}">{{ t }}</a>{% unless forloop.last %} {% endunless %}{% endfor %}
+        </span>
+      {% endif %}
+    </div>
   </header>
 
   <div class="post-body">

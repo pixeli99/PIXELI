@@ -188,6 +188,28 @@ th {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
+.entry-tail {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  white-space: nowrap;
+}
+.entry-tail .kind {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.more {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+}
+.more a { color: var(--muted); border-bottom: 1px solid var(--border); }
+.more a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
 /* —— Index page intro —— */
 .intro {
@@ -209,13 +231,91 @@ th {
 /* —— Post —— */
 .post-header { margin-bottom: 2.2rem; }
 .post-title { margin-top: 0; font-size: 1.85rem; }
-.post-date {
-  display: block;
+.post-meta {
   font-family: var(--font-sans);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--faint);
   margin-top: 0.5em;
   font-variant-numeric: tabular-nums;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.post-meta .dot { color: var(--border); }
+.post-meta a {
+  color: var(--muted);
+  border-bottom: none;
+}
+.post-meta a:hover { color: var(--accent); }
+.post-tags a { margin-right: 0.3rem; }
+
+.tag-cloud {
+  margin: 1.8em 0 2.4em;
+  line-height: 2.2;
+}
+.tag-cloud a {
+  display: inline-block;
+  margin-right: 0.6rem;
+  padding: 0.1em 0.55em;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--muted);
+  background: var(--code-bg);
+  border-bottom: none;
+  border-radius: 3px;
+}
+.tag-cloud a:hover { color: var(--accent); }
+.tag-cloud sup {
+  color: var(--faint);
+  margin-left: 0.25em;
+  font-size: 0.75em;
+}
+
+.muted { color: var(--muted); }
+
+/* —— Footnotes (kramdown 默认输出) —— */
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.footnotes ol { padding-left: 1.2em; }
+.footnotes li { margin: 0.4em 0; line-height: 1.7; }
+.footnotes p { margin: 0.3em 0; }
+sup.footnote, a.footnote {
+  font-size: 0.78em;
+  color: var(--accent);
+  border-bottom: none;
+  padding: 0 0.15em;
+  font-variant-numeric: tabular-nums;
+}
+.reversefootnote {
+  border-bottom: none;
+  margin-left: 0.3em;
+  color: var(--faint);
+}
+
+/* —— Entry list with optional excerpt —— */
+.entry-list li.with-excerpt {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  padding: 0.9em 0;
+}
+.entry-list .entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  width: 100%;
+}
+.entry-list .entry-excerpt {
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.55;
 }
 .post-body { word-wrap: break-word; }
 .post-body > *:first-child { margin-top: 0; }

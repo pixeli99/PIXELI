@@ -7,22 +7,22 @@ layout: default
   <p>——论文、随笔、片段。</p>
 </div>
 
-<div class="section-label">近期笔记</div>
+<div class="section-label">最近</div>
+{% assign all = site.notes | concat: site.papers | sort: "date" | reverse %}
 <ul class="entry-list">
-{% for n in site.notes reversed %}{% if forloop.index <= 5 %}
+{% for item in all %}{% if forloop.index <= 12 %}
   <li>
-    <a href="{{ n.url | relative_url }}">{{ n.title }}</a>
-    <time>{{ n.date | date: "%Y-%m-%d" }}</time>
+    <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+    <span class="entry-tail">
+      {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
+      <time>{{ item.date | date: "%Y-%m-%d" }}</time>
+    </span>
   </li>
 {% endif %}{% endfor %}
 </ul>
 
-<div class="section-label">近期论文</div>
-<ul class="entry-list">
-{% for p in site.papers reversed %}{% if forloop.index <= 5 %}
-  <li>
-    <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
-    <time>{{ p.date | date: "%Y-%m-%d" }}</time>
-  </li>
-{% endif %}{% endfor %}
-</ul>
+<p class="more">
+  全部 <a href="{{ '/notes/' | relative_url }}">笔记</a>
+  ／ <a href="{{ '/papers/' | relative_url }}">论文</a>
+  ／按 <a href="{{ '/tags/' | relative_url }}">标签</a>看
+</p>

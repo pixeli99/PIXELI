@@ -32,6 +32,21 @@ defaults:
     values:
       layout: post
 
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+  hard_wrap: false
+  footnote_nr: 1
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -39,6 +54,11 @@ plugins:
 
 feed:
   path: feed.xml
+  collections:
+    notes:
+      path: notes.xml
+    papers:
+      path: papers.xml
 
 exclude:
   - Gemfile

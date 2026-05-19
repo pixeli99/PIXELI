@@ -6,7 +6,17 @@
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   {%- seo title=false -%}
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
   {%- feed_meta -%}
+
+  {%- comment -%} KaTeX：仅在文章 front matter 设了 math: true 时加载 {%- endcomment -%}
+  {% if page.math %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}], throwOnError: false});"></script>
+  {% endif %}
 </head>
 <body>
   <header class="site-header">
@@ -14,6 +24,7 @@
     <nav class="site-nav">
       <a href="{{ '/notes/' | relative_url }}">笔记</a>
       <a href="{{ '/papers/' | relative_url }}">论文</a>
+      <a href="{{ '/tags/' | relative_url }}">标签</a>
       <a href="{{ '/about/' | relative_url }}">关于</a>
     </nav>
   </header>
@@ -24,6 +35,8 @@
 
   <footer class="site-footer">
     <span>© {{ 'now' | date: "%Y" }} {{ site.author }}</span>
+    <span class="dot">·</span>
+    <a href="https://github.com/pixeli99/PIXELI">源码</a>
     <span class="dot">·</span>
     <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
   </footer>

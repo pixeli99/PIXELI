@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'zh-CN' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  {%- seo title=false -%}
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  {%- feed_meta -%}
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav class="site-nav">
+      <a href="{{ '/notes/' | relative_url }}">笔记</a>
+      <a href="{{ '/papers/' | relative_url }}">论文</a>
+      <a href="{{ '/about/' | relative_url }}">关于</a>
+    </nav>
+  </header>
+
+  <main class="site-content">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <span>© {{ 'now' | date: "%Y" }} {{ site.author }}</span>
+    <span class="dot">·</span>
+    <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+  </footer>
+</body>
+</html>

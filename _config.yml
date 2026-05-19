@@ -1,0 +1,49 @@
+title: PIXELI
+tagline: 论文 · 随笔 · 笔记
+author: pixeli99
+email: 2040gis@gmail.com
+description: 一个人的知识库
+
+baseurl: "/PIXELI"
+url: "https://pixeli99.github.io"
+
+lang: zh-CN
+timezone: Asia/Shanghai
+
+permalink: /:collection/:path/
+
+collections:
+  notes:
+    output: true
+    permalink: /notes/:path/
+  papers:
+    output: true
+    permalink: /papers/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: notes
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: papers
+    values:
+      layout: post
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .claude/
+  - README.md
+  - .github/

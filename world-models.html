@@ -1,0 +1,979 @@
+---
+layout: default
+title: World Models 全景
+permalink: /world-models/
+math: true
+---
+
+<style>
+  .wm-intro { margin: 0 0 2.5rem; }
+  .wm-intro p { margin: 0.4em 0; }
+
+  .wm-section-h {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--faint);
+    text-transform: uppercase;
+    margin: 3rem 0 0.8rem;
+  }
+
+  /* Timeline */
+  .wm-timeline {
+    position: relative;
+    margin: 1.4rem 0 2.4rem;
+    padding: 0.6rem 0 1.6rem;
+    overflow-x: auto;
+  }
+  .wm-timeline-track {
+    display: flex;
+    gap: 2.2rem;
+    min-width: max-content;
+    padding: 0 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .wm-era {
+    font-family: var(--font-sans);
+    flex-shrink: 0;
+    padding-bottom: 1rem;
+    position: relative;
+    min-width: 9rem;
+  }
+  .wm-era::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .wm-era-year {
+    font-size: 0.78rem;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+  }
+  .wm-era-title {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.92rem;
+    margin: 0.2rem 0 0.3rem;
+  }
+  .wm-era-models {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Streams matrix */
+  .wm-streams {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.8rem;
+    margin: 1.2rem 0 2.4rem;
+  }
+  .wm-stream {
+    border: 1px solid var(--border);
+    padding: 0.9rem 1rem;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.015);
+  }
+  .wm-stream-name {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  .wm-stream-name .badge {
+    font-size: 0.7rem;
+    color: var(--faint);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    margin-left: 0.4rem;
+  }
+  .wm-stream-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  @media (prefers-color-scheme: dark) {
+    .wm-stream { background: rgba(255,255,255,0.025); }
+  }
+
+  /* Filter controls */
+  .wm-controls {
+    margin: 0.6rem 0 1.5rem;
+    padding: 1rem 0 0.4rem;
+    border-top: 1px solid var(--border);
+  }
+  .wm-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.5rem;
+    margin: 0.55rem 0;
+  }
+  .wm-filter-label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    width: 4.2rem;
+    flex-shrink: 0;
+  }
+  .wm-chip {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--muted);
+    background: var(--code-bg);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 0.16em 0.6em;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    user-select: none;
+  }
+  .wm-chip:hover { color: var(--text); }
+  .wm-chip.active {
+    color: #fff;
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .wm-summary {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--faint);
+    margin: 0.6rem 0 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Grid */
+  .wm-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    margin: 1.4rem 0 2.4rem;
+  }
+  .wm-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.85rem 1rem;
+    background: var(--bg);
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.05s;
+  }
+  .wm-card:hover { border-color: var(--accent); }
+  .wm-card.open {
+    border-color: var(--accent);
+    cursor: default;
+  }
+  .wm-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.7rem;
+  }
+  .wm-card-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.98rem;
+  }
+  .wm-card-meta {
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .wm-card-tags {
+    display: inline-flex;
+    gap: 0.35rem;
+    margin-left: auto;
+    flex-wrap: wrap;
+  }
+  .wm-tag {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    color: var(--faint);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.05em 0.4em;
+    letter-spacing: 0.04em;
+  }
+  .wm-tag.repr-latent { color: var(--accent); border-color: var(--accent); }
+  .wm-tag.repr-pixel  { color: var(--muted); }
+  .wm-tag.repr-token  { color: var(--muted); }
+  .wm-tag.repr-3d     { color: var(--muted); }
+  .wm-card-short {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-top: 0.35rem;
+    line-height: 1.6;
+  }
+  .wm-card-detail {
+    display: none;
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--border);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .wm-card.open .wm-card-detail { display: block; }
+  .wm-card-detail .wm-summary-line {
+    color: var(--text);
+    margin-bottom: 0.7rem;
+  }
+  .wm-pc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem 1.2rem;
+    margin: 0.4rem 0;
+  }
+  .wm-pc-grid h4 {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    margin: 0 0 0.3rem;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .wm-pc-grid ul {
+    margin: 0;
+    padding-left: 1.2em;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  .wm-pc-grid li { margin: 0.15em 0; }
+  .wm-bench {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.55rem;
+    padding-top: 0.5rem;
+    border-top: 1px dotted var(--border);
+  }
+  .wm-bench-label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-right: 0.5em;
+  }
+  .wm-card-links {
+    margin-top: 0.65rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+  }
+  .wm-card-links a {
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    margin-right: 0.8rem;
+  }
+  .wm-card-links a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .wm-streams { grid-template-columns: 1fr; }
+    .wm-pc-grid { grid-template-columns: 1fr; }
+    .wm-filter-label { width: 100%; margin-bottom: -0.3rem; }
+    .wm-card-tags { margin-left: 0; }
+  }
+
+  /* Bench tables */
+  .wm-bench-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.6rem 0 1.5rem;
+    font-size: 0.88rem;
+  }
+  .wm-bench-table th,
+  .wm-bench-table td {
+    text-align: left;
+    padding: 0.35em 0.7em;
+    border-bottom: 1px solid var(--border);
+  }
+  .wm-bench-table th {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .wm-bench-table .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Snapshot panel */
+  .wm-snapshot {
+    border-left: 2px solid var(--accent);
+    padding: 0.2rem 0 0.2rem 1rem;
+    margin: 1.4rem 0 2rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.78;
+  }
+  .wm-snapshot strong { color: var(--text); }
+</style>
+
+<h1 style="margin-top:0">World Models 全景</h1>
+
+<div class="wm-intro">
+  <p>
+  广义"world model"指一个能在某种状态空间里预测<em>下一步会发生什么</em>的模型——预测目标可以是嵌入（latent）、token 序列，或者直接是像素。"预测得到什么"决定了这套模型能干什么：在 latent 里预测得到的是 sample-efficient 的 RL/planning 引擎；预测像素得到的是 video generation；带动作输入得到的是可玩的虚拟世界。这页把 2018 到 2026 这一支的主要模型放在同一张图上比对。
+  </p>
+  <p style="color:var(--faint);font-size:0.88rem">
+  数据基础：本知识库 <a href="{{ '/papers/' | relative_url }}">_papers/</a> 中 29 篇笔记 + 6 篇公开但未单独归档的闭源旗舰。
+  </p>
+</div>
+
+<div class="wm-section-h">时间线</div>
+<div class="wm-timeline">
+  <div class="wm-timeline-track">
+    <div class="wm-era">
+      <div class="wm-era-year">2018 — 2020</div>
+      <div class="wm-era-title">latent dreaming</div>
+      <div class="wm-era-models">Ha & Schmidhuber<br>PlaNet · DreamerV1/V2</div>
+    </div>
+    <div class="wm-era">
+      <div class="wm-era-year">2022 — 2023</div>
+      <div class="wm-era-title">tokenized & scaled</div>
+      <div class="wm-era-models">IRIS · TWM · DreamerV3<br>I-JEPA · GAIA-1</div>
+    </div>
+    <div class="wm-era">
+      <div class="wm-era-year">2024</div>
+      <div class="wm-era-title">video as world sim</div>
+      <div class="wm-era-models">Sora · Lumiere · VideoPoet<br>Genie · V-JEPA · Oasis · Genie 2</div>
+    </div>
+    <div class="wm-era">
+      <div class="wm-era-year">2025</div>
+      <div class="wm-era-title">物理 AI & 可交互</div>
+      <div class="wm-era-models">Cosmos · WHAM · GAIA-2 · Wan<br>V-JEPA 2 · Genie 3 · Marble</div>
+    </div>
+    <div class="wm-era">
+      <div class="wm-era-year">2026</div>
+      <div class="wm-era-title">部署 & 评测</div>
+      <div class="wm-era-models">1X WM · WorldArena<br>SANA-WM · VGGT-Ω · FutureSim</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-section-h">三大流派 — 一句话差异</div>
+<div class="wm-streams">
+  <div class="wm-stream">
+    <div class="wm-stream-name">Latent<span class="badge">predict embedding</span></div>
+    <div class="wm-stream-desc">RSSM / JEPA 路线——在压缩后的低维状态里预测。不渲染像素，省算力、容易给下游 policy/controller 用，但没法直接给人看视频。代表：DreamerV3、V-JEPA 2。</div>
+  </div>
+  <div class="wm-stream">
+    <div class="wm-stream-name">Token<span class="badge">predict next token</span></div>
+    <div class="wm-stream-desc">把视频/动作 VQ-VAE 量化成 token，套 transformer 做 next-token prediction。可解码回像素也可控、训练栈跟 LLM 同构，但分辨率受 codebook 上限。代表：IRIS、Genie、GAIA-1。</div>
+  </div>
+  <div class="wm-stream">
+    <div class="wm-stream-name">Pixel<span class="badge">predict frame</span></div>
+    <div class="wm-stream-desc">DiT / latent diffusion 直接生成 RGB 帧序列。视觉天花板最高，能 prompt-conditioned，但推理慢、长 horizon 一致性差，更像电影机不像 simulator。代表：Sora、Veo、Wan、Cosmos。</div>
+  </div>
+</div>
+
+<div class="wm-section-h">浏览模型</div>
+
+<div class="wm-controls">
+  <div class="wm-filter-row">
+    <span class="wm-filter-label">表示</span>
+    <button class="wm-chip active" data-filter="repr" data-value="all">全部</button>
+    <button class="wm-chip" data-filter="repr" data-value="latent">Latent</button>
+    <button class="wm-chip" data-filter="repr" data-value="token">Token</button>
+    <button class="wm-chip" data-filter="repr" data-value="pixel">Pixel</button>
+    <button class="wm-chip" data-filter="repr" data-value="3d">3D / Spatial</button>
+  </div>
+  <div class="wm-filter-row">
+    <span class="wm-filter-label">用途</span>
+    <button class="wm-chip active" data-filter="purpose" data-value="all">全部</button>
+    <button class="wm-chip" data-filter="purpose" data-value="rl">RL / Planning</button>
+    <button class="wm-chip" data-filter="purpose" data-value="video">视频生成</button>
+    <button class="wm-chip" data-filter="purpose" data-value="game">游戏 / 交互</button>
+    <button class="wm-chip" data-filter="purpose" data-value="driving">驾驶</button>
+    <button class="wm-chip" data-filter="purpose" data-value="robotics">机器人</button>
+    <button class="wm-chip" data-filter="purpose" data-value="spatial">3D / 空间</button>
+    <button class="wm-chip" data-filter="purpose" data-value="benchmark">评测</button>
+  </div>
+  <div class="wm-filter-row">
+    <span class="wm-filter-label">年代</span>
+    <button class="wm-chip active" data-filter="era" data-value="all">全部</button>
+    <button class="wm-chip" data-filter="era" data-value="pre2023">2018-2022</button>
+    <button class="wm-chip" data-filter="era" data-value="2023">2023</button>
+    <button class="wm-chip" data-filter="era" data-value="2024">2024</button>
+    <button class="wm-chip" data-filter="era" data-value="2025">2025</button>
+    <button class="wm-chip" data-filter="era" data-value="2026">2026</button>
+  </div>
+  <div class="wm-filter-row">
+    <span class="wm-filter-label">开源</span>
+    <button class="wm-chip active" data-filter="open" data-value="all">全部</button>
+    <button class="wm-chip" data-filter="open" data-value="open">Open</button>
+    <button class="wm-chip" data-filter="open" data-value="closed">Closed</button>
+  </div>
+  <div class="wm-summary" id="wm-summary"></div>
+</div>
+
+<div class="wm-grid" id="wm-grid"></div>
+
+<div class="wm-section-h">Benchmark 横切</div>
+
+<p style="color:var(--muted);font-size:0.95rem;">
+评测体系正在大迁移。FVD/IS/CLIPSIM 实际上被弃用——<a href="{{ '/papers/2024-10-07-beyond-fvd/' | relative_url }}">Beyond FVD (ICLR 2025)</a> 列了三条致命缺陷：I3D 特征非高斯、对时间扰动不敏感、需要不切实际的样本量。当下分四套接管：<strong>VBench-2.0</strong>（intrinsic faithfulness，物理/常识/合成性/解剖）、<strong>WorldArena</strong>（embodied utility，清华 FIB，CVPR 2026 Challenge）、<strong>WorldMark</strong>（interactive WM 专用，500 case）、<strong>WorldScore</strong>（Stanford）。
+</p>
+
+<h3 style="margin-top:2rem;">WorldMark · 6 个 interactive WM 的核心指标（first-person real）</h3>
+<p style="color:var(--muted);font-size:0.88rem;">
+摘自 <a href="https://arxiv.org/abs/2604.21686" target="_blank" rel="noopener">arXiv:2604.21686</a>。Aesthetic / Imaging 0-100 越高越好；trans/rot/reproj err 越低越好；state/content/style consistency 0-10 越高越好。
+</p>
+
+<div style="overflow-x:auto;">
+<table class="wm-bench-table">
+  <thead>
+    <tr>
+      <th>模型</th>
+      <th class="num">美学</th>
+      <th class="num">成像</th>
+      <th class="num">平移 err</th>
+      <th class="num">旋转 err</th>
+      <th class="num">重投影 err</th>
+      <th class="num">state 一致</th>
+      <th class="num">content 一致</th>
+      <th class="num">style 一致</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>YUME 1.5</td><td class="num">56.9</td><td class="num">74.4</td><td class="num">0.199</td><td class="num">2.11</td><td class="num">0.549</td><td class="num">5.3</td><td class="num">3.8</td><td class="num">7.1</td></tr>
+    <tr><td>Matrix-Game 2.0</td><td class="num">49.4</td><td class="num">68.1</td><td class="num">0.222</td><td class="num">1.32</td><td class="num">0.688</td><td class="num">4.2</td><td class="num">7.4</td><td class="num">3.2</td></tr>
+    <tr><td>HY-World 1.5</td><td class="num">54.8</td><td class="num">69.4</td><td class="num">0.191</td><td class="num">2.08</td><td class="num">0.702</td><td class="num">5.9</td><td class="num">6.4</td><td class="num">5.1</td></tr>
+    <tr><td>HY-GameCraft</td><td class="num">46.6</td><td class="num">49.3</td><td class="num">0.159</td><td class="num">6.02</td><td class="num">0.447</td><td class="num">4.1</td><td class="num">5.8</td><td class="num">3.7</td></tr>
+    <tr><td>Open-Oasis</td><td class="num">29.3</td><td class="num">28.1</td><td class="num">0.376</td><td class="num">4.89</td><td class="num">1.938</td><td class="num">2.6</td><td class="num">3.7</td><td class="num">1.8</td></tr>
+    <tr><td><strong>Genie 3</strong></td><td class="num">45.6</td><td class="num">64.1</td><td class="num">0.498</td><td class="num">4.25</td><td class="num">0.441</td><td class="num"><strong>6.4</strong></td><td class="num">6.9</td><td class="num"><strong>8.2</strong></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="color:var(--muted);font-size:0.88rem;">
+结论：<strong>视觉质量和世界一致性几乎不相关</strong>。YUME 美学最高，Genie 3 一致性最强；Open-Oasis 在两边都垫底。Spearman ρ &gt; 0.9 与人工偏好对齐——评测可信。
+</p>
+
+<h3 style="margin-top:2rem;">VBench-2.0 · 物理/常识/合成性是当下硬骨头</h3>
+<p style="color:var(--muted);font-size:0.88rem;">
+摘自 <a href="https://arxiv.org/abs/2503.21755" target="_blank" rel="noopener">arXiv:2503.21755</a>。绝大多数 frontier 模型在物理/动态空间关系上都 &lt;60%。</p>
+
+<div style="overflow-x:auto;">
+<table class="wm-bench-table">
+  <thead>
+    <tr><th>能力维度</th><th class="num">HunyuanVideo</th><th class="num">CogVideoX-1.5</th><th class="num">Sora</th><th class="num">Kling 1.6</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>人体解剖</td><td class="num">88.6</td><td class="num">59.7</td><td class="num">86.5</td><td class="num">87.0</td></tr>
+    <tr><td>物理 · 力学</td><td class="num">76.1</td><td class="num"><strong>80.8</strong></td><td class="num">62.2</td><td class="num">65.6</td></tr>
+    <tr><td>物理 · 热学</td><td class="num">56.5</td><td class="num">67.1</td><td class="num">43.4</td><td class="num">59.5</td></tr>
+    <tr><td>动态空间关系</td><td class="num">21.3</td><td class="num">19.3</td><td class="num">19.8</td><td class="num">20.8</td></tr>
+    <tr><td>动态属性</td><td class="num">22.7</td><td class="num">24.2</td><td class="num">8.1</td><td class="num">19.4</td></tr>
+    <tr><td>运动顺序</td><td class="num">26.6</td><td class="num">26.9</td><td class="num">14.8</td><td class="num">29.3</td></tr>
+    <tr><td>多视角一致性</td><td class="num">43.8</td><td class="num">21.8</td><td class="num">58.2</td><td class="num"><strong>64.4</strong></td></tr>
+    <tr><td>复杂情节</td><td class="num">10.1</td><td class="num">12.4</td><td class="num">11.7</td><td class="num">11.8</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="color:var(--muted);font-size:0.88rem;">
+原表里 Veo 3.1 / Sora 2 / Wan 2.5+ 没赶上 benchmark cut-off；UCSD Hao AI Lab 的 follow-up 跑了它们，结论是 Sora 2 / Veo 3 在物理上靠前但仍 &lt;60%。"复杂情节"全员 10-12 分——这是 video model 共同的语义瓶颈。
+</p>
+
+<h3 style="margin-top:2rem;">人工偏好 Elo（Artificial Analysis · 2026 Q1-Q2）</h3>
+<div style="overflow-x:auto;">
+<table class="wm-bench-table">
+  <thead>
+    <tr><th>模型</th><th class="num">Elo</th><th>开/闭</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>HappyHorse-1.0</td><td class="num">1361</td><td>Closed</td></tr>
+    <tr><td>Seedance 2.0</td><td class="num">1268</td><td>Closed</td></tr>
+    <tr><td>Kling 3.0</td><td class="num">1247</td><td>Closed</td></tr>
+    <tr><td>Veo 3</td><td class="num">1217</td><td>Closed</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="color:var(--muted);font-size:0.88rem;">
+Elo 跟 VBench / WorldArena 几乎不可对换——前者来自 head-to-head 偏好，后者来自标量指标。三个榜并列存在，恰恰说明评测还在迁移期。
+</p>
+
+<h3 style="margin-top:2rem;">机器人侧的真实数字</h3>
+<table class="wm-bench-table">
+  <thead>
+    <tr><th>模型</th><th>任务</th><th class="num">成功率 %</th><th>推理 / 备注</th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="4">V-JEPA 2-AC</td><td>reach</td><td class="num">100</td><td rowspan="4">每 action 16s（Cosmos 240s）</td></tr>
+    <tr><td>grasp</td><td class="num">65</td></tr>
+    <tr><td>reach-with-object</td><td class="num">75</td></tr>
+    <tr><td>pick-and-place</td><td class="num">65</td></tr>
+    <tr><td rowspan="3">Cosmos Policy</td><td>LIBERO avg</td><td class="num">98.5</td><td>2026-02-23 发布</td></tr>
+    <tr><td>RoboCasa avg</td><td class="num">67.1</td><td></td></tr>
+    <tr><td>ALOHA-2 双臂</td><td class="num">93.6</td><td></td></tr>
+  </tbody>
+</table>
+<p style="color:var(--muted);font-size:0.88rem;">
+LIBERO 简单任务上 Cosmos 把 V-JEPA 2-AC 远远甩开，但 RoboCasa 这种更杂的环境 67% 也不算特别强。pick-and-place 65% 是 V-JEPA 2-AC 当下最常被引的数字。GAIA-3 至今未公开 sim2real gap / scenario reject rate 等定量结果。
+</p>
+
+<div class="wm-section-h">业界 snapshot · 2026 Q2</div>
+<div class="wm-snapshot" id="wm-snapshot">
+  <p><strong>四大阵营分化已经成型。</strong>① 视频生成派（Sora 2 / Veo 3.1 / Wan 2.6 / Kling 3.0 / Seedance 2.0）追"看上去像物理"；② 实时交互派（Genie 3 / Decart Lucy &lt;30ms / WHAMM）追"能玩、能 close loop"；③ 行业派（Wayve GAIA-3、NVIDIA Cosmos、1X、World Labs Marble、Tencent HY-World 2.0）只服务自己业务指标；④ JEPA 派（Meta V-JEPA 2-AC）拒绝预测像素，押注 embedding 空间。四派短期不会合流——评测尺度根本不一样。</p>
+  <p><strong>开源比例反常地高。</strong>foundation WM 这条线开源占 ~60-65%（Cosmos、V-JEPA 2、HY-World 2.0、Wan 2.2、WHAM 全开），real-time interactive 反过来仅 ~30% 开源（Genie 3 / Lucy / Oasis / GAIA-3 全闭）。整个 WM 空间开源比 ~55-60%，与 LLM 顶端 ~70% 闭源的格局完全反转。</p>
+  <p><strong>"长一致性"仍是公认硬上限。</strong>Genie 3 的分钟级是当前 SOTA，但所有人都知道这远远不够 RL 训练所需的小时级 rollout。WorldMark 的 state-consistency 维度 Genie 3 拿 6.4/10（最强），但其他模型普遍 2-6 分——长 horizon 这条线整个 field 都没解决。</p>
+  <p><strong>资本侧 2026 Q1 同步爆发。</strong>World Labs 2026-02-18 完成 $1B / 估值 ~$5B（Autodesk $200M 领投）；Wayve 2026-02-24 完成 Series D $1.26B / 估值 $8.6B；Decart 2026-05-18 完成 $300M Series C / 估值 ~$4B。三家路线分化明显（内容生成 / 驾驶评估 / 实时交互），但都被 NVIDIA Cosmos 收编为 synthetic data 引擎。</p>
+  <p><strong>Sora 2 已退出舞台。</strong>OpenAI app 于 2026-04-26 关闭、API 计划 2026-09-24 停服，用户迁移到 GPT-5 视频功能；这条线 OpenAI 实际放弃了独立产品形态，转入多模态 GPT 主线。</p>
+  <p><strong>研究空白 — taxonomy 矩阵的三个空格</strong>：① latent × content generation（没人用纯 latent 做面向消费者的内容生成，渲染瓶颈）；② pixel × RL/planning（pixel 推理太慢，Cosmos 一次 action 要 240 秒）；③ latent × evaluation（用 embedding 距离做模型能力评估几乎没人在做）。这三块都是真实未开发地。</p>
+</div>
+
+<div class="wm-section-h">研究空白 — 当前 field 的三个未开发格</div>
+
+<p style="color:var(--muted);font-size:0.92rem;">
+把 30+ 模型塞进 [Latent / Token / Pixel] × [RL planning / Content gen / Evaluation] 的 2×3 矩阵后，三个格子明显空着——这本身就是研究信号：
+</p>
+
+<table class="wm-bench-table">
+  <thead>
+    <tr><th>空格</th><th>为什么空</th><th>谁可能填上</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Latent × Content Gen</strong></td>
+      <td>latent 不易渲染回像素 → 消费者看不到</td>
+      <td>有人把 JEPA 嵌入 + diffusion decoder 配对（V-JEPA → frame decoder）</td>
+    </tr>
+    <tr>
+      <td><strong>Pixel × RL / Planning</strong></td>
+      <td>pixel 推理慢，Cosmos 一次 action 要 240 秒</td>
+      <td>Cosmos / SANA-WM 等开始投入；蒸馏 + 量化能压下来吗</td>
+    </tr>
+    <tr>
+      <td><strong>Latent × Evaluation</strong></td>
+      <td>用 embedding 距离做模型能力评估几乎没人在做</td>
+      <td>V-JEPA 2 的 physical reasoning bench 是孤本——Meta 内部线索</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="wm-section-h">三流派 Pros / Cons 总表</div>
+<table class="wm-bench-table">
+  <thead>
+    <tr><th></th><th>优势</th><th>劣势</th><th>典型用例</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Latent</strong><br><span class="wm-card-meta">JEPA / RSSM</span></td>
+      <td>样本效率高（DreamerV3 在 Atari 100k 上击败 model-free）；可直接给 controller / policy 用；不预测像素 = 不浪费算力在不可预测内容上（LeCun 论点）</td>
+      <td>无法给人看；表达力受 latent dim 上限；评测困难（没有视觉 ground truth）；社区注意力远低于像素派</td>
+      <td>RL planning · embodied reasoning</td>
+    </tr>
+    <tr>
+      <td><strong>Token</strong><br><span class="wm-card-meta">VQ + AR transformer</span></td>
+      <td>训练栈与 LLM 完全同构；天然支持 action token；推理可以接 KV cache；scaling 路线清晰</td>
+      <td>codebook 上限决定细节；离散量化丢高频；推理仍 sequential</td>
+      <td>可交互世界（Genie）· 驾驶（GAIA-1）</td>
+    </tr>
+    <tr>
+      <td><strong>Pixel</strong><br><span class="wm-card-meta">DiT / latent diffusion</span></td>
+      <td>视觉天花板最高；prompt-conditioned 灵活；高度多模态；2024 后所有 hype 都在这条线</td>
+      <td>推理慢（生成 5s 需若干秒到几十秒）；长 horizon 漂移严重；物理常被违反；闭源旗舰为主</td>
+      <td>视频生成 · 物理 AI synthetic data</td>
+    </tr>
+    <tr>
+      <td><strong>3D / Spatial</strong><br><span class="wm-card-meta">scene-level</span></td>
+      <td>输出可导出（Gaussian splat / mesh）；持久化空间一致性；下游 3D engine 可用</td>
+      <td>新流派，工作少；评测体系不成熟；动态物体支持有限</td>
+      <td>VR / AR · game asset · 3D reconstruction</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="wm-section-h">延伸阅读</div>
+<ul class="entry-list">
+  <li><a href="{{ '/notes/2026-05-20-world-arena/' | relative_url }}">World Arena 与 World Model 脉络（综述）</a><time>2026-05-20</time></li>
+  <li><a href="{{ '/papers/' | relative_url }}">所有论文笔记</a><time>57+</time></li>
+  <li><a href="{{ '/tags/#tag-world-model' | relative_url }}">所有 World Model 笔记按标签</a><time>—</time></li>
+</ul>
+
+<script>
+(function(){
+const BASE = "{{ site.baseurl }}";
+const MODELS = [
+  {slug:"world-models-ha-schmidhuber",title:"World Models (Ha & Schmidhuber)",date:"2018-03",org:"Ha & Schmidhuber",repr:"latent",purpose:["rl"],era:"pre2023",open:true,
+   short:"V (VAE) + M (MDN-RNN) + C (linear controller)，先学世界再在'梦里'训策略。",
+   summary:"CarRacing 平均 906±21 解决；DoomTakeCover 在 dream 里训完 zero-shot 迁回真环境拿 1100 步。",
+   pros:["range-defining：把'先学 WM、再 plan/policy'这条路点亮","controller 仅 867 参数，证明 representation 学好后 policy capacity 几乎不要"],
+   cons:["只 work 在低维像素 + 离散 action","MDN-RNN 不 scale 到长 horizon","dream exploit 没解决（后续 Dreamer 才稳）"],
+   bench:"CarRacing avg 906；DoomTakeCover dream→real 1100 steps",
+   paper:"/papers/2018-03-27-world-models-ha-schmidhuber/"},
+  {slug:"planet",title:"PlaNet",date:"2018-11",org:"Google Brain & DeepMind",repr:"latent",purpose:["rl"],era:"pre2023",open:true,
+   short:"端到端 RSSM + CEM 在 latent 里做 model-predictive planning，不学显式 policy。",
+   summary:"DeepMind Control 6 个连续控制任务匹敌 D4PG/A3C 但样本量仅 1/200。",
+   pros:["首次证明 latent dynamics 可直接 plan","RSSM (deterministic + stochastic) 架构后续被 Dreamer 全家沿用"],
+   cons:["纯 planning 不学 policy，推理时仍要 CEM","只测了 DMC，没扩到 Atari"],
+   bench:"DMC 6 task，sample efficiency 200×",
+   paper:"/papers/2018-11-12-planet/"},
+  {slug:"dreamerv1",title:"DreamerV1",date:"2019-12",org:"Google Brain & DeepMind",repr:"latent",purpose:["rl"],era:"pre2023",open:true,
+   short:"PlaNet 的 RSSM 上换 CEM 为 latent imagination 里训 actor-critic。",
+   summary:"DMC 20 个任务 5M frames 超过 D4PG 100M frames。",
+   pros:["analytic gradient through latent imagination 让 actor-critic 高效","完整 model-based RL framework，可控可解释"],
+   cons:["RSSM 容量有限","Atari 表现一般（V2 才解决）"],
+   bench:"DMC 20 task @ 5M frames > D4PG @ 100M",
+   paper:"/papers/2019-12-03-dreamerv1/"},
+  {slug:"dreamerv2",title:"DreamerV2",date:"2020-10",org:"Google Brain & DeepMind",repr:"latent",purpose:["rl"],era:"pre2023",open:true,
+   short:"RSSM 把 Gaussian latent 换成 32×32 categorical（straight-through）。",
+   summary:"单 GPU 跑完 Atari 55 game 200M frames，平均人类标准化分 1.64，首次让 model-based 整体击败 Rainbow/IQN。",
+   pros:["discrete latent + straight-through 解决 stochasticity 反传","KL balancing 缓解 dream exploit"],
+   cons:["transformer 时代来临前的最后一代 RSSM","仅 single agent，多模态扩展乏力"],
+   bench:"Atari 55 game HNM 1.64",
+   paper:"/papers/2020-10-05-dreamerv2/"},
+  {slug:"iris",title:"IRIS",date:"2022-09",org:"Univ. of Geneva",repr:"token",purpose:["rl"],era:"pre2023",open:true,
+   short:"World model = VQ token 序列上的 GPT-style autoregressive LM。",
+   summary:"Atari 100k benchmark，26 game HNM mean 1.046 / median 0.289，100k 区段第一个 mean 超过人类的 agent。",
+   pros:["把 WM 重写成 next-token prediction，与 LLM stack 同构","16 token/frame 的高压缩让 100k 区段可行"],
+   cons:["VQ 重建上限决定细节","attention 在长 horizon 下成本"],
+   bench:"Atari 100k：mean 1.046 / median 0.289",
+   paper:"/papers/2022-09-01-iris/"},
+  {slug:"twm",title:"TWM",date:"2023-03",org:"TU Darmstadt",repr:"token",purpose:["rl"],era:"2023",open:true,
+   short:"Dreamer 的 RSSM 换成 Transformer-XL，输入 (z,a,r) 拼成单序列。",
+   summary:"Atari 100k HNM mean 0.96 / median 0.51，同体量 model-based sample-efficient 代表。",
+   pros:["balanced cross entropy 处理 sequence imbalance","Transformer-XL recurrence 适合 long horizon"],
+   cons:["体量小，scaling 路径不明","跟 IRIS 路线接近，差异化弱"],
+   bench:"Atari 100k：mean 0.96 / median 0.51",
+   paper:"/papers/2023-03-13-twm/"},
+  {slug:"dreamerv3",title:"DreamerV3",date:"2023-01",org:"DeepMind",repr:"latent",purpose:["rl"],era:"2023",open:true,
+   short:"一套固定超参 + 一套架构在 150+ 任务上稳定 work；Minecraft 从零挖钻石。",
+   summary:"WM 参数 8M→200M 性能单调，2025 年发 Nature。",
+   pros:["首次单超参跨 DMC/Atari/ProcGen/Crafter/Minecraft 都稳","WM scaling law 第一次在 RL 里被观察到"],
+   cons:["最大 200M 还远小于 LLM/视频模型，是否可继续 scale 未明","Minecraft 也只是稀疏 reward 任务"],
+   bench:"150+ task 单一超参；Minecraft zero-shot diamond",
+   paper:"/papers/2023-01-10-dreamerv3/"},
+  {slug:"i-jepa",title:"I-JEPA",date:"2023-01",org:"Meta FAIR (LeCun)",repr:"latent",purpose:["ssl"],era:"2023",open:true,
+   short:"在 representation 空间预测被遮挡区域，不重建像素、不对比学习、不增广。",
+   summary:"ImageNet linear probe ViT-H/14 77.5%，比 MAE 同规模快约 10×。",
+   pros:["不重建像素的哲学胜利","下游迁移效果好"],
+   cons:["仍是 image-level，没动到时间维","对比 BYOL/DINO 优势没那么悬殊"],
+   bench:"ImageNet ViT-H/14 linear 77.5%",
+   paper:"/papers/2023-01-19-i-jepa/"},
+  {slug:"gaia-1",title:"GAIA-1",date:"2023-09",org:"Wayve",repr:"token",purpose:["driving"],era:"2023",open:false,
+   short:"9B 自回归 token transformer + video diffusion decoder，专攻驾驶 world model。",
+   summary:"video / text / action 三路 token 化，预测 next visual token 后解码成视频。",
+   pros:["三路条件输入设计完整","Wayve 业务闭环驱动 → 真实驾驶场景数据"],
+   cons:["闭源","9B autoregressive 推理慢","单视角"],
+   bench:"未公开 sim2real / scenario metrics",
+   paper:"/papers/2023-09-29-gaia-1/"},
+  {slug:"videopoet",title:"VideoPoet",date:"2023-12",org:"Google",repr:"token",purpose:["video"],era:"2023",open:false,
+   short:"video/audio/image 全 tokenize 后塞进 decoder-only Transformer，纯 next-token。",
+   summary:"ICML 2024 Best Paper；支持 text2video/image2video/stylization/v2a 零样本多任务。",
+   pros:["纯 LLM 范式，工程上极干净","多模态/多任务统一"],
+   cons:["闭源","token 量化丢细节","Sora 出来后被压","Wan 等开源以更便宜方式追上"],
+   bench:"未公开统一 leaderboard 分数",
+   paper:"/papers/2023-12-21-videopoet/"},
+  {slug:"lumiere",title:"Lumiere",date:"2024-01",org:"Google",repr:"pixel",purpose:["video"],era:"2024",open:false,
+   short:"Space-Time U-Net 一次性 denoise 整 5 秒视频（80 帧 @ 16 fps）。",
+   summary:"避免了先关键帧再插帧的两段式，时间一致性显著好。",
+   pros:["单 pass full duration 处理","time-down/up sampling 设计干净"],
+   cons:["闭源未发","DiT 兴起后这套 U-Net 路线被边缘化"],
+   bench:"未公开 leaderboard",
+   paper:"/papers/2024-01-23-lumiere/"},
+  {slug:"sora",title:"Sora",date:"2024-02",org:"OpenAI",repr:"pixel",purpose:["video"],era:"2024",open:false,
+   short:"DiT on spacetime patches，最长 60s 1080p。",
+   summary:"把'video gen = world simulator'砸进主流叙事；scaling 涌现物理（笔触留痕、咬痕）。",
+   pros:["spacetime patch 统一不同分辨率/时长/宽高比","scaling 力度强","对全行业是路线引导"],
+   cons:["物理违反频发（穿模、守恒律）","闭源","推理慢"],
+   bench:"VBench leaderboard 主流前列；具体闭源 API",
+   paper:"/papers/2024-02-15-sora/"},
+  {slug:"genie",title:"Genie",date:"2024-02",org:"DeepMind",repr:"token",purpose:["game"],era:"2024",open:false,
+   short:"11B，从无标注视频学 latent action（codebook 8），可玩 2D 世界。",
+   summary:"30k 小时 2D 平台游戏视频；frame-level 可控。",
+   pros:["latent action 这一创新打开'可玩'范式","无 action 标注 → 解锁海量 video 数据"],
+   cons:["2D only","闭源","代码不放、复现门槛高"],
+   bench:"未公开 quantitative；以 demo 为主",
+   paper:"/papers/2024-02-23-genie/"},
+  {slug:"v-jepa",title:"V-JEPA",date:"2024-04",org:"Meta FAIR",repr:"latent",purpose:["ssl","video"],era:"2024",open:true,
+   short:"I-JEPA 推到 video，2M 视频做 feature prediction。",
+   summary:"K400 ViT-H/16 frozen 81.9%；SSv2 72.2%。",
+   pros:["证明 video JEPA 路线 work","frozen evaluation 强 → 表示真好"],
+   cons:["pre-train 数据规模仍小于像素派","下游 generative task 不擅长"],
+   bench:"K400 81.9 / SSv2 72.2 (frozen)",
+   paper:"/papers/2024-04-12-v-jepa/"},
+  {slug:"oasis",title:"Oasis",date:"2024-10",org:"Decart × Etched",repr:"pixel",purpose:["game"],era:"2024",open:true,
+   short:"20 FPS 实时生成 Minecraft 克隆，autoregressive DiT。",
+   summary:"每帧 47ms；客户可直接键鼠操控。",
+   pros:["第一个跑到消费可用 latency 的生成式游戏 WM","跟 Etched ASIC 配合的工程示范"],
+   cons:["仅 Minecraft 像素风格","一致性短","复杂动作下漂移"],
+   bench:"20 FPS / 47ms per frame",
+   paper:"/papers/2024-10-31-oasis/"},
+  {slug:"genie-2",title:"Genie 2",date:"2024-12",org:"DeepMind",repr:"pixel",purpose:["game"],era:"2024",open:false,
+   short:"一张图 → 可玩 3D 世界；首次挂'foundation world model'。",
+   summary:"键鼠可操控，3D 一致性比 Genie 1 显著好。",
+   pros:["从 2D 到 3D 的跃迁","'foundation' 定调，行业标签化"],
+   cons:["闭源 / 仅博客","参数/数据未披露","一致性约秒级"],
+   bench:"未公开 quantitative",
+   paper:"/papers/2024-12-04-genie-2/"},
+  {slug:"cosmos",title:"Cosmos",date:"2025-01",org:"NVIDIA",repr:"pixel",purpose:["robotics","driving"],era:"2025",open:true,
+   short:"Physical AI 的 World Foundation Model 平台（Predict / Transfer / Reason 三件套）。",
+   summary:"2B–14B 多档；面向 1X / Agility / Figure / Skild / Uber / Foretellix 等。",
+   pros:["开源 + 平台化运营","跟 NVIDIA 硬件生态绑死，落地路径硬","三件套覆盖训练-推理全链路"],
+   cons:["视觉天花板低于 Sora/Veo","平台思维有时拖慢单项 SOTA"],
+   bench:"WorldArena text-cond embodied 第 3",
+   paper:"/papers/2025-01-07-cosmos/"},
+  {slug:"wham-muse",title:"WHAM / Muse",date:"2025-02",org:"Microsoft × Ninja Theory",repr:"pixel",purpose:["game"],era:"2025",open:false,
+   short:"上 Nature 的 World and Human Action Model；WHAMM 跑 Quake II 实时。",
+   summary:"WHAM-1.6B：300×180、1B 图像+动作对、7 年 gameplay；WHAMM MaskGIT 加速到 10+ FPS。",
+   pros:["上 Nature 的范式合法化","与 Ninja Theory 业务结合"],
+   cons:["仅特定游戏","闭源/有限访问","WHAMM 分辨率 640×360 仍偏低"],
+   bench:"WHAMM 10+ FPS / 0.9s context",
+   paper:"/papers/2025-02-19-wham-muse/"},
+  {slug:"gaia-2",title:"GAIA-2",date:"2025-03",org:"Wayve",repr:"pixel",purpose:["driving"],era:"2025",open:false,
+   short:"从 GAIA-1 的 AR token 换成 latent diffusion + flow matching；多视角同步。",
+   summary:"结构化条件（ego dynamics + 其他 agent + 道路语义 + 内外参）已经像 driving sim 的 API。",
+   pros:["多视角时间一致性 → 真车可用","条件接口标准化"],
+   cons:["闭源","Wayve 业务以外难复用"],
+   bench:"未公开 sim2real 数字（Wayve 内部）",
+   paper:"/papers/2025-03-25-gaia-2/"},
+  {slug:"wan",title:"Wan 2.x",date:"2025-03",org:"Alibaba",repr:"pixel",purpose:["video"],era:"2025",open:true,
+   short:"14B DiT + 自研时空 VAE，Apache-2.0；Wan2.1 在 VBench 86.22% 超 Sora。",
+   summary:"Wan 2.2 引入 MoE，能在单卡 4090 跑 720p。",
+   pros:["VBench SOTA 且开源","权重直接可用 + finetune","中文社区生态强"],
+   cons:["跟 Sora/Veo 的视觉细节仍有差距","闭源 RLHF post-training 比不上 OpenAI/Google"],
+   bench:"VBench 86.22% (Wan 2.1)",
+   paper:"/papers/2025-03-26-wan-2-1/"},
+  {slug:"v-jepa-2",title:"V-JEPA 2",date:"2025-06",org:"Meta FAIR",repr:"latent",purpose:["ssl","robotics"],era:"2025",open:true,
+   short:"1.2B + 100 万小时视频；V-JEPA 2-AC 在两个真实实验室 Franka 上 zero-shot pick-and-place。",
+   summary:"SSv2 77.3 / Epic-Kitchens-100 anticipation 39.7 recall@5；< 62 小时 Droid 数据 post-train。",
+   pros:["JEPA 路线最强代表","真机器人 zero-shot 是个有分量的 demo","开源"],
+   cons:["pick-and-place 仅证明短 horizon","JEPA 派的市场关注仍远低于像素派"],
+   bench:"SSv2 77.3 / Epic-K100 anticipation 39.7@5",
+   paper:"/papers/2025-06-11-v-jepa-2/"},
+  {slug:"genie-3",title:"Genie 3",date:"2025-08",org:"DeepMind",repr:"pixel",purpose:["game"],era:"2025",open:false,
+   short:"首个 'real-time interactive general-purpose WM'，720p / 24fps，分钟级一致性。",
+   summary:"text prompt 直接出可玩世界；中途可注入新 event。",
+   pros:["实时 + 长一致性的工程突破","'foundation' 标签的实际兑现"],
+   cons:["参数/数据完全未披露","限量 preview","离 close-loop RL training engine 还差几个量级"],
+   bench:"720p / 24fps；~1 minute coherence",
+   paper:"/papers/2025-08-05-genie-3/"},
+  {slug:"marble",title:"Marble",date:"2025-11",org:"World Labs",repr:"3d",purpose:["spatial"],era:"2025",open:false,
+   short:"text/image/video/草图 → 可导出 3D 场景（Gaussian splat / mesh / video）。",
+   summary:"Fei-Fei Li 公司首个商业产品；'persistent' 而非'边走边幻觉'。",
+   pros:["产出 3D 资产可直接进 game engine / VR","spatial intelligence 这条线最具体的兑现"],
+   cons:["动态/物体支持有限","数据规模未公开","商用闭源"],
+   bench:"未公开 leaderboard；以产品 demo 为准",
+   paper:"/papers/2025-11-12-marble/"},
+  {slug:"1x-wm",title:"1X World Model",date:"2026-01",org:"1X Technologies",repr:"pixel",purpose:["robotics"],era:"2026",open:false,
+   short:"14B 视频生成模型 + 第一人称人类视频 + 机器人 fine-tune；NEO 的认知核心。",
+   summary:"900h ego-centric 人类视频预训 + 70h 机器人微调；声称让人形机器人靠'想象未来视频'导出动作。",
+   pros:["明确把 WM 嵌入 humanoid 商业产品","数据收集机制 → 第一视角私有数据壁垒"],
+   cons:["博客 demo 看着漂亮，复杂任务（pour cereal / draw smiley）实际成功率近 0%","闭源"],
+   bench:"未公开下游任务量化（仅 demo）",
+   paper:"/papers/2026-01-13-1x-world-model/"},
+  {slug:"sana-wm",title:"SANA-WM",date:"2026-05",org:"NVIDIA / HKUST / MIT",repr:"pixel",purpose:["video"],era:"2026",open:true,
+   short:"2.6B 开源，原生 1 分钟 720p；hybrid linear attention + 6-DoF dual-branch camera；NVFP4 蒸馏。",
+   summary:"单卡 RTX 5090 + NVFP4 下 34 秒出 60 秒视频，36× 吞吐于同档闭源。",
+   pros:["效率优势悬殊（消费卡可跑）","开源 + 量化栈完整","camera control 干净"],
+   cons:["2.6B 体量限上限","60s 仍非小时级"],
+   bench:"60s 720p @ 34s on RTX 5090",
+   paper:"/papers/2026-05-14-sana-wm/"},
+  {slug:"vggt-omega",title:"VGGT-Ω",date:"2026-05",org:"Meta AI / Oxford VGG",repr:"3d",purpose:["spatial","ssl"],era:"2026",open:true,
+   short:"3D reconstruction backbone 第一次跑出 scaling law；CVPR 2026 Oral。",
+   summary:"单 head + register-based 跨帧聚合 + self-supervised video 预训；监督数据吃到上一代 15×。",
+   pros:["3D 这条线第一次有像 LLM 一样的 scaling 曲线","架构 minimalist"],
+   cons:["仍属 reconstruction 而非 generative WM","下游 spatial 任务接口未标准化"],
+   bench:"15× data scaling 单调；具体数字看 paper",
+   paper:"/papers/2026-05-14-vggt-omega/"},
+  {slug:"worldarena",title:"WorldArena",date:"2026-02",org:"清华 FIB Lab",repr:"pixel",purpose:["benchmark"],era:"2026",open:true,
+   short:"14 个模型统一评测：感知 16 维 × functional utility 3 角色 → EWMScore；CVPR 2026 Challenge。",
+   summary:"battle 机制（用户对比视频）+ leaderboard；揭示 'perception–functionality gap'。",
+   pros:["把 embodied utility 拉进评测","online battle 提供持续校准"],
+   cons:["闭源旗舰未上榜","EWMScore 跟真下游 success rate 的相关性还需验证"],
+   bench:"自己作为 benchmark；非模型",
+   paper:"/papers/2026-02-09-worldarena/"},
+  {slug:"beyond-fvd",title:"Beyond FVD",date:"2024-10",org:"Luo, Favero et al.",repr:"pixel",purpose:["benchmark"],era:"2024",open:true,
+   short:"列出 FVD 三条致命缺陷，提出 JEDi 替代。",
+   summary:"JEDi 所需样本数仅为 FVD 的 16%。ICLR 2025。",
+   pros:["FVD 退场的合法化","JEDi 工程上轻"],
+   cons:["仍是 set-level 指标，单条视频内部一致性测不出","未广泛部署"],
+   bench:"JEDi 样本量 = FVD 的 16%",
+   paper:"/papers/2024-10-07-beyond-fvd/"},
+
+  /* 补充：未单独成笔记的闭源旗舰 */
+  {slug:"sora-2",title:"Sora 2",date:"2025-09",org:"OpenAI",repr:"pixel",purpose:["video"],era:"2025",open:false,
+   short:"Sora 后续：强调物理一致性（篮球反弹守恒）、同步原生音频、人物注入。",
+   summary:"将 Sora 的 spacetime DiT 路线 + 物理优先级 + 多模态生成（音频）。",
+   pros:["把 'physical consistency' 当 explicit objective","原生音频是工程上罕见整合"],
+   cons:["反例（穿模、守恒违反）仍遍地","闭源 API"],
+   bench:"未上 WorldArena；产品 demo 为主",
+   paper:null},
+  {slug:"veo-3",title:"Veo 3 / Veo 3.1",date:"2025-08",org:"Google DeepMind",repr:"pixel",purpose:["video"],era:"2025",open:false,
+   short:"DeepMind 视频旗舰；3.1 强调物理 + 原生音频；WorldArena 视觉并列第一。",
+   summary:"作为 Google Cloud + Workspace 的可访问产品；接 Lumiere/VideoPoet 这条线的延续。",
+   pros:["WorldArena 视觉感知并列 1","与 Google 生态整合（Workspace、YouTube）","音频质量为同类最高"],
+   cons:["闭源","Genie 系列才是 DeepMind 的'交互'押注，Veo 更像电影机"],
+   bench:"WorldArena 视觉并列第 1（与 Wan 2.6）",
+   paper:null},
+  {slug:"kling",title:"Kling",date:"2024-06",org:"Kuaishou",repr:"pixel",purpose:["video"],era:"2024",open:false,
+   short:"快手可灵；中国闭源视频生成代表，3D VAE + DiT，主打物理 + 长视频。",
+   summary:"持续迭代到 2.0+，强调消费级产品化（移动端可用）。",
+   pros:["中文场景训练充分","产品化好（移动 app）"],
+   cons:["闭源","对 WM 学术叙事贡献小"],
+   bench:"VBench 主流前列；具体闭源",
+   paper:null},
+  {slug:"cogvideox",title:"CogVideoX",date:"2024-08",org:"Tsinghua / Zhipu",repr:"pixel",purpose:["video"],era:"2024",open:true,
+   short:"清华/智谱开源 DiT 视频生成；CogVideoX-5B 是中文开源代表。",
+   summary:"WorldArena 通用视频类入围；社区 finetune 生态最活跃之一。",
+   pros:["完全开源（权重 + 代码）","中文社区基础设施","架构清晰可改"],
+   cons:["视觉细节弱于 Wan 2.6","时长偏短"],
+   bench:"WorldArena 入围；VBench 入围",
+   paper:null},
+  {slug:"hailuo",title:"Hailuo / MiniMax Video",date:"2024-09",org:"MiniMax",repr:"pixel",purpose:["video"],era:"2024",open:false,
+   short:"MiniMax 视频生成；闭源，强调 prompt-following 和角色一致性。",
+   summary:"产品化路线，海外用户多。",
+   pros:["prompt-following 优秀","角色一致性持续优化"],
+   cons:["闭源","WM 叙事贡献低"],
+   bench:"未在 WorldArena；以 VBench 入围为主",
+   paper:null},
+  {slug:"pika",title:"Pika 2.0+",date:"2024-12",org:"Pika Labs",repr:"pixel",purpose:["video"],era:"2024",open:false,
+   short:"美国创作者向闭源视频生成；强调 ingredients（指定人/物注入）。",
+   summary:"产品化路线，创作工具为主。",
+   pros:["创作工具集成完善","角色 ingredient 注入早期独家"],
+   cons:["闭源","技术叙事少"],
+   bench:"未公开统一榜单",
+   paper:null},
+
+  /* 2026 Q1-Q2 agent 调研补充 */
+  {slug:"hy-world-2",title:"HY-World 2.0",date:"2026-04",org:"Tencent",repr:"3d",purpose:["game","spatial"],era:"2026",open:true,
+   short:"首个开源生成真实 3D 资产（mesh / 3DGS / 点云）的 world model；登顶 Stanford WorldScore 开源榜。",
+   summary:"延续 HY-World 1.5 的可玩世界路线，把'输出 3D'与'交互'第一次开源整合。",
+   pros:["3D + 交互兼得，工程极硬","Stanford WorldScore 开源榜第一","Tencent 游戏业务背书"],
+   cons:["体量 / 参数未充分披露","场景类型仍偏游戏向"],
+   bench:"Stanford WorldScore 开源 #1",
+   paper:null},
+  {slug:"decart-lucy",title:"Decart Lucy / DOS",date:"2026-05",org:"Decart",repr:"pixel",purpose:["game","video"],era:"2026",open:false,
+   short:"实时 WM 旗舰：Lucy &lt;30ms 延迟，DOS 1600 tok/s，最高 100fps full-HD。",
+   summary:"$300M Series C / 估值 ~$4B（Radical Ventures 领投，NVIDIA / Sequoia / Benchmark / Adobe 跟投）。",
+   pros:["延迟做到了消费可用区间","Etched ASIC 配合的工程示范升级","闭源但融资充沛"],
+   cons:["闭源","泛化能力比 demo 看到的可能差"],
+   bench:"Lucy &lt;30ms / DOS 1600 tok/s",
+   paper:null},
+  {slug:"seedance-2",title:"Seedance 2.0",date:"2026-03",org:"ByteDance",repr:"pixel",purpose:["video"],era:"2026",open:false,
+   short:"字节闭源视频生成；Artificial Analysis Elo 1268（仅次于 HappyHorse-1.0）。",
+   summary:"ByteDance 的产品级 video model，海外推广积极。",
+   pros:["Elo 第 2","产品迭代速度快","ByteDance 数据规模"],
+   cons:["闭源","技术细节披露少"],
+   bench:"AA Elo 1268",
+   paper:null},
+  {slug:"hunyuanvideo-1-5",title:"HunyuanVideo 1.5",date:"2026-02",org:"Tencent",repr:"pixel",purpose:["video"],era:"2026",open:true,
+   short:"腾讯混元视频开源系列，VBench v1 视觉质量 96.4%，与 Wan 系列共同构成中文开源视频双雄。",
+   summary:"text-alignment 68.5%（仍弱于 closed），但视觉细节是开源 SOTA 之一。",
+   pros:["完全开源","VBench 视觉质量 96.4%（开源第一档）","Tencent 生态"],
+   cons:["text alignment 68.5% 弱于 Sora/Veo","推理仍重"],
+   bench:"VBench v1 visual 96.4 / text-align 68.5",
+   paper:null},
+  {slug:"groot-n17",title:"GR00T N1.7 / Gemini Robotics 1.5",date:"2026-Q1",org:"NVIDIA / DeepMind",repr:"token",purpose:["robotics"],era:"2026",open:false,
+   short:"VLA ← → WM 边界模糊的代表：把 world model 的预测能力直接挂在 policy 头上。",
+   summary:"NVIDIA GR00T 与 DeepMind Gemini Robotics 都在 2026 Q1 把 WM-style prediction 与 action head 一体化。",
+   pros:["WM 不再独立存在，融进 VLA","训练目标更直接对应任务"],
+   cons:["与传统'独立 WM'路线区分变难","评测移动到任务 success rate"],
+   bench:"任务成功率而非视觉指标",
+   paper:null},
+];
+
+const COUNT = MODELS.length;
+
+const STATE = { repr:"all", purpose:"all", era:"all", open:"all" };
+const gridEl = document.getElementById('wm-grid');
+const summaryEl = document.getElementById('wm-summary');
+
+function matches(m) {
+  if (STATE.repr !== 'all' && m.repr !== STATE.repr) return false;
+  if (STATE.purpose !== 'all' && !m.purpose.includes(STATE.purpose)) return false;
+  if (STATE.era !== 'all' && m.era !== STATE.era) return false;
+  if (STATE.open !== 'all') {
+    const want = STATE.open === 'open';
+    if (m.open !== want) return false;
+  }
+  return true;
+}
+
+function escapeHTML(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderCard(m) {
+  const reprLabels = {latent:'Latent', token:'Token', pixel:'Pixel', '3d':'3D'};
+  const purposeLabels = {rl:'RL',video:'Video',game:'Game',driving:'Driving',robotics:'Robot',spatial:'Spatial',ssl:'SSL',benchmark:'Bench'};
+  const purposes = m.purpose.map(p => `<span class="wm-tag">${purposeLabels[p]||p}</span>`).join('');
+  return `
+    <div class="wm-card" data-slug="${m.slug}">
+      <div class="wm-card-head">
+        <span class="wm-card-title">${escapeHTML(m.title)}</span>
+        <span class="wm-card-meta">${m.date} · ${escapeHTML(m.org)}</span>
+        <span class="wm-card-tags">
+          <span class="wm-tag repr-${m.repr}">${reprLabels[m.repr]}</span>
+          ${purposes}
+          <span class="wm-tag">${m.open ? 'Open' : 'Closed'}</span>
+        </span>
+      </div>
+      <div class="wm-card-short">${escapeHTML(m.short)}</div>
+      <div class="wm-card-detail">
+        <div class="wm-summary-line">${escapeHTML(m.summary)}</div>
+        <div class="wm-pc-grid">
+          <div>
+            <h4>优势</h4>
+            <ul>${m.pros.map(p => `<li>${escapeHTML(p)}</li>`).join('')}</ul>
+          </div>
+          <div>
+            <h4>劣势</h4>
+            <ul>${m.cons.map(c => `<li>${escapeHTML(c)}</li>`).join('')}</ul>
+          </div>
+        </div>
+        <div class="wm-bench"><span class="wm-bench-label">Benchmark</span>${escapeHTML(m.bench)}</div>
+        <div class="wm-card-links">
+          ${m.paper ? `<a href="${BASE}${m.paper}">详读笔记 →</a>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function render() {
+  // sort by date desc
+  const sorted = [...MODELS].sort((a,b) => (a.date < b.date ? 1 : -1));
+  const filtered = sorted.filter(matches);
+  gridEl.innerHTML = filtered.map(renderCard).join('');
+  summaryEl.textContent = `显示 ${filtered.length} / ${MODELS.length}`;
+
+  gridEl.querySelectorAll('.wm-card').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.tagName === 'A') return;
+      card.classList.toggle('open');
+    });
+  });
+}
+
+document.querySelectorAll('.wm-chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const f = btn.dataset.filter;
+    const v = btn.dataset.value;
+    STATE[f] = v;
+    document.querySelectorAll(`.wm-chip[data-filter="${f}"]`).forEach(b => {
+      b.classList.toggle('active', b.dataset.value === v);
+    });
+    render();
+  });
+});
+
+render();
+})();
+</script>

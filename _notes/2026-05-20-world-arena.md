@@ -5,6 +5,8 @@ tags: [World Model, 评测, 综述]
 excerpt: 先把"World Arena"这个名字搞清楚（清华 WorldArena vs. WorldMark），再串起从 Ha & Schmidhuber 2018 到 Genie 3 / Cosmos / Marble 这条线，重点是几条隐线：定义之争、可控性、评测、数据。
 ---
 
+> 看交互式全景图：[/world-models/](/PIXELI/world-models/)
+
 ## 关于"World Arena"
 
 先把名字这件事讲清楚：搜下来，**最贴合"World Arena 榜单"这个说法的，是清华 FIB Lab 牵头、于 2026 年 2 月放出的 WorldArena**（[arXiv:2602.08971](https://arxiv.org/abs/2602.08971)，v1 提交于 2026-02-09，仓库 [github.com/tsinghua-fib-lab/WorldArena](https://github.com/tsinghua-fib-lab/WorldArena)，门户 [world-arena.ai](https://world-arena.ai/)）。它定位为"统一评测 embodied world model 的基准" —— 既测 video perception（16 个指标 / 6 个子维度），也测 functional utility（让 world model 充当 synthetic data engine、policy evaluator、action planner 三种角色），最终汇总成一个叫 **EWMScore** 的指数。这个项目还挂了一个 CVPR 2026 Challenge，submission 从 2026-03-06 开放、challenge 2026-03-26 启动，所以它现在确实是社区里被引用的"那个 Arena"。

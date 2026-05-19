@@ -10,9 +10,12 @@ permalink: /notes/
 
 <ul class="entry-list">
 {% for n in site.notes reversed %}
-  <li>
-    <a href="{{ n.url | relative_url }}">{{ n.title }}</a>
-    <time>{{ n.date | date: "%Y-%m-%d" }}</time>
+  <li{% if n.excerpt %} class="with-excerpt"{% endif %}>
+    <div class="entry-head">
+      <a href="{{ n.url | relative_url }}">{{ n.title }}</a>
+      <time>{{ n.date | date: "%Y-%m-%d" }}</time>
+    </div>
+    {% if n.excerpt %}<div class="entry-excerpt">{{ n.excerpt }}</div>{% endif %}
   </li>
 {% endfor %}
 </ul>

@@ -435,6 +435,73 @@ math: true
   .wm-end ol li { margin: 0.3em 0; }
   .wm-end ol li strong { color: var(--accent); }
 
+  /* ----- 经典结构解剖卡 ----- */
+  .wm-arch {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 1.1rem 0;
+    overflow: hidden;
+  }
+  .wm-arch-head {
+    background: rgba(0,0,0,0.025);
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.8rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    .wm-arch-head { background: rgba(255,255,255,0.03); }
+  }
+  .wm-arch-name {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .wm-arch-flow {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .wm-arch-body { padding: 0.85rem 1.1rem 1rem; }
+  .wm-arch-diagram {
+    background: var(--wm-cell-lo);
+    padding: 0.7rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    line-height: 1.55;
+    margin: 0 0 0.7rem;
+    border-radius: 3px;
+    overflow-x: auto;
+    color: var(--text);
+    white-space: pre;
+  }
+  .wm-arch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 1.4rem;
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+  .wm-arch-grid h5 {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    font-weight: 600;
+    margin: 0 0 0.15rem;
+  }
+  .wm-arch-grid > div { color: var(--muted); }
+  .wm-arch-grid > div strong { color: var(--text); }
+  @media (max-width: 760px) {
+    .wm-arch-grid { grid-template-columns: 1fr; }
+    .wm-arch-diagram { font-size: 0.7rem; }
+  }
+
   /* ----- 流派 Pros/Cons 表 ----- */
   .wm-pc-table th.col-stream { width: 12%; }
   .wm-pc-table .stream-name { font-family: var(--font-sans); font-weight: 600; color: var(--text); }
@@ -607,7 +674,254 @@ math: true
 </div>
 
 
-<h2 class="wm-h">§ 3 当前阵营<span class="num">谁在做什么 · 资本动向</span></h2>
+<h2 class="wm-h">§ 3 经典结构解剖<span class="num">8 个 canonical 架构</span></h2>
+
+<div class="wm-cap">
+  汇报到这里听众已经知道"谁做了什么"，但要回答"具体怎么做"——输入是啥、输出是啥、怎么训——还得看结构。下面 8 个是这条线上工程最有代表性的，每个给一个 schematic、IO、训练目标、关键数字。
+</div>
+
+<div class="wm-arch">
+  <div class="wm-arch-head">
+    <span class="wm-arch-name">① Ha &amp; Schmidhuber 2018 — World Models</span>
+    <span class="wm-arch-flow">V + M + C 三件套</span>
+  </div>
+  <div class="wm-arch-body">
+<pre class="wm-arch-diagram">obs_t (64×64×3)
+   │
+   ▼
+V: Conv-VAE        ──►  z_t ∈ ℝ³²
+                          │
+                          ▼
+M: MDN-LSTM        ──►  p(z_{t+1} | z_t, a_t, h_t)   [5-mode GMM]
+                          │
+                          ▼
+C: linear([z_t; h_t]) ──►  a_t            ←  CMA-ES 演化</pre>
+    <div class="wm-arch-grid">
+      <div><h5>输入</h5> 64×64×3 RGB 观测 + 当前动作</div>
+      <div><h5>输出</h5> 下一帧 latent 的 5 模 GMM 分布；controller 给 scalar action</div>
+      <div><h5>训练</h5> V 用随机策略的回放数据监督训（recon + KL）；M 在 V 冻住后用 (z, a) 序列监督；C <strong>不用梯度</strong>，CMA-ES 在 dream 里演化</div>
+      <div><h5>规模</h5> V ~3M、M ~0.5M、C <strong>867 参数</strong>；CarRacing 平均 906±21</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-arch">
+  <div class="wm-arch-head">
+    <span class="wm-arch-name">② RSSM / DreamerV3</span>
+    <span class="wm-arch-flow">Recurrent State-Space Model + imagination training</span>
+  </div>
+  <div class="wm-arch-body">
+<pre class="wm-arch-diagram">obs_t ──► encoder ──► x_t
+                       │
+                       ▼
+        ┌─────────────────────────────────────┐
+        │ h_t = GRU(h_{t-1}, z_{t-1}, a_{t-1}) │  deterministic
+        │ z_t ~ p(· | h_t, x_t)   posterior   │  32×32 categorical (V2+)
+        │ ẑ_t ~ p(· | h_t)        prior       │  KL-balanced
+        └─────────────────────────────────────┘
+                       │
+                  s_t = [h_t ; z_t]
+                       │
+        ┌──────────────┼──────────────┬──────────────┐
+        ▼              ▼              ▼              ▼
+     decoder        reward         continue     actor + critic
+   (recon loss)   prediction      prediction   imagine 15 步 latent rollout
+                                               用 λ-returns 训</pre>
+    <div class="wm-arch-grid">
+      <div><h5>输入</h5> 像素或 vector 状态 + 上一动作</div>
+      <div><h5>输出</h5> 重建图、预测奖励、is-continue；actor 输出动作分布</div>
+      <div><h5>训练</h5> WM: recon + reward + continue + KL(posterior ‖ prior, balanced)；策略：actor 沿 imagined latent rollout（15 步）最大化 λ-returns；DreamerV3 用 <strong>symlog two-hot</strong> 编码处理 reward scale 漂移</div>
+      <div><h5>规模</h5> WM <strong>8M → 200M</strong> scaling 单调；单超参跨 DMC / Atari / ProcGen / Crafter / Minecraft 150+ 任务；Minecraft <em>zero-shot diamond</em></div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-arch">
+  <div class="wm-arch-head">
+    <span class="wm-arch-name">③ JEPA 家族 — I-JEPA / V-JEPA / V-JEPA 2</span>
+    <span class="wm-arch-flow">不重建像素，只在 embedding 空间预测</span>
+  </div>
+  <div class="wm-arch-body">
+<pre class="wm-arch-diagram">context patches              target patches
+       │                            │
+       ▼                            ▼
+  Encoder_θ                   Encoder_θ̄  (EMA of θ, stop-grad)
+       │                            │
+       ▼                            ▼
+     c (context embed)           t (target embed)
+       │                            │
+       └─►  Predictor (small ViT) ──►  ĉ_target
+                                      │
+                              L2 loss(ĉ_target, t_target)
+                              （无像素重建、无对比学习、无增广）
+
+V-JEPA 2-AC 加一个 action-conditioned head：
+   c ⊕ a ──►  Action Predictor ──►  ĉ_{t+Δ}</pre>
+    <div class="wm-arch-grid">
+      <div><h5>输入</h5> I-JEPA: 单图 context block + target blocks；V-JEPA: 视频 patches；V-JEPA 2-AC: 视频 + action token</div>
+      <div><h5>输出</h5> 目标 patches 的 embedding（不是像素），用于下游 frozen probe / planning</div>
+      <div><h5>训练</h5> 自监督：mask 一部分 patch，predictor 在 representation 空间预测；target encoder 是 context encoder 的 EMA、无梯度；V-JEPA 2-AC 用 <strong>&lt;62 小时 Droid</strong> 数据 post-train action head</div>
+      <div><h5>规模</h5> V-JEPA 2 <strong>1.2B 参数 + 1M+ 小时视频</strong>；SSv2 frozen 77.3、Epic-K100 anticip 39.7@5；V-JEPA 2-AC 真机 Franka pick-and-place <strong>65%</strong>，每 action 16s 推理</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-arch">
+  <div class="wm-arch-head">
+    <span class="wm-arch-name">④ IRIS</span>
+    <span class="wm-arch-flow">World model = 离散 token 上的 GPT</span>
+  </div>
+  <div class="wm-arch-body">
+<pre class="wm-arch-diagram">frame_t ──► VQ-VAE ──► K=16 个 obs token
+
+序列结构:
+[obs_tok_1..K, act_t, rew_t, done_t,  obs_tok_{1..K, t+1}, act_{t+1}, ...]
+                                │
+                                ▼
+                  GPT-style Transformer (causal)
+                                │
+                                ▼
+              预测下一个 obs token / reward / done
+                                │
+                                ▼
+        actor + critic 在 transformer 生成的 imagined rollout 上训</pre>
+    <div class="wm-arch-grid">
+      <div><h5>输入</h5> 量化后的 (obs, action, reward) token 序列</div>
+      <div><h5>输出</h5> 下一帧 K 个 obs token + reward + done</div>
+      <div><h5>训练</h5> 与环境交互 <strong>100k</strong> 帧，cross-entropy 预训 transformer；actor-critic 在 transformer 生成的虚拟轨迹上训（无需真环境 rollout）</div>
+      <div><h5>规模</h5> ~5M 参数；K=16 tokens/frame；<strong>Atari 100k mean HNM 1.046 / median 0.289</strong>，首次 100k 区段平均超人</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-arch">
+  <div class="wm-arch-head">
+    <span class="wm-arch-name">⑤ Sora / DiT</span>
+    <span class="wm-arch-flow">spacetime patches + Diffusion Transformer</span>
+  </div>
+  <div class="wm-arch-body">
+<pre class="wm-arch-diagram">raw video  ──► 3D VAE encoder ──► spacetime latent patches
+                                  （任意分辨率 / 时长 / 宽高比都展平成 patch 序列）
+                                            │
+              text prompt ──► text encoder ─┤  cross-attention 条件
+                                            ▼
+                            DiT (Diffusion Transformer)
+                                            │
+                                  预测 ε_θ(x_t, t, cond)
+                                            │
+                                            ▼
+                  v-prediction / x-prediction 反演 ──► 干净 latent patches
+                                            │
+                                            ▼
+                                3D VAE decoder ──► 视频</pre>
+    <div class="wm-arch-grid">
+      <div><h5>输入</h5> 文本 prompt + 高斯噪声 latent；也接 image / video 条件做 i2v / v2v / editing</div>
+      <div><h5>输出</h5> 任意分辨率 / 长度（最长 60s）的 RGB 视频</div>
+      <div><h5>训练</h5> 扩散去噪 v-prediction；<strong>"native" 多分辨率/多时长</strong> 是关键工程——不同 shape 数据 patch 化后塞同一模型，scaling 由此跑出来</div>
+      <div><h5>规模</h5> 参数官方未公开（社区估 3-10B）；最长 60s 1080p；2024 年起整个 video gen 派模板照抄</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-arch">
+  <div class="wm-arch-head">
+    <span class="wm-arch-name">⑥ Genie 1</span>
+    <span class="wm-arch-flow">latent action 从无标注视频里学 + 自回归生成</span>
+  </div>
+  <div class="wm-arch-body">
+<pre class="wm-arch-diagram">无标注视频
+   │
+   ▼
+ST-VQ-VAE: 视频 ──► 时空 visual token
+
+(frame_t, frame_{t+1}) ──► Latent Action Model (LAM)
+                                │
+                                ▼
+                  latent action 离散 codebook (size = 8)
+                                │
+                                ▼
+(past visual tokens, latent_action_t) ──► AR Dynamics Transformer
+                                │
+                                ▼
+                    next frame 的 visual tokens ──► 解码 ──► frame_{t+1}
+
+推理时：用户每帧从 8 个 latent action 中按一个</pre>
+    <div class="wm-arch-grid">
+      <div><h5>输入</h5> 训练：纯视频；推理：起始图 + 用户每帧选 latent action ∈ {0..7}</div>
+      <div><h5>输出</h5> 下一帧 visual tokens（解码后是 RGB frame）</div>
+      <div><h5>训练</h5> 端到端联合三件：ST-VQ-VAE 重建 + LAM 把 frame pair 编码成 8 类离散 latent action + dynamics transformer 用 past + action 预测 next frame；<strong>整个过程不需要 action label</strong></div>
+      <div><h5>规模</h5> <strong>11B 参数</strong>，30k 小时 2D 平台游戏视频；Genie 2 (2024.12) 推到 3D；Genie 3 (2025.08) 做到 720p / 24fps 分钟级一致性</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-arch">
+  <div class="wm-arch-head">
+    <span class="wm-arch-name">⑦ GAIA-1 (Wayve)</span>
+    <span class="wm-arch-flow">多模态 token + video diffusion decoder</span>
+  </div>
+  <div class="wm-arch-body">
+<pre class="wm-arch-diagram">video   ──► Image Tokenizer  ──► image tokens
+text    ──► Text Tokenizer   ──► text tokens
+action  ──► Action Embedder  ──► action tokens
+
+           三路 token 拼成单序列
+                  │
+                  ▼
+        World Model: 9B 自回归 Transformer
+                  │
+                  ▼
+         预测下一 image token（next-token CE）
+                  │
+                  ▼
+        image token 序列 ──► Video Diffusion Decoder ──► 高保真视频帧</pre>
+    <div class="wm-arch-grid">
+      <div><h5>输入</h5> 历史 (video, text, action) 三路 token；推理时可只给 (history, text, 想象动作) 让 WM 滚雪球生成未来</div>
+      <div><h5>输出</h5> 未来视频帧（先预测 token，再 diffusion 解码成像素）</div>
+      <div><h5>训练</h5> 第一阶段 next-token prediction（cross-entropy）；<strong>第二阶段独立训 video diffusion</strong> 把 image token 作条件解回视频；token 化让 LM stack 处理驾驶视频</div>
+      <div><h5>规模</h5> WM <strong>9B 参数</strong>，Wayve 驾驶数据集；后续 GAIA-2/3 换成 latent diffusion + flow matching，多视角同步</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-arch">
+  <div class="wm-arch-head">
+    <span class="wm-arch-name">⑧ NVIDIA Cosmos</span>
+    <span class="wm-arch-flow">tokenizer + Predict / Transfer / Reason 三件套</span>
+  </div>
+  <div class="wm-arch-body">
+<pre class="wm-arch-diagram">image / video
+        │
+        ▼
+   Cosmos Tokenizer   (continuous 或 discrete，多 aspect ratio 通用)
+        │
+        ▼
+┌───────────────┬──────────────────┬───────────────────┐
+▼               ▼                  ▼                   ▼
+Cosmos Predict  Cosmos Transfer    Cosmos Reason       Cosmos Policy 2.5
+diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上加
+的 video WFM     合成数据生成        时空推理 + CoT       VLA-style action head
+        │
+        ▼
+预测未来视频 / synthetic data / 推理链 / action tokens</pre>
+    <div class="wm-arch-grid">
+      <div><h5>输入</h5> Predict: text/image/video；Transfer: source video + depth/seg/edge 控制；Reason: video + question；Policy: video + 任务描述</div>
+      <div><h5>输出</h5> 未来视频 / synthetic 数据 / 自然语言推理 / action token</div>
+      <div><h5>训练</h5> 通用 video token 上预训 WFM（diffusion 用 v-prediction，AR 用 cross-entropy）；下游每个组件 post-train（Policy 用 BC + RL）；定位是 <strong>"Physical AI 基础平台"</strong> 而非单点 SOTA</div>
+      <div><h5>规模</h5> <strong>2B - 14B 多档</strong>；NVIDIA 平台下载 &gt;2M；客户 1X / Agility / Figure / Skild / Uber；Cosmos Policy 2.5: LIBERO 98.5% / RoboCasa 67.1% / ALOHA-2 93.6%</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm-tldr">
+  <span class="wm-tldr-label">读完这 8 个的判断</span>
+  ① <strong>latent / token / pixel 三派的训练目标天然不同</strong>：latent 派的 loss 是 embedding 距离 + KL，token 派是 cross-entropy，pixel 派是 diffusion v-prediction。短期不会合流的本质原因。
+  ② <strong>"无 action 标注学动作"</strong>（Genie 的 LAM）和<strong>"无像素重建学世界"</strong>（JEPA）是过去两年最关键的两个 trick——它们绕开了数据标注的瓶颈。
+  ③ Cosmos 这种<strong>"平台思路"</strong>跟单点 SOTA 模型逻辑完全不一样：它在赌 Physical AI 的整条管线，而不是单一指标。
+</div>
+
+
+<h2 class="wm-h">§ 4 当前阵营<span class="num">谁在做什么 · 资本动向</span></h2>
 
 <div class="wm-tldr">
   <span class="wm-tldr-label">小结</span>
@@ -629,7 +943,7 @@ math: true
 </div>
 
 
-<h2 class="wm-h">§ 4 评测怎么看<span class="num">4 张主榜</span></h2>
+<h2 class="wm-h">§ 5 评测怎么看<span class="num">4 张主榜</span></h2>
 
 <div class="wm-tldr">
   <span class="wm-tldr-label">结论</span>
@@ -751,7 +1065,7 @@ math: true
 </div>
 
 
-<h2 class="wm-h">§ 5 流派优劣对照<span class="num">summary</span></h2>
+<h2 class="wm-h">§ 6 流派优劣对照<span class="num">summary</span></h2>
 <div class="wm-cap">汇报时如果只看一张表，看这张。</div>
 <div class="wm-tab-wrap">
   <table class="wm-tab wm-pc-table">
@@ -786,7 +1100,7 @@ math: true
 </div>
 
 
-<h2 class="wm-h">§ 6 还没解决<span class="num">研究空白 + 长 horizon</span></h2>
+<h2 class="wm-h">§ 7 还没解决<span class="num">研究空白 + 长 horizon</span></h2>
 
 <div class="wm-cap">
   把 39 个模型塞进 [Latent / Token / Pixel] × [RL planning / Content gen / Evaluation] 的 2×3 矩阵后，三格明显空着——这本身就是 field 的研究信号。
@@ -821,7 +1135,7 @@ math: true
 </div>
 
 
-<h2 class="wm-h">§ 7 一句话总结<span class="num">汇报时讲这五条</span></h2>
+<h2 class="wm-h">§ 8 一句话总结<span class="num">汇报时讲这五条</span></h2>
 
 <div class="wm-end">
   <ol>

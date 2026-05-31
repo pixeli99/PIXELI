@@ -336,7 +336,14 @@ sup.footnote, a.footnote {
   border-top: 1px solid var(--border);
   font-family: var(--font-sans);
   font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
 }
+.post-nav-prev { flex: 1; }
+.post-nav-up { white-space: nowrap; }
+.post-nav-next { flex: 1; text-align: right; }
 .post-nav a {
   color: var(--muted);
   border: none;
@@ -376,6 +383,11 @@ sup.footnote, a.footnote {
     align-items: flex-start;
     gap: 0.15rem;
   }
+  .post-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .post-nav-next { text-align: left; }
 }
 
 /* —— Dark mode —— */

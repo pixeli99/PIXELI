@@ -28,7 +28,17 @@ layout: default
     {{ content }}
   </div>
 
-  <nav class="post-nav">
-    <a href="{{ '/' | relative_url }}">← 回首页</a>
+  <nav class="post-nav" aria-label="文章导航">
+    <span class="post-nav-prev">
+      {% if page.previous %}
+        <a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title | truncate: 36 }}</a>
+      {% endif %}
+    </span>
+    <a class="post-nav-up" href="{{ '/' | append: page.collection | append: '/' | relative_url }}">回列表</a>
+    <span class="post-nav-next">
+      {% if page.next %}
+        <a href="{{ page.next.url | relative_url }}">{{ page.next.title | truncate: 36 }} →</a>
+      {% endif %}
+    </span>
   </nav>
 </article>

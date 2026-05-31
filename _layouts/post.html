@@ -15,6 +15,10 @@ layout: default
         <span class="dot">·</span>
         <span>约 {{ words | divided_by: 350 | plus: 1 }} 分钟</span>
       {% endif %}
+      {% if page.link %}
+        <span class="dot">·</span>
+        <a href="{{ page.link }}" target="_blank" rel="noopener">{{ page.venue | default: "原文" }} ↗</a>
+      {% endif %}
       {% if page.tags and page.tags.size > 0 %}
         <span class="dot">·</span>
         <span class="post-tags">

@@ -28,6 +28,19 @@ layout: default
     {{ content }}
   </div>
 
+  <script>
+  document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(function(h) {
+    var a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.className = 'heading-anchor';
+    a.setAttribute('aria-hidden', 'true');
+    a.setAttribute('tabindex', '-1');
+    a.textContent = '§';
+    h.appendChild(a);
+  });
+  </script>
+
+
   <nav class="post-nav" aria-label="文章导航">
     <span class="post-nav-prev">
       {% if page.previous %}

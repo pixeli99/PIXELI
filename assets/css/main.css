@@ -330,6 +330,22 @@ sup.footnote, a.footnote {
 }
 .post-body { word-wrap: break-word; }
 .post-body > *:first-child { margin-top: 0; }
+
+/* —— Heading anchors —— */
+.heading-anchor {
+  margin-left: 0.35em;
+  color: var(--faint);
+  border: none;
+  font-weight: 400;
+  font-family: var(--font-sans);
+  font-size: 0.78em;
+  opacity: 0;
+  transition: opacity 0.15s;
+  user-select: none;
+}
+.post-body h2:hover .heading-anchor,
+.post-body h3:hover .heading-anchor { opacity: 1; }
+
 .post-nav {
   margin-top: 4rem;
   padding-top: 1.4rem;

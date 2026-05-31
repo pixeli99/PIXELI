@@ -25,12 +25,12 @@ permalink: /tags/
   {% for item in all %}
     {% if item.tags contains t %}{% assign count = count | plus: 1 %}{% endif %}
   {% endfor %}
-  <a href="#tag-{{ t | slugify }}">{{ t }}<sup>{{ count }}</sup></a>
+  <a href="#tag-{{ t | slugify: "none" }}">{{ t }}<sup>{{ count }}</sup></a>
 {% endfor %}
 </p>
 
 {% for t in unique_tags %}
-  <h2 id="tag-{{ t | slugify }}">{{ t }}</h2>
+  <h2 id="tag-{{ t | slugify: "none" }}">{{ t }}</h2>
   <ul class="entry-list">
   {% assign matched = all | where_exp: "i", "i.tags contains t" | sort: "date" | reverse %}
   {% for item in matched %}

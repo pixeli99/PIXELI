@@ -26,12 +26,12 @@
 <body>
   <header class="site-header">
     <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    <nav class="site-nav">
-      <a href="{{ '/notes/' | relative_url }}">笔记</a>
-      <a href="{{ '/papers/' | relative_url }}">论文</a>
-      <a href="{{ '/world-models/' | relative_url }}">World Models</a>
-      <a href="{{ '/tags/' | relative_url }}">标签</a>
-      <a href="{{ '/about/' | relative_url }}">关于</a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="{{ '/notes/' | relative_url }}"{% if page.url contains '/notes/' %} aria-current="page"{% endif %}>笔记</a>
+      <a href="{{ '/papers/' | relative_url }}"{% if page.url contains '/papers/' %} aria-current="page"{% endif %}>论文</a>
+      <a href="{{ '/world-models/' | relative_url }}"{% if page.url contains '/world-models' %} aria-current="page"{% endif %}>World Models</a>
+      <a href="{{ '/tags/' | relative_url }}"{% if page.url contains '/tags/' %} aria-current="page"{% endif %}>标签</a>
+      <a href="{{ '/about/' | relative_url }}"{% if page.url contains '/about/' %} aria-current="page"{% endif %}>关于</a>
     </nav>
   </header>
 

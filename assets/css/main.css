@@ -84,6 +84,7 @@ body {
   border: none;
 }
 .site-nav a:hover { color: var(--accent); }
+.site-nav a[aria-current="page"] { color: var(--text); font-weight: 500; }
 
 /* —— Typography —— */
 a {

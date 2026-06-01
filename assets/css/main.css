@@ -393,7 +393,7 @@ sup.footnote, a.footnote {
     gap: 0.7rem;
     padding-top: 2rem;
   }
-  .site-nav { display: flex; gap: 1.2rem; }
+  .site-nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.2rem; }
   .site-nav a { margin-left: 0; }
   .entry-list li {
     flex-direction: column;
@@ -405,6 +405,11 @@ sup.footnote, a.footnote {
     gap: 0.5rem;
   }
   .post-nav-next { text-align: left; }
+}
+
+/* —— Touch devices: always show heading anchors —— */
+@media (pointer: coarse) {
+  .heading-anchor { opacity: 0.4; }
 }
 
 /* —— Dark mode —— */

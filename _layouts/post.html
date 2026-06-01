@@ -10,6 +10,10 @@ layout: default
           {{ page.date | date: "%Y 年 %-m 月 %-d 日" }}
         </time>
       {% endif %}
+      {% if page.authors %}
+        <span class="dot">·</span>
+        <span>{{ page.authors }}</span>
+      {% endif %}
       {% assign words = content | strip_html | number_of_words %}
       {% if words > 0 %}
         <span class="dot">·</span>

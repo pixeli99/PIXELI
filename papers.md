@@ -10,12 +10,13 @@ permalink: /papers/
 
 <ul class="entry-list">
 {% for p in site.papers reversed %}
-  <li{% if p.excerpt %} class="with-excerpt"{% endif %}>
+  {% assign p_exc = p.excerpt | strip_html | strip %}
+  <li{% if p_exc.size > 10 %} class="with-excerpt"{% endif %}>
     <div class="entry-head">
       <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
       <time>{{ p.date | date: "%Y-%m-%d" }}</time>
     </div>
-    {% if p.excerpt %}<div class="entry-excerpt">{{ p.excerpt }}</div>{% endif %}
+    {% if p_exc.size > 10 %}<div class="entry-excerpt">{{ p_exc }}</div>{% endif %}
   </li>
 {% endfor %}
 </ul>

@@ -10,12 +10,13 @@ permalink: /notes/
 
 <ul class="entry-list">
 {% for n in site.notes reversed %}
-  <li{% if n.excerpt %} class="with-excerpt"{% endif %}>
+  {% assign n_exc = n.excerpt | strip_html | strip %}
+  <li{% if n_exc.size > 10 %} class="with-excerpt"{% endif %}>
     <div class="entry-head">
       <a href="{{ n.url | relative_url }}">{{ n.title }}</a>
       <time>{{ n.date | date: "%Y-%m-%d" }}</time>
     </div>
-    {% if n.excerpt %}<div class="entry-excerpt">{{ n.excerpt }}</div>{% endif %}
+    {% if n_exc.size > 10 %}<div class="entry-excerpt">{{ n_exc }}</div>{% endif %}
   </li>
 {% endfor %}
 </ul>

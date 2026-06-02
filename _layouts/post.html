@@ -49,6 +49,29 @@ layout: default
   </script>
 
 
+  {% if page.collection == 'papers' and page.tags.size > 0 %}
+    {% assign tag0 = page.tags | first %}
+    {% assign related_papers = "" | split: "" %}
+    {% for p in site.papers reversed %}
+      {% unless p.url == page.url or p.published == false %}
+        {% if p.tags contains tag0 %}
+          {% assign related_papers = related_papers | push: p %}
+        {% endif %}
+      {% endunless %}
+    {% endfor %}
+    {% assign related_papers = related_papers | slice: 0, 3 %}
+    {% if related_papers.size > 0 %}
+    <aside class="related-papers" aria-label="相关论文">
+      <p class="related-label">相关论文</p>
+      <ul>
+        {% for p in related_papers %}
+          <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </aside>
+    {% endif %}
+  {% endif %}
+
   <nav class="post-nav" aria-label="文章导航">
     <span class="post-nav-prev">
       {% if page.previous %}

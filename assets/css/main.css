@@ -367,6 +367,39 @@ sup.footnote, a.footnote {
 }
 .post-nav a:hover { color: var(--accent); }
 
+/* —— Related papers —— */
+.related-papers {
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--border);
+}
+.related-label {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin: 0 0 0.6rem;
+}
+.related-papers ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.related-papers li {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  padding: 0.35em 0;
+  border-bottom: 1px dashed var(--border);
+}
+.related-papers li:last-child { border-bottom: none; }
+.related-papers li a {
+  color: var(--muted);
+  border: none;
+}
+.related-papers li a:hover { color: var(--accent); }
+
 /* —— Footer —— */
 .site-footer {
   margin-top: 6rem;

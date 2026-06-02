@@ -25,6 +25,14 @@ jobs:
           ruby-version: "3.2"
           bundler-cache: true
 
+      - name: Cache Jekyll build
+        uses: actions/cache@v4
+        with:
+          path: .jekyll-cache
+          key: jekyll-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', '_layouts/**', 'assets/**') }}
+          restore-keys: |
+            jekyll-${{ runner.os }}-
+
       - name: Build with Jekyll
         run: bundle exec jekyll build
         env:

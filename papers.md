@@ -10,7 +10,7 @@ permalink: /papers/
 
 <ul class="entry-list">
 {% for p in site.papers reversed %}
-  {% assign p_exc = p.excerpt | strip_html | strip %}
+  {% assign p_exc = p.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip %}
   <li{% if p_exc.size > 10 %} class="with-excerpt"{% endif %}>
     <div class="entry-head">
       <a href="{{ p.url | relative_url }}">{{ p.title }}</a>

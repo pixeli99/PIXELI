@@ -14,7 +14,7 @@ layout: default
         <span class="dot">·</span>
         <span>{{ page.authors }}</span>
       {% endif %}
-      {% assign words = content | strip_html | number_of_words %}
+      {% assign words = content | strip_html | number_of_words: "cjk" %}
       {% if words > 0 %}
         <span class="dot">·</span>
         <span>约 {{ words | divided_by: 350 | plus: 1 }} 分钟</span>

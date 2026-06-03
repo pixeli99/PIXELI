@@ -6,7 +6,8 @@ permalink: /tags/
 
 # 标签
 
-{% assign all = site.notes | concat: site.papers %}
+{% assign published_papers = site.papers | where_exp: "p", "p.published != false" %}
+{% assign all = site.notes | concat: published_papers %}
 {% assign tags = "" | split: "" %}
 {% for item in all %}
   {% for t in item.tags %}

@@ -8,7 +8,7 @@ permalink: /papers/
 
 读过的论文。每篇含一句话概述、方法、想法、引用四个段落。
 
-{% assign papers_sorted = site.papers | sort: "date" | reverse %}
+{% assign papers_sorted = site.papers | where_exp: "p", "p.published != false" | sort: "date" | reverse %}
 {% assign prev_year = "" %}
 {% for p in papers_sorted %}
   {% assign year = p.date | date: "%Y" %}

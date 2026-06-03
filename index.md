@@ -8,7 +8,8 @@ layout: default
 </div>
 
 <div class="section-label">最近</div>
-{% assign all = site.notes | concat: site.papers | sort: "date" | reverse %}
+{% assign published_papers = site.papers | where_exp: "p", "p.published != false" %}
+{% assign all = site.notes | concat: published_papers | sort: "date" | reverse %}
 <ul class="entry-list">
 {% for item in all %}{% if forloop.index <= 12 %}
   <li>

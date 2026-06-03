@@ -1,0 +1,92 @@
+---
+layout: default
+title: 搜索
+permalink: /search/
+---
+
+<style>
+#q {
+  width: 100%;
+  padding: 0.55em 0.75em;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-bottom: 1.6rem;
+  -webkit-appearance: none;
+}
+#q:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+</style>
+
+<input type="search" id="q" placeholder="搜论文、笔记…" autocomplete="off" disabled>
+<ul id="results" class="entry-list"></ul>
+<p id="hint" class="muted" style="font-size:0.9rem;font-family:var(--font-sans)">加载中…</p>
+
+<script>
+(function () {
+  var q = document.getElementById('q');
+  var out = document.getElementById('results');
+  var hint = document.getElementById('hint');
+  var docs = [];
+
+  fetch('{{ "/search.json" | relative_url }}')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      docs = data;
+      q.disabled = false;
+      hint.textContent = '输入关键词搜索全站';
+      q.focus();
+    })
+    .catch(function () { hint.textContent = '索引加载失败'; });
+
+  function score(doc, terms) {
+    var s = 0;
+    var title = doc.title.toLowerCase();
+    var text  = (doc.text  || '').toLowerCase();
+    var tags  = (doc.tags  || []).join(' ').toLowerCase();
+    terms.forEach(function (t) {
+      if (title.indexOf(t) >= 0) s += 10;
+      if (tags.indexOf(t)  >= 0) s += 3;
+      if (text.indexOf(t)  >= 0) s += 1;
+    });
+    return s;
+  }
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function render(results) {
+    if (!results.length) {
+      out.innerHTML = '';
+      hint.textContent = '没有找到匹配内容';
+      return;
+    }
+    hint.textContent = '';
+    out.innerHTML = results.map(function (d) {
+      var kind = d.collection === 'papers' ? '论文' : '笔记';
+      return '<li><a href="' + esc(d.url) + '">' + esc(d.title) + '</a>' +
+             '<span class="entry-tail"><span class="kind">' + kind + '</span></span></li>';
+    }).join('');
+  }
+
+  q.addEventListener('input', function () {
+    var val = q.value.trim().toLowerCase();
+    if (!val) { out.innerHTML = ''; hint.textContent = '输入关键词搜索全站'; return; }
+    var terms = val.split(/\s+/);
+    var hits = docs
+      .map(function (d) { return { d: d, s: score(d, terms) }; })
+      .filter(function (x) { return x.s > 0; })
+      .sort(function (a, b) { return b.s - a.s; })
+      .slice(0, 12)
+      .map(function (x) { return x.d; });
+    render(hits);
+  });
+})();
+</script>

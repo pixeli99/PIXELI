@@ -400,6 +400,17 @@ sup.footnote, a.footnote {
 }
 .related-papers li a:hover { color: var(--accent); }
 
+/* —— Accessibility utility —— */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* —— Footer —— */
 .site-footer {
   margin-top: 6rem;

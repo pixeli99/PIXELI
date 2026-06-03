@@ -24,6 +24,7 @@ permalink: /search/
 }
 </style>
 
+<label for="q" class="sr-only">搜索</label>
 <input type="search" id="q" placeholder="搜论文、笔记…" autocomplete="off" disabled>
 <ul id="results" class="entry-list"></ul>
 <p id="hint" class="muted" style="font-size:0.9rem;font-family:var(--font-sans)">加载中…</p>
@@ -71,8 +72,11 @@ permalink: /search/
     hint.textContent = '';
     out.innerHTML = results.map(function (d) {
       var kind = d.collection === 'papers' ? '论文' : '笔记';
-      return '<li><a href="' + esc(d.url) + '">' + esc(d.title) + '</a>' +
-             '<span class="entry-tail"><span class="kind">' + kind + '</span></span></li>';
+      var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' +
+                 (d.date ? '<time>' + esc(d.date) + '</time>' : '') + '</span>';
+      var head = '<div class="entry-head"><a href="' + esc(d.url) + '">' + esc(d.title) + '</a>' + tail + '</div>';
+      var exc  = d.excerpt ? '<div class="entry-excerpt">' + esc(d.excerpt) + '</div>' : '';
+      return '<li' + (exc ? ' class="with-excerpt"' : '') + '>' + head + exc + '</li>';
     }).join('');
   }
 

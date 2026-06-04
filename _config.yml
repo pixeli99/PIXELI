@@ -7,6 +7,14 @@ description: 一个人的知识库
 baseurl: "/PIXELI"
 url: "https://pixeli99.github.io"
 
+twitter:
+  username: pixeli99
+
+social:
+  name: pixeli99
+  links:
+    - https://github.com/pixeli99
+
 lang: zh-CN
 timezone: Asia/Shanghai
 

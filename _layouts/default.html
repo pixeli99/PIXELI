@@ -25,6 +25,7 @@
   {% endif %}
 </head>
 <body>
+  <a href="#main-content" class="sr-only skip-link">跳至主要内容</a>
   <header class="site-header">
     <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
     <nav class="site-nav" aria-label="主导航">
@@ -37,7 +38,7 @@
     </nav>
   </header>
 
-  <main class="site-content">
+  <main id="main-content" class="site-content">
     {{ content }}
   </main>
 

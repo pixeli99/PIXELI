@@ -73,7 +73,7 @@ permalink: /search/
     out.innerHTML = results.map(function (d) {
       var kind = d.collection === 'papers' ? '论文' : '笔记';
       var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' +
-                 (d.date ? '<time>' + esc(d.date) + '</time>' : '') + '</span>';
+                 (d.date ? '<time datetime="' + esc(d.date) + '">' + esc(d.date) + '</time>' : '') + '</span>';
       var head = '<div class="entry-head"><a href="' + esc(d.url) + '">' + esc(d.title) + '</a>' + tail + '</div>';
       var exc  = d.excerpt ? '<div class="entry-excerpt">' + esc(d.excerpt) + '</div>' : '';
       return '<li' + (exc ? ' class="with-excerpt"' : '') + '>' + head + exc + '</li>';

@@ -15,7 +15,7 @@ permalink: /notes/
   <li{% if n_exc.size > 10 %} class="with-excerpt"{% endif %}>
     <div class="entry-head">
       <a href="{{ n.url | relative_url }}">{{ n.title }}</a>
-      <time>{{ n.date | date: "%Y-%m-%d" }}</time>
+      <time datetime="{{ n.date | date_to_xmlschema }}">{{ n.date | date: "%Y-%m-%d" }}</time>
     </div>
     {% if n_exc.size > 10 %}<div class="entry-excerpt">{{ n_exc }}</div>{% endif %}
   </li>

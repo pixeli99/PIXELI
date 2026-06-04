@@ -22,7 +22,7 @@ permalink: /papers/
   <li{% if p_exc.size > 10 %} class="with-excerpt"{% endif %}>
     <div class="entry-head">
       <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
-      <time>{{ p.date | date: "%Y-%m-%d" }}</time>
+      <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y-%m-%d" }}</time>
     </div>
     {% if p_exc.size > 10 %}<div class="entry-excerpt">{{ p_exc }}</div>{% endif %}
   </li>

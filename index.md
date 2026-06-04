@@ -12,12 +12,20 @@ layout: default
 {% assign all = site.notes | concat: published_papers | sort: "date" | reverse %}
 <ul class="entry-list">
 {% for item in all %}{% if forloop.index <= 12 %}
-  <li>
-    <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
-    <span class="entry-tail">
-      {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
-      <time>{{ item.date | date: "%Y-%m-%d" }}</time>
-    </span>
+  {% if item.collection == "papers" %}
+    {% assign exc = item.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip %}
+  {% else %}
+    {% assign exc = item.excerpt | strip_html | strip %}
+  {% endif %}
+  <li{% if exc.size > 10 %} class="with-excerpt"{% endif %}>
+    <div class="entry-head">
+      <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+      <span class="entry-tail">
+        {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
+        <time>{{ item.date | date: "%Y-%m-%d" }}</time>
+      </span>
+    </div>
+    {% if exc.size > 10 %}<div class="entry-excerpt">{{ exc }}</div>{% endif %}
   </li>
 {% endif %}{% endfor %}
 </ul>

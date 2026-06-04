@@ -102,13 +102,14 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 2.4em;
   margin-bottom: 0.5em;
   letter-spacing: -0.005em;
+  text-wrap: balance;
 }
 h1 { font-size: 1.7rem; }
 h2 { font-size: 1.28rem; }
 h3 { font-size: 1.08rem; }
 h4 { font-size: 0.98rem; color: var(--muted); }
 
-p { margin: 1em 0; }
+p { margin: 1em 0; text-wrap: pretty; }
 
 strong { font-weight: 600; }
 em { font-style: italic; }

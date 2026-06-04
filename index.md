@@ -7,7 +7,7 @@ layout: default
   <p>——论文、随笔、片段。</p>
 </div>
 
-<div class="section-label">最近</div>
+<h2 class="section-label">最近</h2>
 {% assign published_papers = site.papers | where_exp: "p", "p.published != false" %}
 {% assign all = site.notes | concat: published_papers | sort: "date" | reverse %}
 <ul class="entry-list">

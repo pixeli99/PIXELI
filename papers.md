@@ -14,7 +14,7 @@ permalink: /papers/
   {% assign year = p.date | date: "%Y" %}
   {% if year != prev_year %}
     {% unless forloop.first %}</ul>{% endunless %}
-    <div class="section-label">{{ year }}</div>
+    <h2 class="section-label">{{ year }}</h2>
     <ul class="entry-list">
     {% assign prev_year = year %}
   {% endif %}

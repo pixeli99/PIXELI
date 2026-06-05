@@ -479,6 +479,28 @@ sup.footnote, a.footnote {
   .heading-anchor { opacity: 0.4; }
 }
 
+/* —— Print —— */
+@media print {
+  .site-header,
+  .site-footer,
+  .post-nav,
+  .related-papers,
+  .skip-link,
+  .heading-anchor { display: none !important; }
+
+  body { font-size: 11pt; line-height: 1.6; color: #000; background: #fff; }
+  .site-content { max-width: none; padding: 0; }
+  .post-title { font-size: 16pt; }
+
+  a { color: #000; border-bottom: none; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #555; }
+  a[href^="/"]::after,
+  .post-meta a::after { content: none; }
+
+  pre, blockquote { page-break-inside: avoid; }
+  h1, h2, h3 { page-break-after: avoid; }
+}
+
 /* —— Dark mode —— */
 @media (prefers-color-scheme: dark) {
   :root {

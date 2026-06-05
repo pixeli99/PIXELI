@@ -14,18 +14,46 @@
 
 ## 写一篇
 
-笔记放 `_notes/`，论文笔记放 `_papers/`。文件名 `YYYY-MM-DD-slug.md`。
+文件名格式：`YYYY-MM-DD-slug.md`
 
-最小 front matter：
+**随笔** → `_notes/`
 
 ```yaml
 ---
 title: 标题
 date: 2026-05-20
 tags: [扩散模型, 视频生成]   # 可选
-math: true                  # 用到公式才打开（节省 KaTeX 资源）
+math: true                  # 有公式才加（节省 KaTeX 资源）
 ---
 ```
+
+**论文笔记** → `_papers/`（可直接复制 `_papers/2026-05-20-template.md`）
+
+```yaml
+---
+title: 论文标题
+date: 2026-05-20
+authors: 作者 et al. (机构)
+venue: arXiv preprint          # 或 NeurIPS 2025 等
+link: https://arxiv.org/abs/XXXX.XXXXX
+tags: [MoE, Scaling]
+math: true
+---
+```
+
+论文笔记推荐四段：`## 一句话` / `## 方法` / `## 想法` / `## 引用`。
+
+bibtex 里含 `{{...}}` 大括号保护的 title，必须用 `{% raw %}...{% endraw %}` 包住，否则 Jekyll 把 `{{` 当 Liquid 变量报错：
+
+````markdown
+{% raw %}
+```bibtex
+@article{...,
+  title = {{GShard}: ...},
+}
+```
+{% endraw %}
+````
 
 文章里：
 

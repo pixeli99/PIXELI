@@ -9,7 +9,7 @@ permalink: /notes/
 随手记下的东西，按时间倒序排列。
 
 <ul class="entry-list">
-{% assign published_notes = site.notes | where_exp: "n", "n.published != false" %}
+{% assign published_notes = site.notes | where_exp: "n", "n.published != false" | sort: "date" | reverse %}
 {% for n in published_notes %}
   {% assign n_exc = n.excerpt | strip_html | strip %}
   <li{% if n_exc.size > 10 %} class="with-excerpt"{% endif %}>

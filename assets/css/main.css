@@ -1,6 +1,7 @@
 ---
 ---
 :root {
+  color-scheme: light dark;
   --text:        #1c1c1b;
   --muted:       #6b6b66;
   --faint:       #a8a8a3;

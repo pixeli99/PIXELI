@@ -20,12 +20,22 @@ permalink: /tags/
 <p class="muted">还没有标签。在文章 front matter 里加 <code>tags: [扩散模型, 视频生成]</code> 就会出现在这里。</p>
 {% else %}
 
-<p class="tag-cloud">
+{% assign tag_freq_entries = "" | split: "" %}
 {% for t in unique_tags %}
   {% assign count = 0 %}
   {% for item in all %}
     {% if item.tags contains t %}{% assign count = count | plus: 1 %}{% endif %}
   {% endfor %}
+  {% capture freq_entry %}{{ count | prepend: "00000" | slice: -5, 5 }}|{{ t }}{% endcapture %}
+  {% assign tag_freq_entries = tag_freq_entries | push: freq_entry %}
+{% endfor %}
+{% assign sorted_by_freq = tag_freq_entries | sort | reverse %}
+
+<p class="tag-cloud">
+{% for entry in sorted_by_freq %}
+  {% assign parts = entry | split: "|" %}
+  {% assign t = parts[1] %}
+  {% assign count = parts[0] | plus: 0 %}
   <a href="#tag-{{ t | slugify: "none" }}">{{ t }}<sup>{{ count }}</sup></a>
 {% endfor %}
 </p>

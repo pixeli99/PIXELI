@@ -46,8 +46,13 @@ permalink: /tags/
   {% assign matched = all | where_exp: "i", "i.tags contains t" | sort: "date" | reverse %}
   {% for item in matched %}
     <li>
-      <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
-      <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%Y-%m-%d" }}</time>
+      <div class="entry-head">
+        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        <span class="entry-tail">
+          {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
+          <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%Y-%m-%d" }}</time>
+        </span>
+      </div>
     </li>
   {% endfor %}
   </ul>

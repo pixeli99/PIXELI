@@ -502,6 +502,15 @@ sup.footnote, a.footnote {
   h1, h2, h3 { page-break-after: avoid; }
 }
 
+/* —— Reduced motion —— */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* —— Dark mode —— */
 @media (prefers-color-scheme: dark) {
   :root {

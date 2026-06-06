@@ -1210,7 +1210,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 <h2 class="wm-h">延伸阅读</h2>
 <ul class="entry-list" style="margin-top:0.6rem">
   <li><a href="{{ '/notes/2026-05-20-world-arena/' | relative_url }}">World Arena 与 World Model 脉络（综述）</a><time>2026-05-20</time></li>
-  <li><a href="{{ '/papers/' | relative_url }}">所有论文笔记</a><time>57+</time></li>
+  <li><a href="{{ '/papers/' | relative_url }}">所有论文笔记</a><time>{{ site.papers | where_exp: "p", "p.published != false" | size }}+</time></li>
   <li><a href="{{ '/tags/#tag-world-model' | relative_url }}">按"World Model"标签浏览</a><time>—</time></li>
 </ul>
 
@@ -1520,7 +1520,7 @@ function rowHTML(m, idx) {
   const openCls = m.open ? 'open' : 'closed';
   const openTxt = m.open ? 'Open' : 'Closed';
   return `
-    <tr class="row" data-idx="${idx}">
+    <tr class="row" data-idx="${idx}" tabindex="0" aria-expanded="false">
       <td><span class="chev">▸</span>${escapeHTML(m.title)}</td>
       <td class="dim">${m.date}</td>
       <td>${escapeHTML(m.org)}</td>
@@ -1558,22 +1558,30 @@ function renderMaster() {
   summaryEl.textContent = `${filtered.length} / ${MODELS.length} 模型`;
 
   tbody.querySelectorAll('tr.row').forEach(r => {
-    r.addEventListener('click', () => {
+    function toggleRow() {
       const idx = r.dataset.idx;
       const det = tbody.querySelector(`tr.detail[data-idx="${idx}"]`);
       const opening = det.style.display === 'none';
       det.style.display = opening ? '' : 'none';
       r.classList.toggle('open', opening);
+      r.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    }
+    r.addEventListener('click', toggleRow);
+    r.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRow(); }
     });
   });
 }
 
 document.querySelectorAll('.wm-chip').forEach(btn => {
+  btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
   btn.addEventListener('click', () => {
     const f = btn.dataset.filter, v = btn.dataset.value;
     STATE[f] = v;
     document.querySelectorAll(`.wm-chip[data-filter="${f}"]`).forEach(b => {
-      b.classList.toggle('active', b.dataset.value === v);
+      const active = b.dataset.value === v;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
     renderMaster();
   });

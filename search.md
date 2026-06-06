@@ -22,6 +22,16 @@ permalink: /search/
   outline-offset: 1px;
   border-color: transparent;
 }
+mark {
+  background: rgba(138, 51, 36, 0.14);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 0.08em;
+  font-style: normal;
+}
+@media (prefers-color-scheme: dark) {
+  mark { background: rgba(217, 119, 87, 0.24); }
+}
 </style>
 
 <label for="q" class="sr-only">搜索</label>
@@ -63,7 +73,17 @@ permalink: /search/
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function render(results) {
+  function highlight(escaped, terms) {
+    var s = escaped;
+    terms.forEach(function (t) {
+      if (!t) return;
+      var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      s = s.replace(re, '<mark>$1</mark>');
+    });
+    return s;
+  }
+
+  function render(results, terms) {
     if (!results.length) {
       out.innerHTML = '';
       hint.textContent = '没有找到匹配内容';
@@ -74,8 +94,8 @@ permalink: /search/
       var kind = d.collection === 'papers' ? '论文' : '笔记';
       var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' +
                  (d.date ? '<time datetime="' + esc(d.date) + '">' + esc(d.date) + '</time>' : '') + '</span>';
-      var head = '<div class="entry-head"><a href="' + esc(d.url) + '">' + esc(d.title) + '</a>' + tail + '</div>';
-      var exc  = d.excerpt ? '<div class="entry-excerpt">' + esc(d.excerpt) + '</div>' : '';
+      var head = '<div class="entry-head"><a href="' + esc(d.url) + '">' + highlight(esc(d.title), terms) + '</a>' + tail + '</div>';
+      var exc  = d.excerpt ? '<div class="entry-excerpt">' + highlight(esc(d.excerpt), terms) + '</div>' : '';
       return '<li' + (exc ? ' class="with-excerpt"' : '') + '>' + head + exc + '</li>';
     }).join('');
   }
@@ -95,7 +115,7 @@ permalink: /search/
       .sort(function (a, b) { return b.s - a.s; })
       .slice(0, 12)
       .map(function (x) { return x.d; });
-    render(hits);
+    render(hits, terms);
   }
 })();
 </script>

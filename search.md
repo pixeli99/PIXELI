@@ -80,7 +80,12 @@ permalink: /search/
     }).join('');
   }
 
-  q.addEventListener('input', function () {
+  var composing = false;
+  q.addEventListener('compositionstart', function () { composing = true; });
+  q.addEventListener('compositionend',   function () { composing = false; doSearch(); });
+  q.addEventListener('input', function () { if (!composing) doSearch(); });
+
+  function doSearch() {
     var val = q.value.trim().toLowerCase();
     if (!val) { out.innerHTML = ''; hint.textContent = '输入关键词搜索全站'; return; }
     var terms = val.split(/\s+/);
@@ -91,6 +96,6 @@ permalink: /search/
       .slice(0, 12)
       .map(function (x) { return x.d; });
     render(hits);
-  });
+  }
 })();
 </script>

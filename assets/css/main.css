@@ -330,6 +330,10 @@ sup.footnote, a.footnote {
   color: var(--muted);
   font-size: 0.93rem;
   line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .post-body { word-wrap: break-word; }
 .post-body > *:first-child { margin-top: 0; }

@@ -1,6 +1,21 @@
 ---
 layout: default
 ---
+{%- assign _ld_type = "Article" -%}
+{%- if page.collection == 'papers' -%}{%- assign _ld_type = "ScholarlyArticle" -%}{%- endif -%}
+{%- assign _ld_author = site.author -%}
+{%- if page.authors -%}{%- assign _ld_author = page.authors -%}{%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": {{ _ld_type | jsonify }},
+  "headline": {{ page.title | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "url": "{{ page.url | absolute_url }}",
+  "author": { "@type": "Person", "name": {{ _ld_author | jsonify }} },
+  "publisher": { "@type": "Person", "name": {{ site.author | jsonify }}, "url": "{{ site.url }}{{ site.baseurl }}" }
+}
+</script>
 <article class="post">
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>

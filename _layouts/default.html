@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  {%- if page.collection == 'papers' -%}
+    {%- assign _desc = page.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip | truncate: 160 -%}
+    {%- if _desc.size > 10 -%}
+    <meta name="description" content="{{ _desc | escape }}">
+    <meta property="og:description" content="{{ _desc | escape }}">
+    {%- endif -%}
+  {%- endif -%}
   {%- seo title=false -%}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">

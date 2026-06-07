@@ -50,16 +50,21 @@ layout: default
 
 
   {% if page.collection == 'papers' and page.tags.size > 0 %}
-    {% assign tag0 = page.tags | first %}
     {% assign related_papers = "" | split: "" %}
-    {% for p in site.papers reversed %}
-      {% unless p.url == page.url or p.published == false %}
-        {% if p.tags contains tag0 %}
-          {% assign related_papers = related_papers | push: p %}
-        {% endif %}
-      {% endunless %}
+    {% assign seen_urls = "" | split: "" %}
+    {% for t in page.tags %}
+      {% for p in site.papers %}
+        {% unless p.url == page.url or p.published == false %}
+          {% if p.tags contains t %}
+            {% unless seen_urls contains p.url %}
+              {% assign seen_urls = seen_urls | push: p.url %}
+              {% assign related_papers = related_papers | push: p %}
+            {% endunless %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
     {% endfor %}
-    {% assign related_papers = related_papers | slice: 0, 3 %}
+    {% assign related_papers = related_papers | sort: "date" | reverse | slice: 0, 3 %}
     {% if related_papers.size > 0 %}
     <aside class="related-papers" aria-label="相关论文">
       <p class="related-label">相关论文</p>

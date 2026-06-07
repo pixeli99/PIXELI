@@ -40,7 +40,9 @@ permalink: /tags/
 {% endfor %}
 </p>
 
-{% for t in unique_tags %}
+{% for entry in sorted_by_freq %}
+  {% assign parts = entry | split: "|" %}
+  {% assign t = parts[1] %}
   <h2 id="tag-{{ t | slugify: "none" }}">{{ t }}</h2>
   <ul class="entry-list">
   {% assign matched = all | where_exp: "i", "i.tags contains t" | sort: "date" | reverse %}

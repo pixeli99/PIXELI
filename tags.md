@@ -2,6 +2,7 @@
 layout: default
 title: 标签
 permalink: /tags/
+description: 按标签浏览全部论文笔记与随笔。
 ---
 
 # 标签

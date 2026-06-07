@@ -2,6 +2,7 @@
 layout: default
 title: 笔记
 permalink: /notes/
+description: 随手记下的随笔与综述，按时间倒序排列。
 ---
 
 # 笔记

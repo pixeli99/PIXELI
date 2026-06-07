@@ -2,6 +2,7 @@
 layout: default
 title: 关于
 permalink: /about/
+description: pixeli99 的论文笔记与随笔存档地。
 ---
 
 # 关于

@@ -2,6 +2,7 @@
 layout: default
 title: 论文
 permalink: /papers/
+description: 论文阅读笔记，每篇含一句话概述、方法摘要、个人想法与引用。
 ---
 
 # 论文

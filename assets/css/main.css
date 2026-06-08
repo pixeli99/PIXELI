@@ -235,6 +235,15 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+.entry-authors {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 22ch;
+}
 
 .more {
   font-family: var(--font-sans);

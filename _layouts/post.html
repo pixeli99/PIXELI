@@ -5,6 +5,12 @@ layout: default
 {%- if page.collection == 'papers' -%}{%- assign _ld_type = "ScholarlyArticle" -%}{%- endif -%}
 {%- assign _ld_author = site.author -%}
 {%- if page.authors -%}{%- assign _ld_author = page.authors -%}{%- endif -%}
+{%- assign _ld_desc = "" -%}
+{%- if page.collection == 'papers' -%}
+  {%- assign _ld_desc = page.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip | truncate: 200 -%}
+{%- elsif page.excerpt -%}
+  {%- assign _ld_desc = page.excerpt | strip_html | strip | truncate: 200 -%}
+{%- endif -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -12,8 +18,11 @@ layout: default
   "headline": {{ page.title | jsonify }},
   "datePublished": "{{ page.date | date_to_xmlschema }}",
   "url": "{{ page.url | absolute_url }}",
+  "inLanguage": "zh-CN",
   "author": { "@type": "Person", "name": {{ _ld_author | jsonify }} },
-  "publisher": { "@type": "Person", "name": {{ site.author | jsonify }}, "url": "{{ site.url }}{{ site.baseurl }}" }
+  "publisher": { "@type": "Person", "name": {{ site.author | jsonify }}, "url": "{{ site.url }}{{ site.baseurl }}" }{% if _ld_desc.size > 10 %},
+  "description": {{ _ld_desc | jsonify }}{% endif %}{% if page.tags.size > 0 %},
+  "keywords": {{ page.tags | join: ", " | jsonify }}{% endif %}
 }
 </script>
 <article class="post">

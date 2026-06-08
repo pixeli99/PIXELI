@@ -70,6 +70,25 @@ layout: default
     a.textContent = '§';
     h.appendChild(a);
   });
+
+  document.querySelectorAll('.post-body pre').forEach(function(pre) {
+    if (!navigator.clipboard) return;
+    var btn = document.createElement('button');
+    btn.textContent = '复制';
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', '复制代码');
+    btn.addEventListener('click', function() {
+      var code = pre.querySelector('code');
+      navigator.clipboard.writeText(code ? code.textContent : pre.textContent).then(function() {
+        btn.textContent = '已复制';
+        setTimeout(function() { btn.textContent = '复制'; }, 1600);
+      }).catch(function() {
+        btn.textContent = '失败';
+        setTimeout(function() { btn.textContent = '复制'; }, 1600);
+      });
+    });
+    pre.appendChild(btn);
+  });
   </script>
 
 

@@ -59,13 +59,17 @@ mark {
 
   function score(doc, terms) {
     var s = 0;
-    var title = doc.title.toLowerCase();
-    var text  = (doc.text  || '').toLowerCase();
-    var tags  = (doc.tags  || []).join(' ').toLowerCase();
+    var title   = doc.title.toLowerCase();
+    var text    = (doc.text    || '').toLowerCase();
+    var tags    = (doc.tags    || []).join(' ').toLowerCase();
+    var authors = (doc.authors || '').toLowerCase();
+    var venue   = (doc.venue   || '').toLowerCase();
     terms.forEach(function (t) {
-      if (title.indexOf(t) >= 0) s += 10;
-      if (tags.indexOf(t)  >= 0) s += 3;
-      if (text.indexOf(t)  >= 0) s += 1;
+      if (title.indexOf(t)   >= 0) s += 10;
+      if (authors.indexOf(t) >= 0) s += 4;
+      if (tags.indexOf(t)    >= 0) s += 4;
+      if (venue.indexOf(t)   >= 0) s += 3;
+      if (text.indexOf(t)    >= 0) s += 1;
     });
     return s;
   }
@@ -109,7 +113,9 @@ mark {
     hint.textContent = '';
     out.innerHTML = results.map(function (d) {
       var kind = d.collection === 'papers' ? '论文' : '笔记';
-      var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' +
+      var authStr = (d.authors && d.collection === 'papers')
+        ? '<span class="entry-authors">' + highlight(esc(d.authors), terms) + '</span>' : '';
+      var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' + authStr +
                  (d.date ? '<time datetime="' + esc(d.date) + '">' + esc(d.date) + '</time>' : '') + '</span>';
       var head = '<div class="entry-head"><a href="' + esc(d.url) + '">' + highlight(esc(d.title), terms) + '</a>' + tail + '</div>';
       var excText = d.excerpt || '';

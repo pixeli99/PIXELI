@@ -84,6 +84,22 @@ mark {
     return s;
   }
 
+  function snippet(text, terms, maxLen) {
+    if (!text) return '';
+    maxLen = maxLen || 160;
+    var lower = text.toLowerCase();
+    var best = -1;
+    terms.forEach(function (t) {
+      if (!t) return;
+      var idx = lower.indexOf(t);
+      if (idx >= 0 && (best < 0 || idx < best)) best = idx;
+    });
+    if (best < 0) return text.slice(0, maxLen);
+    var start = Math.max(0, best - 60);
+    var end = Math.min(text.length, start + maxLen);
+    return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+  }
+
   function render(results, terms) {
     if (!results.length) {
       out.innerHTML = '';
@@ -96,7 +112,11 @@ mark {
       var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' +
                  (d.date ? '<time datetime="' + esc(d.date) + '">' + esc(d.date) + '</time>' : '') + '</span>';
       var head = '<div class="entry-head"><a href="' + esc(d.url) + '">' + highlight(esc(d.title), terms) + '</a>' + tail + '</div>';
-      var exc  = d.excerpt ? '<div class="entry-excerpt">' + highlight(esc(d.excerpt), terms) + '</div>' : '';
+      var excText = d.excerpt || '';
+      var excLower = excText.toLowerCase();
+      var matchInExc = terms.some(function (t) { return t && excLower.indexOf(t) >= 0; });
+      var displayExc = matchInExc ? excText : snippet(d.text || '', terms, 160);
+      var exc = displayExc ? '<div class="entry-excerpt">' + highlight(esc(displayExc), terms) + '</div>' : '';
       return '<li' + (exc ? ' class="with-excerpt"' : '') + '>' + head + exc + '</li>';
     }).join('');
   }

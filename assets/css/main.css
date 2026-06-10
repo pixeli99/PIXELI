@@ -523,7 +523,8 @@ sup.footnote, a.footnote {
   .post-nav,
   .related-papers,
   .skip-link,
-  .heading-anchor { display: none !important; }
+  .heading-anchor,
+  .copy-btn { display: none !important; }
 
   body { font-size: 11pt; line-height: 1.6; color: #000; background: #fff; }
   .site-content { max-width: none; padding: 0; }

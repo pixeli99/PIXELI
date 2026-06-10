@@ -511,6 +511,11 @@ sup.footnote, a.footnote {
   .post-nav-next { text-align: left; }
 }
 
+/* —— Narrow screens: hide author column from list to protect title width —— */
+@media (max-width: 480px) {
+  .entry-list .entry-authors { display: none; }
+}
+
 /* —— Touch devices: always show heading anchors —— */
 @media (pointer: coarse) {
   .heading-anchor { opacity: 0.4; }

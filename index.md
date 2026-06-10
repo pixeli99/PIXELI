@@ -9,7 +9,7 @@ layout: default
 
 <h2 class="section-label">最近</h2>
 {% assign published_papers = site.papers | where_exp: "p", "p.published != false" %}
-{% assign all = site.notes | concat: published_papers | sort: "date" | reverse %}
+{% assign all = site.notes | where_exp: "n", "n.published != false" | concat: published_papers | sort: "date" | reverse %}
 <ul class="entry-list">
 {% for item in all %}{% if forloop.index <= 12 %}
   {% if item.collection == "papers" %}

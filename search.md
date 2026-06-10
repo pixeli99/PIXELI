@@ -38,7 +38,7 @@ mark {
 <label for="q" class="sr-only">搜索</label>
 <input type="search" id="q" placeholder="搜论文、笔记…" autocomplete="off" disabled>
 <ul id="results" class="entry-list"></ul>
-<p id="hint" class="muted" style="font-size:0.9rem;font-family:var(--font-sans)">加载中…</p>
+<p id="hint" class="muted" style="font-size:0.9rem;font-family:var(--font-sans)" role="status" aria-live="polite" aria-atomic="true">加载中…</p>
 
 <script>
 (function () {
@@ -110,7 +110,7 @@ mark {
       hint.textContent = '没有找到匹配内容';
       return;
     }
-    hint.textContent = '';
+    hint.textContent = '找到 ' + results.length + ' 条结果';
     out.innerHTML = results.map(function (d) {
       var kind = d.collection === 'papers' ? '论文' : '笔记';
       var authStr = (d.authors && d.collection === 'papers')

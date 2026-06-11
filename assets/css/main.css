@@ -214,6 +214,12 @@ th {
   border: none;
 }
 .year-nav a:hover { color: var(--accent); }
+.year-nav sup {
+  color: var(--faint);
+  margin-left: 0.12em;
+  font-size: 0.7em;
+  font-variant-numeric: tabular-nums;
+}
 
 /* —— Entry list —— */
 .entry-list {

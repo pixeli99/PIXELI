@@ -5,6 +5,7 @@ authors: 清华大学 FIB Lab
 venue: arXiv preprint / CVPR 2026 Challenge
 link: https://arxiv.org/abs/2602.08971
 tags: [World Model, Benchmark, Robotics]
+math: true
 ---
 
 ## 一句话

@@ -5,7 +5,7 @@ authors: ELLIS Tübingen / MPI-IS / EPFL
 venue: arXiv preprint
 link: https://arxiv.org/abs/2605.15188
 tags: [Agent, Benchmark, Tool Use, Reasoning]
-math: false
+math: true
 ---
 
 ## 一句话

@@ -5,36 +5,6 @@ permalink: /search/
 description: 全文搜索全站论文笔记与随笔。
 ---
 
-<style>
-#q {
-  width: 100%;
-  padding: 0.55em 0.75em;
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  margin-bottom: 1.6rem;
-  -webkit-appearance: none;
-}
-#q:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-  border-color: transparent;
-}
-mark {
-  background: rgba(138, 51, 36, 0.14);
-  color: inherit;
-  border-radius: 2px;
-  padding: 0 0.08em;
-  font-style: normal;
-}
-@media (prefers-color-scheme: dark) {
-  mark { background: rgba(217, 119, 87, 0.24); }
-}
-</style>
-
 <label for="q" class="sr-only">搜索</label>
 <input type="search" id="q" placeholder="搜论文、笔记…" autocomplete="off" disabled>
 <ul id="results" class="entry-list"></ul>

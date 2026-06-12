@@ -460,6 +460,32 @@ sup.footnote, a.footnote {
 }
 .related-papers li a:hover { color: var(--accent); }
 
+/* —— Search —— */
+#q {
+  width: 100%;
+  padding: 0.55em 0.75em;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-bottom: 1.6rem;
+  -webkit-appearance: none;
+}
+#q:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+mark {
+  background: rgba(138, 51, 36, 0.14);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 0.08em;
+  font-style: normal;
+}
+
 /* —— Accessibility utility —— */
 .sr-only {
   position: absolute;
@@ -564,6 +590,7 @@ sup.footnote, a.footnote {
 
   pre, blockquote { page-break-inside: avoid; }
   h1, h2, h3 { page-break-after: avoid; }
+  mark { background: none; }
 }
 
 /* —— Reduced motion —— */
@@ -587,4 +614,5 @@ sup.footnote, a.footnote {
     --accent:  #d97757;
     --code-bg: #232325;
   }
+  mark { background: rgba(217, 119, 87, 0.24); }
 }

@@ -5,6 +5,7 @@ authors: 1X Technologies
 venue: 博客 / 技术报告
 link: https://www.1x.tech/discover/1x-world-model
 tags: [World Model, Robotics, Generative, Video]
+math: false
 ---
 
 ## 一句话

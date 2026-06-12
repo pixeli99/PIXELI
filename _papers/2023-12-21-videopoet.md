@@ -5,7 +5,7 @@ authors: Kondratyuk, Yu, Gu, et al. (Google)
 venue: ICML 2024 (Best Paper)
 link: https://arxiv.org/abs/2312.14125
 tags: [Video, Tokenizer, World Model]
-math: true
+math: false
 ---
 
 ## 一句话

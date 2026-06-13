@@ -122,7 +122,6 @@ blockquote {
   padding-left: 1.2em;
   color: var(--muted);
   margin: 1.8em 0;
-  font-style: italic;
 }
 
 ul, ol { padding-left: 1.4em; }

@@ -45,7 +45,7 @@ layout: default
       {% endif %}
       {% if page.link %}
         <span class="dot" aria-hidden="true">·</span>
-        <a href="{{ page.link }}" target="_blank" rel="noopener">{{ page.venue | default: "原文" }}<span aria-hidden="true"> ↗</span></a>
+        <a href="{{ page.link }}" target="_blank" rel="noopener noreferrer">{{ page.venue | default: "原文" }}<span aria-hidden="true"> ↗</span></a>
       {% endif %}
       {% if page.tags and page.tags.size > 0 %}
         <span class="dot" aria-hidden="true">·</span>

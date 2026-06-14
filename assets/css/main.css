@@ -476,6 +476,7 @@ sup.footnote, a.footnote {
   border: 1px solid var(--border);
   border-radius: 3px;
   margin-bottom: 1.6rem;
+  caret-color: var(--accent);
   -webkit-appearance: none;
   appearance: none;
 }

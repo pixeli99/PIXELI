@@ -5,10 +5,11 @@ permalink: /search/
 description: 全文搜索全站论文笔记与随笔。
 ---
 
+<noscript><p class="muted" style="font-size:0.9rem;font-family:var(--font-sans)">搜索需要 JavaScript，当前浏览器已禁用。请通过<a href="{{ '/tags/' | relative_url }}">标签</a>或<a href="{{ '/papers/' | relative_url }}">论文列表</a>浏览。</p></noscript>
 <label for="q" class="sr-only">搜索</label>
 <input type="search" id="q" placeholder="搜论文、笔记…" autocomplete="off" disabled>
 <ul id="results" class="entry-list"></ul>
-<p id="hint" class="muted" style="font-size:0.9rem;font-family:var(--font-sans)" role="status" aria-live="polite" aria-atomic="true">加载中…</p>
+<p id="hint" class="muted" role="status" aria-live="polite" aria-atomic="true">加载中…</p>
 
 <script>
 (function () {

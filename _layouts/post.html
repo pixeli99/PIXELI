@@ -41,7 +41,7 @@ layout: default
       {% assign words = content | strip_html | number_of_words: "cjk" %}
       {% if words > 0 %}
         <span class="dot" aria-hidden="true">·</span>
-        <span>约 {{ words | divided_by: 350 | plus: 1 }} 分钟</span>
+        <span>约 {{ words | plus: 349 | divided_by: 350 }} 分钟</span>
       {% endif %}
       {% if page.link %}
         <span class="dot" aria-hidden="true">·</span>

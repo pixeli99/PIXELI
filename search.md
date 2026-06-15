@@ -20,13 +20,15 @@ description: 全文搜索全站论文笔记与随笔。
   var hint = document.getElementById('hint');
   var docs = [];
 
+  var initialQ = new URLSearchParams(location.search).get('q') || '';
+  if (initialQ) { q.value = initialQ; }
+
   fetch('{{ "/search.json" | relative_url }}')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       docs = data;
       q.disabled = false;
-      hint.textContent = '输入关键词搜索全站';
-      q.focus();
+      if (initialQ) { doSearch(); } else { hint.textContent = '输入关键词搜索全站'; q.focus(); }
     })
     .catch(function () { hint.textContent = '索引加载失败'; });
 
@@ -107,6 +109,9 @@ description: 全文搜索全站论文笔记与随笔。
 
   function doSearch() {
     var val = q.value.trim().toLowerCase();
+    var raw = q.value.trim();
+    var newUrl = raw ? (location.pathname + '?q=' + encodeURIComponent(raw)) : location.pathname;
+    history.replaceState(null, '', newUrl);
     if (!val) { out.innerHTML = ''; hint.textContent = '输入关键词搜索全站'; return; }
     var terms = val.split(/\s+/);
     var hits = docs

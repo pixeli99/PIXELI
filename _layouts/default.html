@@ -45,7 +45,7 @@
       <a href="{{ '/papers/' | relative_url }}"{% if page.url contains '/papers/' %} aria-current="page"{% endif %}>论文</a>
       <a href="{{ '/world-models/' | relative_url }}"{% if page.url contains '/world-models' %} aria-current="page"{% endif %}>World Models</a>
       <a href="{{ '/tags/' | relative_url }}"{% if page.url contains '/tags/' %} aria-current="page"{% endif %}>标签</a>
-      <a href="{{ '/search/' | relative_url }}"{% if page.url contains '/search/' %} aria-current="page"{% endif %}>搜索</a>
+      <a href="{{ '/search/' | relative_url }}"{% if page.url contains '/search/' %} aria-current="page"{% endif %} title="搜索（/）">搜索</a>
       <a href="{{ '/about/' | relative_url }}"{% if page.url contains '/about/' %} aria-current="page"{% endif %}>关于</a>
     </nav>
   </header>
@@ -53,6 +53,18 @@
   <main id="main-content" class="site-content">
     {{ content }}
   </main>
+
+  <script>
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== '/') return;
+    var tag = document.activeElement ? document.activeElement.tagName : '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) return;
+    var q = document.getElementById('q');
+    e.preventDefault();
+    if (q) { q.focus(); q.select(); }
+    else { window.location.href = '{{ "/search/" | relative_url }}'; }
+  });
+  </script>
 
   <footer class="site-footer">
     <span>© {{ 'now' | date: "%Y" }} {{ site.author }}</span>

@@ -490,7 +490,7 @@ sup.footnote, a.footnote {
   border-color: transparent;
 }
 mark {
-  background: rgba(138, 51, 36, 0.14);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
   color: inherit;
   border-radius: 2px;
   padding: 0 0.08em;
@@ -643,5 +643,5 @@ mark {
     --accent:  #d97757;
     --code-bg: #232325;
   }
-  mark { background: rgba(217, 119, 87, 0.24); }
+  mark { background: color-mix(in srgb, var(--accent) 24%, transparent); }
 }

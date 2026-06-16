@@ -23,7 +23,9 @@
 title: 标题
 date: 2026-05-20
 tags: [扩散模型, 视频生成]   # 可选
+excerpt: 一句话摘要          # 可选，用于列表预览和 SEO description
 math: true                  # 有公式才加（节省 KaTeX 资源）
+published: false            # 可选，草稿不发布时加
 ---
 ```
 
@@ -37,7 +39,8 @@ authors: 作者 et al. (机构)
 venue: arXiv preprint          # 或 NeurIPS 2025 等
 link: https://arxiv.org/abs/XXXX.XXXXX
 tags: [MoE, Scaling]
-math: true
+math: true                  # 有公式才加
+published: false            # 可选，草稿不发布时加
 ---
 ```
 
@@ -75,14 +78,16 @@ bundle exec jekyll serve
 ## 结构
 
 ```
-_notes/      随笔
-_papers/     论文阅读
-_layouts/    布局
-assets/      CSS、Favicon
-index.md     首页（合并最近 12 条）
-notes.md     /notes/
-papers.md    /papers/
-tags.md      /tags/
-about.md     /about/
+_notes/           随笔
+_papers/          论文阅读
+_layouts/         布局
+assets/           CSS、Favicon
+index.md          首页（合并最近 12 条）
+notes.md          /notes/
+papers.md         /papers/
+tags.md           /tags/
+search.md         /search/（前端全文搜索）
+world-models.html /world-models/（World Model 领域全景表）
+about.md          /about/
 404.html
 ```

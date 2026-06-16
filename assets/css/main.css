@@ -97,6 +97,9 @@ a {
 }
 a:visited { color: var(--muted); }
 a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+/* Structural links must not change on visited — higher specificity overrides a:visited */
+.site-title:visited { color: var(--text); }
+.heading-anchor:visited { color: var(--faint); }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);

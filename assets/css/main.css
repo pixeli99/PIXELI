@@ -127,6 +127,8 @@ blockquote {
   color: var(--muted);
   margin: 1.8em 0;
 }
+blockquote > *:first-child { margin-top: 0; }
+blockquote > *:last-child  { margin-bottom: 0; }
 
 ul, ol { padding-left: 1.4em; }
 li { margin: 0.25em 0; }

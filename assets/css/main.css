@@ -314,7 +314,7 @@ th {
   gap: 0.5rem;
   align-items: center;
 }
-.post-meta .dot { color: var(--border); }
+.meta-sep::before { content: "·"; color: var(--border); margin-right: 0.5rem; }
 .post-meta a {
   color: var(--muted);
   border-bottom: none;

@@ -35,23 +35,17 @@ layout: default
         </time>
       {% endif %}
       {% if page.authors %}
-        <span class="dot" aria-hidden="true">·</span>
-        <span>{{ page.authors }}</span>
+        <span class="meta-sep"><span>{{ page.authors }}</span></span>
       {% endif %}
       {% assign words = content | strip_html | number_of_words: "cjk" %}
       {% if words > 0 %}
-        <span class="dot" aria-hidden="true">·</span>
-        <span>约 {{ words | plus: 349 | divided_by: 350 }} 分钟</span>
+        <span class="meta-sep"><span>约 {{ words | plus: 349 | divided_by: 350 }} 分钟</span></span>
       {% endif %}
       {% if page.link %}
-        <span class="dot" aria-hidden="true">·</span>
-        <a href="{{ page.link }}" target="_blank" rel="noopener noreferrer">{{ page.venue | default: "原文" }}<span aria-hidden="true"> ↗</span></a>
+        <span class="meta-sep"><a href="{{ page.link }}" target="_blank" rel="noopener noreferrer">{{ page.venue | default: "原文" }}<span aria-hidden="true"> ↗</span></a></span>
       {% endif %}
       {% if page.tags and page.tags.size > 0 %}
-        <span class="dot" aria-hidden="true">·</span>
-        <span class="post-tags">
-          {% for t in page.tags %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | slugify: "none" }}">{{ t }}</a>{% unless forloop.last %} {% endunless %}{% endfor %}
-        </span>
+        <span class="meta-sep"><span class="post-tags">{% for t in page.tags %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | slugify: "none" }}">{{ t }}</a>{% unless forloop.last %} {% endunless %}{% endfor %}</span></span>
       {% endif %}
     </div>
   </header>

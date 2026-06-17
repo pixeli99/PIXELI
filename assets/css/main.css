@@ -316,7 +316,7 @@ th {
   gap: 0.5rem;
   align-items: center;
 }
-.meta-sep::before { content: "·"; color: var(--border); margin-right: 0.5rem; }
+.meta-sep::before { content: "·"; color: var(--faint); margin-right: 0.5rem; }
 .post-meta a {
   color: var(--muted);
   border-bottom: none;
@@ -565,7 +565,7 @@ mark {
 }
 .site-footer a { color: var(--faint); border: none; }
 .site-footer a:hover { color: var(--accent); }
-.site-footer .dot { color: var(--border); }
+.site-footer .dot { color: var(--faint); }
 
 /* —— Mobile —— */
 @media (max-width: 600px) {

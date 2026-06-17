@@ -486,6 +486,8 @@ sup.footnote, a.footnote {
   -webkit-appearance: none;
   appearance: none;
 }
+#q::placeholder { color: var(--faint); opacity: 1; }
+#q:disabled { opacity: 0.5; cursor: default; }
 #q:focus {
   outline: 2px solid var(--accent);
   outline-offset: 1px;

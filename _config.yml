@@ -39,7 +39,6 @@ defaults:
       type: papers
     values:
       layout: post
-      description: " "
 
 markdown: kramdown
 highlighter: rouge

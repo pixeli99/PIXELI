@@ -1463,11 +1463,11 @@ const MODELS = [
    bench:"Stanford WorldScore 开源 #1",
    paper:null},
   {slug:"decart-lucy",title:"Decart Lucy / DOS",date:"2026-05",org:"Decart",repr:"pixel",purpose:["game","video"],era:"2026",open:false,
-   short:"实时 WM 旗舰：Lucy &lt;30ms 延迟，DOS 1600 tok/s，最高 100fps full-HD。",
+   short:"实时 WM 旗舰：Lucy <30ms 延迟，DOS 1600 tok/s，最高 100fps full-HD。",
    summary:"$300M Series C / 估值 ~$4B（Radical Ventures 领投）。",
    pros:["延迟做到消费可用区间","Etched ASIC 工程示范升级","融资充沛"],
    cons:["闭源","泛化能力比 demo 可能差"],
-   bench:"Lucy &lt;30ms / DOS 1600 tok/s",
+   bench:"Lucy <30ms / DOS 1600 tok/s",
    paper:null},
   {slug:"seedance-2",title:"Seedance 2.0",date:"2026-03",org:"ByteDance",repr:"pixel",purpose:["video"],era:"2026",open:false,
    short:"字节闭源视频生成；Artificial Analysis Elo 1268（仅次于 HappyHorse-1.0）。",
@@ -1530,6 +1530,7 @@ function rowHTML(m, idx) {
     <tr class="detail" data-idx="${idx}" style="display:none">
       <td colspan="7">
         <div class="wm-detail">
+          ${m.short ? `<div class="full"><h4>方法</h4>${escapeHTML(m.short)}</div>` : ''}
           <div class="full">${escapeHTML(m.summary)}</div>
           <div>
             <h4>优势</h4>

@@ -11,7 +11,7 @@ layout: default
 {% assign published_papers = site.papers | where_exp: "p", "p.published != false" %}
 {% assign all = site.notes | where_exp: "n", "n.published != false" | concat: published_papers | sort: "date" | reverse %}
 <ul class="entry-list">
-{% for item in all %}{% if forloop.index <= 12 %}
+{% for item in all limit: 12 %}
   {% if item.collection == "papers" %}
     {% assign exc = item.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip %}
   {% else %}
@@ -27,7 +27,7 @@ layout: default
     </div>
     {% if exc.size > 10 %}<div class="entry-excerpt">{{ exc }}</div>{% endif %}
   </li>
-{% endif %}{% endfor %}
+{% endfor %}
 </ul>
 
 <p class="more">

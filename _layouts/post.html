@@ -105,7 +105,7 @@ layout: default
     {% if related_papers.size > 0 %}
     <aside class="related-papers" aria-label="相关论文">
       <p class="related-label">相关论文</p>
-      <ul>
+      <ul role="list">
         {% for p in related_papers %}
           <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
         {% endfor %}

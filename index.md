@@ -10,7 +10,7 @@ layout: default
 <h2 class="section-label">最近</h2>
 {% assign published_papers = site.papers | where_exp: "p", "p.published != false" %}
 {% assign all = site.notes | where_exp: "n", "n.published != false" | concat: published_papers | sort: "date" | reverse %}
-<ul class="entry-list">
+<ul class="entry-list" role="list">
 {% for item in all limit: 12 %}
   {% if item.collection == "papers" %}
     {% assign exc = item.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip %}

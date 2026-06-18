@@ -45,7 +45,7 @@ description: 按标签浏览全部论文笔记与随笔。
   {% assign parts = entry | split: "|" %}
   {% assign t = parts[1] %}
   <h2 id="tag-{{ t | slugify: "none" }}">{{ t }}</h2>
-  <ul class="entry-list">
+  <ul class="entry-list" role="list">
   {% assign matched = all | where_exp: "i", "i.tags contains t" | sort: "date" | reverse %}
   {% for item in matched %}
     <li>

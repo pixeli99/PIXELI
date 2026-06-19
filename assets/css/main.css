@@ -648,6 +648,20 @@ mark {
   }
 }
 
+/* —— Increased contrast —— */
+@media (prefers-contrast: more) {
+  :root {
+    --muted:  #4a4a47;  /* 7.5:1 on --bg */
+    --faint:  #6b6b66;  /* 4.6:1 on --bg, hits AA for small text */
+    --border: #8a8a87;  /* 3.1:1 on --bg, hits non-text threshold */
+  }
+}
+@media (prefers-color-scheme: dark) and (prefers-contrast: more) {
+  :root {
+    --border: #666660;  /* 3.1:1 on dark --bg; --muted/--faint already pass AA */
+  }
+}
+
 /* —— Dark mode —— */
 @media (prefers-color-scheme: dark) {
   :root {

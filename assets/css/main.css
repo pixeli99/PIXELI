@@ -276,6 +276,17 @@ th {
   text-overflow: ellipsis;
   max-width: 22ch;
 }
+.entry-venue {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--faint);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+}
+.entry-tail:has(.entry-venue) .entry-authors { display: none; }
 
 .more {
   font-family: var(--font-sans);
@@ -593,9 +604,10 @@ mark {
   .post-nav-next { text-align: left; }
 }
 
-/* —— Narrow screens: hide author column from list to protect title width —— */
+/* —— Narrow screens: hide author/venue from list to protect title width —— */
 @media (max-width: 480px) {
-  .entry-list .entry-authors { display: none; }
+  .entry-list .entry-authors,
+  .entry-list .entry-venue { display: none; }
 }
 
 /* —— Touch devices: always show heading anchors —— */

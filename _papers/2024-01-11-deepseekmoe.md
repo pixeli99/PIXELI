@@ -2,7 +2,7 @@
 title: "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models"
 date: 2024-01-11
 authors: DeepSeek-AI (Dai et al.)
-venue: arXiv preprint / ACL 2024
+venue: ACL 2024
 link: https://arxiv.org/abs/2401.06066
 tags: [MoE, DeepSeek, Routing, Sparse, Scaling]
 math: true

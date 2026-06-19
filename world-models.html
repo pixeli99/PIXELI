@@ -1151,16 +1151,16 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 <div class="wm-cap">想查具体某个模型 / 按维度过滤时用。点击行展开 pros/cons/benchmark + 详读笔记。按时间倒序。</div>
 
 <div class="wm-controls">
-  <div class="wm-filter-row">
-    <span class="wm-filter-label">表示</span>
+  <div class="wm-filter-row" role="group" aria-labelledby="fl-repr">
+    <span class="wm-filter-label" id="fl-repr">表示</span>
     <button class="wm-chip active" data-filter="repr" data-value="all">全部</button>
     <button class="wm-chip" data-filter="repr" data-value="latent">Latent</button>
     <button class="wm-chip" data-filter="repr" data-value="token">Token</button>
     <button class="wm-chip" data-filter="repr" data-value="pixel">Pixel</button>
     <button class="wm-chip" data-filter="repr" data-value="3d">Spatial</button>
   </div>
-  <div class="wm-filter-row">
-    <span class="wm-filter-label">用途</span>
+  <div class="wm-filter-row" role="group" aria-labelledby="fl-purpose">
+    <span class="wm-filter-label" id="fl-purpose">用途</span>
     <button class="wm-chip active" data-filter="purpose" data-value="all">全部</button>
     <button class="wm-chip" data-filter="purpose" data-value="rl">RL / Planning</button>
     <button class="wm-chip" data-filter="purpose" data-value="video">视频生成</button>
@@ -1170,8 +1170,8 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
     <button class="wm-chip" data-filter="purpose" data-value="spatial">3D / 空间</button>
     <button class="wm-chip" data-filter="purpose" data-value="benchmark">评测</button>
   </div>
-  <div class="wm-filter-row">
-    <span class="wm-filter-label">年代</span>
+  <div class="wm-filter-row" role="group" aria-labelledby="fl-era">
+    <span class="wm-filter-label" id="fl-era">年代</span>
     <button class="wm-chip active" data-filter="era" data-value="all">全部</button>
     <button class="wm-chip" data-filter="era" data-value="pre2023">2018–2022</button>
     <button class="wm-chip" data-filter="era" data-value="2023">2023</button>
@@ -1179,8 +1179,8 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
     <button class="wm-chip" data-filter="era" data-value="2025">2025</button>
     <button class="wm-chip" data-filter="era" data-value="2026">2026</button>
   </div>
-  <div class="wm-filter-row">
-    <span class="wm-filter-label">开源</span>
+  <div class="wm-filter-row" role="group" aria-labelledby="fl-open">
+    <span class="wm-filter-label" id="fl-open">开源</span>
     <button class="wm-chip active" data-filter="open" data-value="all">全部</button>
     <button class="wm-chip" data-filter="open" data-value="open">Open</button>
     <button class="wm-chip" data-filter="open" data-value="closed">Closed</button>

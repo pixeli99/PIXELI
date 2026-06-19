@@ -2,7 +2,7 @@
 title: "WorldArena: A Unified Benchmark for Evaluating Perception and Functional Utility of Embodied World Models"
 date: 2026-02-09
 authors: 清华大学 FIB Lab
-venue: arXiv preprint / CVPR 2026 Challenge
+venue: CVPR 2026 Challenge
 link: https://arxiv.org/abs/2602.08971
 tags: [World Model, Benchmark, Robotics]
 math: true

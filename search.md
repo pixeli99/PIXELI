@@ -90,7 +90,10 @@ description: 全文搜索全站论文笔记与随笔。
       var kind = d.collection === 'papers' ? '论文' : '笔记';
       var authStr = (d.authors && d.collection === 'papers')
         ? '<span class="entry-authors">' + highlight(esc(d.authors), terms) + '</span>' : '';
-      var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' + authStr +
+      var v = d.venue || '';
+      var venueStr = (d.collection === 'papers' && v && v.indexOf('arXiv') < 0 && v.indexOf('博客') < 0)
+        ? '<span class="entry-venue">' + highlight(esc(v), terms) + '</span>' : '';
+      var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' + authStr + venueStr +
                  (d.date ? '<time datetime="' + esc(d.date) + '">' + esc(d.date) + '</time>' : '') + '</span>';
       var head = '<div class="entry-head"><a href="' + esc(d.url) + '">' + highlight(esc(d.title), terms) + '</a>' + tail + '</div>';
       var excText = d.excerpt || '';

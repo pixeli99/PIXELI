@@ -53,6 +53,12 @@ description: 按标签浏览全部论文笔记与随笔。
         <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
         <span class="entry-tail">
           {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
+          {% if item.collection == "papers" %}
+            {% if item.authors %}<span class="entry-authors">{{ item.authors }}</span>{% endif %}
+            {% unless item.venue contains 'arXiv' or item.venue contains '博客' or item.venue == nil or item.venue == '' %}
+              <span class="entry-venue">{{ item.venue }}</span>
+            {% endunless %}
+          {% endif %}
           <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%Y-%m-%d" }}</time>
         </span>
       </div>

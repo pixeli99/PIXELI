@@ -189,6 +189,9 @@ description: World Models 领域论文全景：时间线、方法对比、技术
        --bg (#18181a) gives ~5.4:1 and passes AA */
     .wm-chip.active { color: var(--bg); }
   }
+  /* active chip background == --accent, so the default accent-colored outline vanishes;
+     use --bg instead: near-white (#fdfcf8) on red, near-black (#18181a) on orange */
+  .wm-chip.active:focus-visible { outline-color: var(--bg); }
   .wm-summary {
     font-family: var(--font-sans);
     font-size: 0.78rem;

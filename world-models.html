@@ -2,7 +2,7 @@
 layout: default
 title: World Models 全景
 permalink: /world-models/
-math: true
+description: World Models 领域论文全景：时间线、方法对比、技术维度分析。
 ---
 
 <style>
@@ -49,11 +49,9 @@ math: true
     color: var(--text);
     letter-spacing: -0.005em;
   }
-  h2.wm-h::before {
-    content: "§ ";
+  h2.wm-h .wm-sec {
     color: var(--accent);
     font-weight: 400;
-    margin-right: 0.1em;
   }
   h2.wm-h .num {
     font-size: 0.78rem;
@@ -186,6 +184,11 @@ math: true
   }
   .wm-chip:hover { color: var(--text); border-color: var(--muted); }
   .wm-chip.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+  @media (prefers-color-scheme: dark) {
+    /* dark accent (#d97757) is light enough that white text only reaches ~3.3:1;
+       --bg (#18181a) gives ~5.4:1 and passes AA */
+    .wm-chip.active { color: var(--bg); }
+  }
   .wm-summary {
     font-family: var(--font-sans);
     font-size: 0.78rem;
@@ -523,7 +526,7 @@ math: true
 
 <h1 style="margin-top:0;margin-bottom:0.4rem">World Models 全景 · 2026 Q2</h1>
 <div class="wm-cap" style="font-size:0.9rem;margin-bottom:1.6rem">
-  39 个模型 · 4 类评测 · 2018 — 2026 · 数据 <time>2026-05-20</time>
+  39 个模型 · 4 类评测 · 2018 — 2026 · 数据 <time datetime="2026-05-20">2026-05-20</time>
 </div>
 
 <div class="wm-tldr">
@@ -534,7 +537,7 @@ math: true
 </div>
 
 
-<h2 class="wm-h">§ 1 这是什么<span class="num">定义 · 应用 · 为什么 2024 后才热</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 1 这是什么<span class="num">定义 · 应用 · 为什么 2024 后才热</span></h2>
 
 <p>
 广义 <strong>World Model</strong> 是一个能预测<em>下一步会发生什么</em>的模型。给一段视频 + 一个动作 + 一些条件，它告诉你接下来若干帧会长什么样、嵌入会怎么变、3D 场景会怎么演化。
@@ -556,7 +559,7 @@ math: true
 </p>
 
 
-<h2 class="wm-h">§ 2 发展三段<span class="num">2018 — 2026</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 2 发展三段<span class="num">2018 — 2026</span></h2>
 
 <div class="wm-era-narr">
   <span class="num-tag">2018 — 2022</span>
@@ -674,7 +677,7 @@ math: true
 </div>
 
 
-<h2 class="wm-h">§ 3 经典结构解剖<span class="num">8 个 canonical 架构</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 3 经典结构解剖<span class="num">8 个 canonical 架构</span></h2>
 
 <div class="wm-cap">
   汇报到这里听众已经知道"谁做了什么"，但要回答"具体怎么做"——输入是啥、输出是啥、怎么训——还得看结构。下面 8 个是这条线上工程最有代表性的，每个给一个 schematic、IO、训练目标、关键数字。
@@ -921,7 +924,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h">§ 4 当前阵营<span class="num">谁在做什么 · 资本动向</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 4 当前阵营<span class="num">谁在做什么 · 资本动向</span></h2>
 
 <div class="wm-tldr">
   <span class="wm-tldr-label">小结</span>
@@ -943,7 +946,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h">§ 5 评测怎么看<span class="num">4 张主榜</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 5 评测怎么看<span class="num">4 张主榜</span></h2>
 
 <div class="wm-tldr">
   <span class="wm-tldr-label">结论</span>
@@ -952,7 +955,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 
 <h3 class="wm-h3">WorldMark · 6 个 interactive WM × 8 指标</h3>
 <div class="wm-cap">
-  摘自 <a href="https://arxiv.org/abs/2604.21686" target="_blank" rel="noopener">arXiv:2604.21686</a>，first-person real 场景。
+  摘自 <a href="https://arxiv.org/abs/2604.21686" target="_blank" rel="noopener noreferrer">arXiv:2604.21686</a>，first-person real 场景。
   美学 / 成像 0-100 越高越好；trans/rot/reproj err 越低越好；3 项一致性 0-10 越高越好。
   色深 = 该列相对排名。
 </div>
@@ -961,15 +964,15 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
   <table class="wm-tab" id="wm-bench-worldmark">
     <thead>
       <tr>
-        <th>模型</th>
-        <th class="num">美学 ↑</th>
-        <th class="num">成像 ↑</th>
-        <th class="num">平移 err ↓</th>
-        <th class="num">旋转 err ↓</th>
-        <th class="num">重投影 err ↓</th>
-        <th class="num">state ↑</th>
-        <th class="num">content ↑</th>
-        <th class="num">style ↑</th>
+        <th scope="col">模型</th>
+        <th scope="col" class="num">美学 ↑</th>
+        <th scope="col" class="num">成像 ↑</th>
+        <th scope="col" class="num">平移 err ↓</th>
+        <th scope="col" class="num">旋转 err ↓</th>
+        <th scope="col" class="num">重投影 err ↓</th>
+        <th scope="col" class="num">state ↑</th>
+        <th scope="col" class="num">content ↑</th>
+        <th scope="col" class="num">style ↑</th>
       </tr>
     </thead>
     <tbody>
@@ -987,7 +990,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 
 <h3 class="wm-h3">VBench-2.0 · 8 个能力维度 × 4 模型</h3>
 <div class="wm-cap">
-  摘自 <a href="https://arxiv.org/abs/2503.21755" target="_blank" rel="noopener">arXiv:2503.21755</a>。% 越高越好。"动态空间关系"、"复杂情节"全员低分——是当下硬骨头。
+  摘自 <a href="https://arxiv.org/abs/2503.21755" target="_blank" rel="noopener noreferrer">arXiv:2503.21755</a>。% 越高越好。"动态空间关系"、"复杂情节"全员低分——是当下硬骨头。
   Veo 3.1 / Sora 2 / Wan 2.5+ 未赶上 cut-off。
 </div>
 
@@ -995,11 +998,11 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
   <table class="wm-tab" id="wm-bench-vbench">
     <thead>
       <tr>
-        <th>能力维度 (%)</th>
-        <th class="num">HunyuanVideo</th>
-        <th class="num">CogVideoX-1.5</th>
-        <th class="num">Sora</th>
-        <th class="num">Kling 1.6</th>
+        <th scope="col">能力维度 (%)</th>
+        <th scope="col" class="num">HunyuanVideo</th>
+        <th scope="col" class="num">CogVideoX-1.5</th>
+        <th scope="col" class="num">Sora</th>
+        <th scope="col" class="num">Kling 1.6</th>
       </tr>
     </thead>
     <tbody>
@@ -1023,11 +1026,11 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
   <table class="wm-tab" id="wm-bench-robotics">
     <thead>
       <tr>
-        <th>模型</th>
-        <th>路线</th>
-        <th>任务</th>
-        <th class="num">成功率 (%)</th>
-        <th class="num">每 action 推理</th>
+        <th scope="col">模型</th>
+        <th scope="col">路线</th>
+        <th scope="col">任务</th>
+        <th scope="col" class="num">成功率 (%)</th>
+        <th scope="col" class="num">每 action 推理</th>
       </tr>
     </thead>
     <tbody>
@@ -1051,7 +1054,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 <h3 class="wm-h3">人工偏好 Elo · Artificial Analysis 2026 Q1-Q2</h3>
 <div class="wm-tab-wrap">
   <table class="wm-tab" id="wm-bench-elo">
-    <thead><tr><th>模型</th><th class="num">Elo</th><th>组织</th><th>开/闭</th></tr></thead>
+    <thead><tr><th scope="col">模型</th><th scope="col" class="num">Elo</th><th scope="col">组织</th><th scope="col">开/闭</th></tr></thead>
     <tbody>
       <tr><td>HappyHorse-1.0</td><td class="hm" data-col="elo" data-val="1361">1361</td><td>未披露</td><td><span class="wm-os closed">Closed</span></td></tr>
       <tr><td>Seedance 2.0</td><td class="hm" data-col="elo" data-val="1268">1268</td><td>ByteDance</td><td><span class="wm-os closed">Closed</span></td></tr>
@@ -1065,11 +1068,11 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h">§ 6 流派优劣对照<span class="num">summary</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 6 流派优劣对照<span class="num">summary</span></h2>
 <div class="wm-cap">汇报时如果只看一张表，看这张。</div>
 <div class="wm-tab-wrap">
   <table class="wm-tab wm-pc-table">
-    <thead><tr><th class="col-stream">流派</th><th>优势</th><th>劣势</th><th>典型用例</th></tr></thead>
+    <thead><tr><th scope="col" class="col-stream">流派</th><th scope="col">优势</th><th scope="col">劣势</th><th scope="col">典型用例</th></tr></thead>
     <tbody>
       <tr>
         <td><span class="stream-name">Latent</span><span class="stream-tag">JEPA / RSSM</span></td>
@@ -1100,7 +1103,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h">§ 7 还没解决<span class="num">研究空白 + 长 horizon</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 7 还没解决<span class="num">研究空白 + 长 horizon</span></h2>
 
 <div class="wm-cap">
   把 39 个模型塞进 [Latent / Token / Pixel] × [RL planning / Content gen / Evaluation] 的 2×3 矩阵后，三格明显空着——这本身就是 field 的研究信号。
@@ -1108,7 +1111,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 
 <div class="wm-tab-wrap">
   <table class="wm-tab">
-    <thead><tr><th>空格</th><th>为什么空</th><th>谁可能填上</th></tr></thead>
+    <thead><tr><th scope="col">空格</th><th scope="col">为什么空</th><th scope="col">谁可能填上</th></tr></thead>
     <tbody>
       <tr>
         <td><strong>Latent × Content Generation</strong></td>
@@ -1135,7 +1138,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h">§ 8 一句话总结<span class="num">汇报时讲这五条</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 8 一句话总结<span class="num">汇报时讲这五条</span></h2>
 
 <div class="wm-end">
   <ol>
@@ -1148,20 +1151,20 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h">§ 附录 · 39 模型主表<span class="num">filter + 详读</span></h2>
+<h2 class="wm-h"><span class="wm-sec">§</span> 附录 · 39 模型主表<span class="num">filter + 详读</span></h2>
 <div class="wm-cap">想查具体某个模型 / 按维度过滤时用。点击行展开 pros/cons/benchmark + 详读笔记。按时间倒序。</div>
 
 <div class="wm-controls">
-  <div class="wm-filter-row">
-    <span class="wm-filter-label">表示</span>
+  <div class="wm-filter-row" role="group" aria-labelledby="fl-repr">
+    <span class="wm-filter-label" id="fl-repr">表示</span>
     <button class="wm-chip active" data-filter="repr" data-value="all">全部</button>
     <button class="wm-chip" data-filter="repr" data-value="latent">Latent</button>
     <button class="wm-chip" data-filter="repr" data-value="token">Token</button>
     <button class="wm-chip" data-filter="repr" data-value="pixel">Pixel</button>
     <button class="wm-chip" data-filter="repr" data-value="3d">Spatial</button>
   </div>
-  <div class="wm-filter-row">
-    <span class="wm-filter-label">用途</span>
+  <div class="wm-filter-row" role="group" aria-labelledby="fl-purpose">
+    <span class="wm-filter-label" id="fl-purpose">用途</span>
     <button class="wm-chip active" data-filter="purpose" data-value="all">全部</button>
     <button class="wm-chip" data-filter="purpose" data-value="rl">RL / Planning</button>
     <button class="wm-chip" data-filter="purpose" data-value="video">视频生成</button>
@@ -1171,8 +1174,8 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
     <button class="wm-chip" data-filter="purpose" data-value="spatial">3D / 空间</button>
     <button class="wm-chip" data-filter="purpose" data-value="benchmark">评测</button>
   </div>
-  <div class="wm-filter-row">
-    <span class="wm-filter-label">年代</span>
+  <div class="wm-filter-row" role="group" aria-labelledby="fl-era">
+    <span class="wm-filter-label" id="fl-era">年代</span>
     <button class="wm-chip active" data-filter="era" data-value="all">全部</button>
     <button class="wm-chip" data-filter="era" data-value="pre2023">2018–2022</button>
     <button class="wm-chip" data-filter="era" data-value="2023">2023</button>
@@ -1180,8 +1183,8 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
     <button class="wm-chip" data-filter="era" data-value="2025">2025</button>
     <button class="wm-chip" data-filter="era" data-value="2026">2026</button>
   </div>
-  <div class="wm-filter-row">
-    <span class="wm-filter-label">开源</span>
+  <div class="wm-filter-row" role="group" aria-labelledby="fl-open">
+    <span class="wm-filter-label" id="fl-open">开源</span>
     <button class="wm-chip active" data-filter="open" data-value="all">全部</button>
     <button class="wm-chip" data-filter="open" data-value="open">Open</button>
     <button class="wm-chip" data-filter="open" data-value="closed">Closed</button>
@@ -1193,13 +1196,13 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
   <table class="wm-tab wm-master">
     <thead>
       <tr>
-        <th>模型</th>
-        <th>日期</th>
-        <th>组织</th>
-        <th>表示</th>
-        <th>用途</th>
-        <th>开/闭</th>
-        <th>关键数字</th>
+        <th scope="col">模型</th>
+        <th scope="col">日期</th>
+        <th scope="col">组织</th>
+        <th scope="col">表示</th>
+        <th scope="col">用途</th>
+        <th scope="col">开/闭</th>
+        <th scope="col">关键数字</th>
       </tr>
     </thead>
     <tbody id="wm-master-tbody"></tbody>
@@ -1208,10 +1211,10 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 
 
 <h2 class="wm-h">延伸阅读</h2>
-<ul class="entry-list" style="margin-top:0.6rem">
-  <li><a href="{{ '/notes/2026-05-20-world-arena/' | relative_url }}">World Arena 与 World Model 脉络（综述）</a><time>2026-05-20</time></li>
-  <li><a href="{{ '/papers/' | relative_url }}">所有论文笔记</a><time>57+</time></li>
-  <li><a href="{{ '/tags/#tag-world-model' | relative_url }}">按"World Model"标签浏览</a><time>—</time></li>
+<ul class="entry-list" role="list" style="margin-top:0.6rem">
+  <li><a href="{{ '/notes/2026-05-20-world-arena/' | relative_url }}">World Arena 与 World Model 脉络（综述）</a><time datetime="2026-05-20">2026-05-20</time></li>
+  <li><a href="{{ '/papers/' | relative_url }}">所有论文笔记</a><span class="entry-date">{{ site.papers | where_exp: "p", "p.published != false" | size }}+</span></li>
+  <li><a href="{{ '/tags/#tag-world-model' | relative_url }}">按"World Model"标签浏览</a><span class="entry-date">—</span></li>
 </ul>
 
 <script>
@@ -1465,11 +1468,11 @@ const MODELS = [
    bench:"Stanford WorldScore 开源 #1",
    paper:null},
   {slug:"decart-lucy",title:"Decart Lucy / DOS",date:"2026-05",org:"Decart",repr:"pixel",purpose:["game","video"],era:"2026",open:false,
-   short:"实时 WM 旗舰：Lucy &lt;30ms 延迟，DOS 1600 tok/s，最高 100fps full-HD。",
+   short:"实时 WM 旗舰：Lucy <30ms 延迟，DOS 1600 tok/s，最高 100fps full-HD。",
    summary:"$300M Series C / 估值 ~$4B（Radical Ventures 领投）。",
    pros:["延迟做到消费可用区间","Etched ASIC 工程示范升级","融资充沛"],
    cons:["闭源","泛化能力比 demo 可能差"],
-   bench:"Lucy &lt;30ms / DOS 1600 tok/s",
+   bench:"Lucy <30ms / DOS 1600 tok/s",
    paper:null},
   {slug:"seedance-2",title:"Seedance 2.0",date:"2026-03",org:"ByteDance",repr:"pixel",purpose:["video"],era:"2026",open:false,
    short:"字节闭源视频生成；Artificial Analysis Elo 1268（仅次于 HappyHorse-1.0）。",
@@ -1520,7 +1523,7 @@ function rowHTML(m, idx) {
   const openCls = m.open ? 'open' : 'closed';
   const openTxt = m.open ? 'Open' : 'Closed';
   return `
-    <tr class="row" data-idx="${idx}">
+    <tr class="row" data-idx="${idx}" tabindex="0" aria-expanded="false">
       <td><span class="chev">▸</span>${escapeHTML(m.title)}</td>
       <td class="dim">${m.date}</td>
       <td>${escapeHTML(m.org)}</td>
@@ -1532,6 +1535,7 @@ function rowHTML(m, idx) {
     <tr class="detail" data-idx="${idx}" style="display:none">
       <td colspan="7">
         <div class="wm-detail">
+          ${m.short ? `<div class="full"><h4>方法</h4>${escapeHTML(m.short)}</div>` : ''}
           <div class="full">${escapeHTML(m.summary)}</div>
           <div>
             <h4>优势</h4>
@@ -1558,22 +1562,30 @@ function renderMaster() {
   summaryEl.textContent = `${filtered.length} / ${MODELS.length} 模型`;
 
   tbody.querySelectorAll('tr.row').forEach(r => {
-    r.addEventListener('click', () => {
+    function toggleRow() {
       const idx = r.dataset.idx;
       const det = tbody.querySelector(`tr.detail[data-idx="${idx}"]`);
       const opening = det.style.display === 'none';
       det.style.display = opening ? '' : 'none';
       r.classList.toggle('open', opening);
+      r.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    }
+    r.addEventListener('click', toggleRow);
+    r.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleRow(); }
     });
   });
 }
 
 document.querySelectorAll('.wm-chip').forEach(btn => {
+  btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
   btn.addEventListener('click', () => {
     const f = btn.dataset.filter, v = btn.dataset.value;
     STATE[f] = v;
     document.querySelectorAll(`.wm-chip[data-filter="${f}"]`).forEach(b => {
-      b.classList.toggle('active', b.dataset.value === v);
+      const active = b.dataset.value === v;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
     renderMaster();
   });

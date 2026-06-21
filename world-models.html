@@ -522,6 +522,8 @@ description: World Models 领域论文全景：时间线、方法对比、技术
     table.wm-tab thead th { font-size: 0.62rem; padding: 0.45rem 0.5rem; }
     table.wm-tab tbody td { padding: 0.4rem 0.5rem; }
   }
+  .wm-h:hover .heading-anchor,
+  .wm-h3:hover .heading-anchor { opacity: 1; }
 </style>
 
 <h1 style="margin-top:0;margin-bottom:0.4rem">World Models 全景 · 2026 Q2</h1>
@@ -537,7 +539,7 @@ description: World Models 领域论文全景：时间线、方法对比、技术
 </div>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 1 这是什么<span class="num">定义 · 应用 · 为什么 2024 后才热</span></h2>
+<h2 id="sec-1" class="wm-h"><span class="wm-sec">§</span> 1 这是什么<span class="num">定义 · 应用 · 为什么 2024 后才热</span></h2>
 
 <p>
 广义 <strong>World Model</strong> 是一个能预测<em>下一步会发生什么</em>的模型。给一段视频 + 一个动作 + 一些条件，它告诉你接下来若干帧会长什么样、嵌入会怎么变、3D 场景会怎么演化。
@@ -559,7 +561,7 @@ description: World Models 领域论文全景：时间线、方法对比、技术
 </p>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 2 发展三段<span class="num">2018 — 2026</span></h2>
+<h2 id="sec-2" class="wm-h"><span class="wm-sec">§</span> 2 发展三段<span class="num">2018 — 2026</span></h2>
 
 <div class="wm-era-narr">
   <span class="num-tag">2018 — 2022</span>
@@ -621,7 +623,7 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   </p>
 </div>
 
-<h3 class="wm-h3">视觉锚点 · 五段时间线</h3>
+<h3 id="sec-2-timeline" class="wm-h3">视觉锚点 · 五段时间线</h3>
 <div class="wm-tl">
   <div class="wm-tl-track">
     <div class="wm-era">
@@ -652,7 +654,7 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   </div>
 </div>
 
-<h3 class="wm-h3">四派一目了然</h3>
+<h3 id="sec-2-factions" class="wm-h3">四派一目了然</h3>
 <div class="wm-streams">
   <div class="wm-stream s-latent">
     <div class="wm-stream-name">Latent</div>
@@ -677,7 +679,7 @@ description: World Models 领域论文全景：时间线、方法对比、技术
 </div>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 3 经典结构解剖<span class="num">8 个 canonical 架构</span></h2>
+<h2 id="sec-3" class="wm-h"><span class="wm-sec">§</span> 3 经典结构解剖<span class="num">8 个 canonical 架构</span></h2>
 
 <div class="wm-cap">
   汇报到这里听众已经知道"谁做了什么"，但要回答"具体怎么做"——输入是啥、输出是啥、怎么训——还得看结构。下面 8 个是这条线上工程最有代表性的，每个给一个 schematic、IO、训练目标、关键数字。
@@ -924,7 +926,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 4 当前阵营<span class="num">谁在做什么 · 资本动向</span></h2>
+<h2 id="sec-4" class="wm-h"><span class="wm-sec">§</span> 4 当前阵营<span class="num">谁在做什么 · 资本动向</span></h2>
 
 <div class="wm-tldr">
   <span class="wm-tldr-label">小结</span>
@@ -946,14 +948,14 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 5 评测怎么看<span class="num">4 张主榜</span></h2>
+<h2 id="sec-5" class="wm-h"><span class="wm-sec">§</span> 5 评测怎么看<span class="num">4 张主榜</span></h2>
 
 <div class="wm-tldr">
   <span class="wm-tldr-label">结论</span>
   传统 FVD / IS / CLIPSIM 已被弃用。当下并存 4 套：① WorldMark（interactive WM）② VBench-2.0（视频物理常识）③ 机器人成功率（具体任务）④ AA Elo（人工偏好）。<strong>视觉好 ≠ 一致性好</strong>，<strong>闭源旗舰大都缺席统一榜单</strong>。
 </div>
 
-<h3 class="wm-h3">WorldMark · 6 个 interactive WM × 8 指标</h3>
+<h3 id="sec-5-worldmark" class="wm-h3">WorldMark · 6 个 interactive WM × 8 指标</h3>
 <div class="wm-cap">
   摘自 <a href="https://arxiv.org/abs/2604.21686" target="_blank" rel="noopener noreferrer">arXiv:2604.21686</a>，first-person real 场景。
   美学 / 成像 0-100 越高越好；trans/rot/reproj err 越低越好；3 项一致性 0-10 越高越好。
@@ -988,7 +990,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 <div class="wm-cap"><strong>结论：</strong>视觉质量和世界一致性几乎不相关。YUME 美学第一，Genie 3 一致性最强，Open-Oasis 两边垫底。Spearman ρ &gt; 0.9 与人工偏好对齐。</div>
 
 
-<h3 class="wm-h3">VBench-2.0 · 8 个能力维度 × 4 模型</h3>
+<h3 id="sec-5-vbench" class="wm-h3">VBench-2.0 · 8 个能力维度 × 4 模型</h3>
 <div class="wm-cap">
   摘自 <a href="https://arxiv.org/abs/2503.21755" target="_blank" rel="noopener noreferrer">arXiv:2503.21755</a>。% 越高越好。"动态空间关系"、"复杂情节"全员低分——是当下硬骨头。
   Veo 3.1 / Sora 2 / Wan 2.5+ 未赶上 cut-off。
@@ -1019,7 +1021,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h3 class="wm-h3">机器人侧 · 真实成功率</h3>
+<h3 id="sec-5-robot" class="wm-h3">机器人侧 · 真实成功率</h3>
 <div class="wm-cap">两条路线的对照——V-JEPA 2-AC（latent）与 Cosmos Policy（token+pixel）在不同任务上的成功率。</div>
 
 <div class="wm-tab-wrap">
@@ -1051,7 +1053,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h3 class="wm-h3">人工偏好 Elo · Artificial Analysis 2026 Q1-Q2</h3>
+<h3 id="sec-5-elo" class="wm-h3">人工偏好 Elo · Artificial Analysis 2026 Q1-Q2</h3>
 <div class="wm-tab-wrap">
   <table class="wm-tab" id="wm-bench-elo">
     <thead><tr><th>模型</th><th class="num">Elo</th><th>组织</th><th>开/闭</th></tr></thead>
@@ -1068,7 +1070,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 6 流派优劣对照<span class="num">summary</span></h2>
+<h2 id="sec-6" class="wm-h"><span class="wm-sec">§</span> 6 流派优劣对照<span class="num">summary</span></h2>
 <div class="wm-cap">汇报时如果只看一张表，看这张。</div>
 <div class="wm-tab-wrap">
   <table class="wm-tab wm-pc-table">
@@ -1103,7 +1105,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 7 还没解决<span class="num">研究空白 + 长 horizon</span></h2>
+<h2 id="sec-7" class="wm-h"><span class="wm-sec">§</span> 7 还没解决<span class="num">研究空白 + 长 horizon</span></h2>
 
 <div class="wm-cap">
   把 39 个模型塞进 [Latent / Token / Pixel] × [RL planning / Content gen / Evaluation] 的 2×3 矩阵后，三格明显空着——这本身就是 field 的研究信号。
@@ -1138,7 +1140,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 8 一句话总结<span class="num">汇报时讲这五条</span></h2>
+<h2 id="sec-8" class="wm-h"><span class="wm-sec">§</span> 8 一句话总结<span class="num">汇报时讲这五条</span></h2>
 
 <div class="wm-end">
   <ol>
@@ -1151,7 +1153,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h"><span class="wm-sec">§</span> 附录 · 39 模型主表<span class="num">filter + 详读</span></h2>
+<h2 id="sec-appendix" class="wm-h"><span class="wm-sec">§</span> 附录 · 39 模型主表<span class="num">filter + 详读</span></h2>
 <div class="wm-cap">想查具体某个模型 / 按维度过滤时用。点击行展开 pros/cons/benchmark + 详读笔记。按时间倒序。</div>
 
 <div class="wm-controls">
@@ -1210,7 +1212,7 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
 </div>
 
 
-<h2 class="wm-h">延伸阅读</h2>
+<h2 id="sec-further" class="wm-h">延伸阅读</h2>
 <ul class="entry-list" role="list" style="margin-top:0.6rem">
   <li><a href="{{ '/notes/2026-05-20-world-arena/' | relative_url }}">World Arena 与 World Model 脉络（综述）</a><time datetime="2026-05-20">2026-05-20</time></li>
   <li><a href="{{ '/papers/' | relative_url }}">所有论文笔记</a><span class="entry-date">{{ site.papers | where_exp: "p", "p.published != false" | size }}+</span></li>
@@ -1693,4 +1695,14 @@ renderHeatmapTableRowWise('wm-bench-vbench', VB_DATA);
 })();
 
 })();
+
+document.querySelectorAll('.wm-h[id], .wm-h3[id]').forEach(function(h) {
+  var a = document.createElement('a');
+  a.href = '#' + h.id;
+  a.className = 'heading-anchor';
+  a.setAttribute('aria-hidden', 'true');
+  a.setAttribute('tabindex', '-1');
+  a.textContent = '#';
+  h.appendChild(a);
+});
 </script>

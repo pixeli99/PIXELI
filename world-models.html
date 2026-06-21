@@ -38,7 +38,6 @@ description: World Models 领域论文全景：时间线、方法对比、技术
       --wm-ok:        #82c891;
       --wm-warn:      #d97757;
     }
-    .wm-chip.active { color: var(--bg); }
   }
 
   /* 章节标题统一 —— 跟站点 section-label 区分，更像"小节" */
@@ -185,6 +184,11 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   }
   .wm-chip:hover { color: var(--text); border-color: var(--muted); }
   .wm-chip.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+  @media (prefers-color-scheme: dark) {
+    /* dark accent (#d97757) is light enough that white text only reaches ~3.3:1;
+       --bg (#18181a) gives ~5.4:1 and passes AA */
+    .wm-chip.active { color: var(--bg); }
+  }
   .wm-summary {
     font-family: var(--font-sans);
     font-size: 0.78rem;

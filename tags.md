@@ -48,7 +48,12 @@ description: 按标签浏览全部论文笔记与随笔。
   <ul class="entry-list" role="list">
   {% assign matched = all | where_exp: "i", "i.tags contains t" | sort: "date" | reverse %}
   {% for item in matched %}
-    <li>
+    {% if item.collection == "papers" %}
+      {% assign item_exc = item.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip %}
+    {% else %}
+      {% assign item_exc = item.excerpt | strip_html | strip %}
+    {% endif %}
+    <li{% if item_exc.size > 10 %} class="with-excerpt"{% endif %}>
       <div class="entry-head">
         <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
         <span class="entry-tail">
@@ -62,6 +67,7 @@ description: 按标签浏览全部论文笔记与随笔。
           <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%Y-%m-%d" }}</time>
         </span>
       </div>
+      {% if item_exc.size > 10 %}<div class="entry-excerpt">{{ item_exc }}</div>{% endif %}
     </li>
   {% endfor %}
   </ul>

@@ -2,7 +2,7 @@
 title: Mixture of A Million Experts
 date: 2024-07-04
 authors: Xu Owen He (Google DeepMind)
-venue: arXiv 2407.04153
+venue: arXiv preprint
 link: https://arxiv.org/abs/2407.04153
 tags: [MoE, Routing, Scaling, Inference]
 math: true

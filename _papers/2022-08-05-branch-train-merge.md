@@ -2,7 +2,7 @@
 title: Branch-Train-Merge - Embarrassingly Parallel Training of Expert Language Models
 date: 2022-08-05
 authors: Li, Gururangan, Dettmers, Lewis, Althoff, Smith, Zettlemoyer (UW + Meta)
-venue: arXiv 2208.03306 (后续 BTX 进 ICLR/Workshop)
+venue: arXiv preprint
 link: https://arxiv.org/abs/2208.03306
 tags: [MoE, Training, Scaling, Routing]
 math: true

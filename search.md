@@ -9,7 +9,7 @@ description: 全文搜索全站论文笔记与随笔。
 
 <noscript><p class="muted search-hint">搜索需要 JavaScript，当前浏览器已禁用。请通过<a href="{{ '/tags/' | relative_url }}">标签</a>或<a href="{{ '/papers/' | relative_url }}">论文列表</a>浏览。</p></noscript>
 <label for="q" class="sr-only">搜索</label>
-<input type="search" id="q" placeholder="搜论文、笔记…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled>
+<input type="search" id="q" placeholder="搜论文、笔记…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" disabled>
 <ul id="results" class="entry-list" role="list"></ul>
 <p id="hint" class="muted" role="status" aria-live="polite" aria-atomic="true">加载中…</p>
 

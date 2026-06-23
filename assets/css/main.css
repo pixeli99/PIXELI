@@ -602,6 +602,7 @@ mark {
     gap: 0.5rem;
   }
   .post-nav-next { text-align: left; }
+  .post-title { font-size: 1.6rem; }
 }
 
 /* —— Narrow screens: hide author/venue from list to protect title width —— */

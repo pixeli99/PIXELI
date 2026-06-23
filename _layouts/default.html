@@ -4,30 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fdfcf8">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#18181a">
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  {%- if page.collection == 'papers' -%}
-    {%- assign _desc = page.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip | truncate: 160 -%}
-    {%- if _desc.size > 10 -%}
-    <meta name="description" content="{{ _desc | escape }}">
-    <meta property="og:description" content="{{ _desc | escape }}">
-    <meta name="twitter:description" content="{{ _desc | escape }}">
-    {%- endif -%}
-  {%- endif -%}
   {%- seo title=false -%}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {% if page.math %}<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>{% endif %}
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"></noscript>
 
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
-  <link type="application/atom+xml" rel="alternate" href="{{ '/papers.xml' | absolute_url }}" title="{{ site.title }} · 论文">
-  <link type="application/atom+xml" rel="alternate" href="{{ '/notes.xml' | absolute_url }}" title="{{ site.title }} · 笔记">
+  {%- feed_meta -%}
 
   {%- comment -%} KaTeX：仅在文章 front matter 设了 math: true 时加载 {%- endcomment -%}
   {% if page.math %}
@@ -44,9 +32,9 @@
     <nav class="site-nav" aria-label="主导航">
       <a href="{{ '/notes/' | relative_url }}"{% if page.url contains '/notes/' %} aria-current="page"{% endif %}>笔记</a>
       <a href="{{ '/papers/' | relative_url }}"{% if page.url contains '/papers/' %} aria-current="page"{% endif %}>论文</a>
-      <a href="{{ '/world-models/' | relative_url }}"{% if page.url contains '/world-models/' %} aria-current="page"{% endif %}>World Models</a>
+      <a href="{{ '/world-models/' | relative_url }}"{% if page.url contains '/world-models' %} aria-current="page"{% endif %}>World Models</a>
       <a href="{{ '/tags/' | relative_url }}"{% if page.url contains '/tags/' %} aria-current="page"{% endif %}>标签</a>
-      <a href="{{ '/search/' | relative_url }}"{% if page.url contains '/search/' %} aria-current="page"{% endif %} title="搜索（/）">搜索</a>
+      <a href="{{ '/search/' | relative_url }}"{% if page.url contains '/search/' %} aria-current="page"{% endif %}>搜索</a>
       <a href="{{ '/about/' | relative_url }}"{% if page.url contains '/about/' %} aria-current="page"{% endif %}>关于</a>
     </nav>
   </header>
@@ -55,24 +43,12 @@
     {{ content }}
   </main>
 
-  <script>
-  document.addEventListener('keydown', function(e) {
-    if (e.key !== '/') return;
-    var tag = document.activeElement ? document.activeElement.tagName : '';
-    if (tag === 'INPUT' || tag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) return;
-    var q = document.getElementById('q');
-    e.preventDefault();
-    if (q) { q.focus(); q.select(); }
-    else { window.location.href = '{{ "/search/" | relative_url }}'; }
-  });
-  </script>
-
   <footer class="site-footer">
     <span>© {{ 'now' | date: "%Y" }} {{ site.author }}</span>
-    <span class="dot" aria-hidden="true">·</span>
-    <a href="https://github.com/pixeli99/PIXELI" rel="noopener noreferrer">源码</a>
-    <span class="dot" aria-hidden="true">·</span>
-    <a href="{{ '/papers.xml' | relative_url }}">RSS</a>
+    <span class="dot">·</span>
+    <a href="https://github.com/pixeli99/PIXELI">源码</a>
+    <span class="dot">·</span>
+    <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
   </footer>
 </body>
 </html>

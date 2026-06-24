@@ -1,30 +1,6 @@
 ---
 layout: default
 ---
-{%- assign _ld_type = "Article" -%}
-{%- if page.collection == 'papers' -%}{%- assign _ld_type = "ScholarlyArticle" -%}{%- endif -%}
-{%- assign _ld_author = site.author -%}
-{%- if page.authors -%}{%- assign _ld_author = page.authors -%}{%- endif -%}
-{%- assign _ld_desc = "" -%}
-{%- if page.collection == 'papers' -%}
-  {%- assign _ld_desc = page.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip | truncate: 200 -%}
-{%- elsif page.excerpt -%}
-  {%- assign _ld_desc = page.excerpt | strip_html | strip | truncate: 200 -%}
-{%- endif -%}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": {{ _ld_type | jsonify }},
-  "headline": {{ page.title | jsonify }},
-  "datePublished": "{{ page.date | date_to_xmlschema }}",
-  "url": "{{ page.url | absolute_url }}",
-  "inLanguage": "zh-CN",
-  "author": { "@type": "Person", "name": {{ _ld_author | jsonify }} },
-  "publisher": { "@type": "Person", "name": {{ site.author | jsonify }}, "url": "{{ site.url }}{{ site.baseurl }}" }{% if _ld_desc.size > 10 %},
-  "description": {{ _ld_desc | jsonify }}{% endif %}{% if page.tags.size > 0 %},
-  "keywords": {{ page.tags | join: ", " | jsonify }}{% endif %}
-}
-</script>
 <article class="post">
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
@@ -35,17 +11,23 @@ layout: default
         </time>
       {% endif %}
       {% if page.authors %}
-        <span class="meta-sep"><span>{{ page.authors }}</span></span>
+        <span class="dot">·</span>
+        <span>{{ page.authors }}</span>
       {% endif %}
       {% assign words = content | strip_html | number_of_words: "cjk" %}
       {% if words > 0 %}
-        <span class="meta-sep"><span>约 {{ words | plus: 349 | divided_by: 350 }} 分钟</span></span>
+        <span class="dot">·</span>
+        <span>约 {{ words | divided_by: 350 | plus: 1 }} 分钟</span>
       {% endif %}
       {% if page.link %}
-        <span class="meta-sep"><a href="{{ page.link }}" target="_blank" rel="noopener noreferrer">{{ page.venue | default: "原文" }}<span aria-hidden="true"> ↗</span></a></span>
+        <span class="dot">·</span>
+        <a href="{{ page.link }}" target="_blank" rel="noopener">{{ page.venue | default: "原文" }} ↗</a>
       {% endif %}
       {% if page.tags and page.tags.size > 0 %}
-        <span class="meta-sep"><span class="post-tags">{% for t in page.tags %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | slugify: "none" }}">{{ t }}</a>{% unless forloop.last %} {% endunless %}{% endfor %}</span></span>
+        <span class="dot">·</span>
+        <span class="post-tags">
+          {% for t in page.tags %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | slugify: "none" }}">{{ t }}</a>{% unless forloop.last %} {% endunless %}{% endfor %}
+        </span>
       {% endif %}
     </div>
   </header>
@@ -64,50 +46,43 @@ layout: default
     a.textContent = '§';
     h.appendChild(a);
   });
-
   document.querySelectorAll('.post-body pre').forEach(function(pre) {
-    if (!navigator.clipboard) return;
     var btn = document.createElement('button');
-    btn.textContent = '复制';
     btn.className = 'copy-btn';
     btn.setAttribute('aria-label', '复制代码');
+    btn.textContent = '复制';
+    pre.appendChild(btn);
     btn.addEventListener('click', function() {
       var code = pre.querySelector('code');
-      navigator.clipboard.writeText(code ? code.textContent : pre.textContent).then(function() {
+      var text = (code ? code : pre).innerText;
+      navigator.clipboard.writeText(text).then(function() {
         btn.textContent = '已复制';
         btn.setAttribute('aria-label', '已复制');
-        setTimeout(function() { btn.textContent = '复制'; btn.setAttribute('aria-label', '复制代码'); }, 1600);
-      }).catch(function() {
-        btn.textContent = '失败';
-        btn.setAttribute('aria-label', '复制失败');
-        setTimeout(function() { btn.textContent = '复制'; btn.setAttribute('aria-label', '复制代码'); }, 1600);
+        setTimeout(function() {
+          btn.textContent = '复制';
+          btn.setAttribute('aria-label', '复制代码');
+        }, 2000);
       });
     });
-    pre.appendChild(btn);
   });
   </script>
 
 
   {% if page.collection == 'papers' and page.tags.size > 0 %}
+    {% assign tag0 = page.tags | first %}
     {% assign related_papers = "" | split: "" %}
-    {% assign seen_urls = "" | split: "" %}
-    {% for t in page.tags %}
-      {% for p in site.papers %}
-        {% unless p.url == page.url or p.published == false %}
-          {% if p.tags contains t %}
-            {% unless seen_urls contains p.url %}
-              {% assign seen_urls = seen_urls | push: p.url %}
-              {% assign related_papers = related_papers | push: p %}
-            {% endunless %}
-          {% endif %}
-        {% endunless %}
-      {% endfor %}
+    {% for p in site.papers reversed %}
+      {% unless p.url == page.url or p.published == false %}
+        {% if p.tags contains tag0 %}
+          {% assign related_papers = related_papers | push: p %}
+        {% endif %}
+      {% endunless %}
     {% endfor %}
-    {% assign related_papers = related_papers | sort: "date" | reverse | slice: 0, 3 %}
+    {% assign related_papers = related_papers | slice: 0, 3 %}
     {% if related_papers.size > 0 %}
     <aside class="related-papers" aria-label="相关论文">
       <p class="related-label">相关论文</p>
-      <ul role="list">
+      <ul>
         {% for p in related_papers %}
           <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
         {% endfor %}
@@ -119,13 +94,13 @@ layout: default
   <nav class="post-nav" aria-label="文章导航">
     <span class="post-nav-prev">
       {% if page.previous and page.previous.collection == page.collection %}
-        <a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title | truncate: 36 }}</a>
+        <a href="{{ page.previous.url | relative_url }}">&#8592; {{ page.previous.title | truncate: 36 }}</a>
       {% endif %}
     </span>
     <a class="post-nav-up" href="{{ '/' | append: page.collection | append: '/' | relative_url }}">回列表</a>
     <span class="post-nav-next">
       {% if page.next and page.next.collection == page.collection %}
-        <a href="{{ page.next.url | relative_url }}">{{ page.next.title | truncate: 36 }} →</a>
+        <a href="{{ page.next.url | relative_url }}">{{ page.next.title | truncate: 36 }} &#8594;</a>
       {% endif %}
     </span>
   </nav>

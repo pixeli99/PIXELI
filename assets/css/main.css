@@ -150,6 +150,7 @@ code {
   border-radius: 3px;
 }
 pre {
+  position: relative;
   background: var(--code-bg);
   border: 1px solid var(--border);
   padding: 1em 1.1em;
@@ -159,6 +160,28 @@ pre {
   line-height: 1.65;
 }
 pre code { background: none; padding: 0; font-size: 1em; }
+
+/* —— Copy button —— */
+.copy-btn {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  padding: 0.18em 0.5em;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--faint);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+  line-height: 1.6;
+}
+pre:hover .copy-btn,
+pre:focus-within .copy-btn { opacity: 1; }
+.copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+@media (pointer: coarse) { .copy-btn { opacity: 0.55; } }
 
 /* —— Tables —— */
 table {

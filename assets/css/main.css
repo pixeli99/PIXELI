@@ -455,6 +455,20 @@ sup.footnote, a.footnote {
   z-index: 999;
 }
 
+/* —— 404 —— */
+.not-found {
+  text-align: center;
+  padding: 4.5rem 0;
+}
+.not-found .code {
+  font-family: var(--font-sans);
+  font-size: 3.2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--faint);
+}
+.not-found p { color: var(--muted); }
+
 /* —— Footer —— */
 .site-footer {
   margin-top: 6rem;

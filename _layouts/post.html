@@ -37,6 +37,12 @@ layout: default
   </div>
 
   <script>
+  document.querySelectorAll('.post-body table').forEach(function(table) {
+    var wrap = document.createElement('div');
+    wrap.className = 'table-scroll';
+    table.parentNode.insertBefore(wrap, table);
+    wrap.appendChild(table);
+  });
   document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(function(h) {
     var a = document.createElement('a');
     a.href = '#' + h.id;

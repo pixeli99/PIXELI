@@ -195,6 +195,15 @@ th {
   font-family: var(--font-sans);
   font-weight: 600;
 }
+.table-scroll {
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+.post-body .table-scroll table {
+  width: auto;
+  min-width: max(100%, 34rem);
+  margin: 0;
+}
 
 /* —— Entry list —— */
 .entry-list {

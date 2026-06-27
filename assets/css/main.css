@@ -205,6 +205,26 @@ th {
   margin: 0;
 }
 
+/* —— Year nav (papers page) —— */
+.year-nav {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--faint);
+  margin: 0.2rem 0 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.year-nav a {
+  color: var(--muted);
+  border: none;
+}
+.year-nav a:hover { color: var(--accent); }
+.year-nav sup {
+  color: var(--faint);
+  margin-left: 0.12em;
+  font-size: 0.7em;
+  font-variant-numeric: tabular-nums;
+}
+
 /* —— Entry list —— */
 .entry-list {
   list-style: none;
@@ -244,6 +264,26 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+.entry-authors {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 22ch;
+}
+.entry-venue {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--faint);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+}
+.entry-tail:has(.entry-venue) .entry-authors { display: none; }
 
 .more {
   font-family: var(--font-sans);
@@ -430,6 +470,36 @@ sup.footnote, a.footnote {
   border: none;
 }
 .related-papers li a:hover { color: var(--accent); }
+
+/* —— Search —— */
+#hint,
+.search-hint {
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+}
+#q {
+  width: 100%;
+  padding: 0.55em 0.75em;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-bottom: 1.6rem;
+  caret-color: var(--accent);
+  -webkit-appearance: none;
+  appearance: none;
+}
+#q::placeholder { color: var(--faint); opacity: 1; }
+#q:disabled { opacity: 0.5; cursor: default; }
+mark {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 0.08em;
+  font-style: normal;
+}
 
 /* —— Accessibility utility —— */
 .sr-only {

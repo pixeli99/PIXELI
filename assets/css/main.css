@@ -640,3 +640,25 @@ mark {
     --border: #666660;  /* 3.1:1 on dark --bg; --muted/--faint already pass AA */
   }
 }
+
+/* —— Print —— */
+@media print {
+  body { background: #fff; color: #000; }
+  a { color: #000; border-bottom: none; }
+  .site-nav,
+  .skip-link,
+  .site-footer,
+  .copy-btn,
+  .heading-anchor,
+  .post-nav,
+  .related-papers,
+  #q,
+  .search-hint,
+  #hint {
+    display: none !important;
+  }
+  .site-header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; }
+  h1, h2, h3, h4 { break-after: avoid; }
+  pre, blockquote, table, img { break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+}

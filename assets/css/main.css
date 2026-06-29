@@ -586,6 +586,11 @@ mark {
     align-items: flex-start;
     gap: 0.15rem;
   }
+  .entry-list .entry-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
   .post-nav {
     flex-direction: column;
     gap: 0.5rem;

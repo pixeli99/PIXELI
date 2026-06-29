@@ -1,5 +1,5 @@
 ---
-title: "VGGT-Ω: Scaling Visual Geometry Grounded Transformers"
+title: "VGGT-Ω: Scaling Feed-Forward 3D Reconstruction with Efficient Architecture and Self-Supervised Learning"
 date: 2026-05-14
 authors: Meta AI / Oxford VGG
 venue: CVPR 2026 (Oral)
@@ -37,7 +37,7 @@ VLA 那段是 selling point 但写得太短，register token 怎么接进 OpenVL
 {% raw %}
 ```bibtex
 @inproceedings{wang2026vggtomega,
-  title     = {VGGT-$\Omega$: Scaling Visual Geometry Grounded Transformers},
+  title     = {VGGT-$\Omega$: Scaling Feed-Forward 3D Reconstruction with Efficient Architecture and Self-Supervised Learning},
   author    = {Wang, Jianyuan and Chen, Minghao and Zhang, Shangzhan and Karaev, Nikita and Sch\"onberger, Johannes and Labatut, Patrick and Bojanowski, Piotr and Novotny, David and Vedaldi, Andrea and Rupprecht, Christian},
   booktitle = {CVPR},
   year      = {2026}

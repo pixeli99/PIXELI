@@ -1,5 +1,5 @@
 ---
-title: "Prompting Policies for Multi-step Reasoning and Tool-Use via Iterative Distillation of Experience"
+title: "Prompting Policies for Multi-step Reasoning and Tool-Use in Black-box LLMs with Iterative Distillation of Experience"
 date: 2026-05-14
 authors: Google
 venue: arXiv preprint

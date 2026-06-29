@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
-  {%- feed_meta -%}
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }} · 论文" href="{{ '/papers.xml' | absolute_url }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }} · 笔记" href="{{ '/notes.xml' | absolute_url }}">
 
   {%- comment -%} KaTeX：仅在文章 front matter 设了 math: true 时加载 {%- endcomment -%}
   {% if page.math %}
@@ -50,7 +51,9 @@
     <span class="dot">·</span>
     <a href="https://github.com/pixeli99/PIXELI">源码</a>
     <span class="dot">·</span>
-    <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    <a href="{{ '/papers.xml' | relative_url }}">论文 RSS</a>
+    <span class="dot">·</span>
+    <a href="{{ '/notes.xml' | relative_url }}">笔记 RSS</a>
   </footer>
 </body>
 </html>

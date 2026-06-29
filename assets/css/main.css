@@ -563,6 +563,7 @@ mark {
   font-family: var(--font-sans);
   font-size: 0.82rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem;
 }

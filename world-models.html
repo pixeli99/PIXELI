@@ -1703,5 +1703,15 @@ document.querySelectorAll('.wm-tab-wrap').forEach(function(wrap) {
   }
 });
 
+// 窄屏下架构图被裁掉时补一行滑动提示
+document.querySelectorAll('.wm-arch-diagram').forEach(function(pre) {
+  if (pre.scrollWidth > pre.clientWidth + 1) {
+    var hint = document.createElement('p');
+    hint.className = 'scroll-hint';
+    hint.textContent = '← 可左右滑动查看完整架构图 →';
+    pre.insertAdjacentElement('afterend', hint);
+  }
+});
+
 })();
 </script>

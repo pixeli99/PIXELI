@@ -42,6 +42,12 @@ layout: default
     wrap.className = 'table-scroll';
     table.parentNode.insertBefore(wrap, table);
     wrap.appendChild(table);
+    if (wrap.scrollWidth > wrap.clientWidth + 1) {
+      var hint = document.createElement('p');
+      hint.className = 'scroll-hint';
+      hint.textContent = '← 可左右滑动查看完整表格 →';
+      wrap.insertAdjacentElement('afterend', hint);
+    }
   });
   document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(function(h) {
     var a = document.createElement('a');

@@ -1693,5 +1693,15 @@ renderHeatmapTableRowWise('wm-bench-vbench', VB_DATA);
   cells.forEach((c, i) => c.classList.add(cls[i]));
 })();
 
+// 窄屏下表格列被裁掉时补一行滑动提示
+document.querySelectorAll('.wm-tab-wrap').forEach(function(wrap) {
+  if (wrap.scrollWidth > wrap.clientWidth + 1) {
+    var hint = document.createElement('p');
+    hint.className = 'scroll-hint';
+    hint.textContent = '← 可左右滑动查看更多列 →';
+    wrap.insertAdjacentElement('afterend', hint);
+  }
+});
+
 })();
 </script>

@@ -51,6 +51,10 @@ defaults:
 markdown: kramdown
 highlighter: rouge
 
+sass:
+  style: compressed
+  sourcemap: never
+
 kramdown:
   input: GFM
   syntax_highlighter: rouge

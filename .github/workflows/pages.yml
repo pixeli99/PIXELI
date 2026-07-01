@@ -29,7 +29,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .jekyll-cache
-          key: jekyll-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', '_layouts/**', 'assets/**') }}
+          key: jekyll-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', '_layouts/**', 'assets/**', '_plugins/**') }}
           restore-keys: |
             jekyll-${{ runner.os }}-
 

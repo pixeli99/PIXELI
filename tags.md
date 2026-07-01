@@ -37,14 +37,14 @@ description: 按标签浏览全部论文笔记与随笔。
   {% assign parts = entry | split: "|" %}
   {% assign t = parts[1] %}
   {% assign count = parts[0] | plus: 0 %}
-  <a href="#tag-{{ t | slugify: "none" }}" aria-label="{{ t }}，{{ count }} 篇">{{ t }}<sup aria-hidden="true">{{ count }}</sup></a>
+  <a href="#tag-{{ t | replace: " ", "-" }}" aria-label="{{ t }}，{{ count }} 篇">{{ t }}<sup aria-hidden="true">{{ count }}</sup></a>
 {% endfor %}
 </p>
 
 {% for entry in sorted_by_freq %}
   {% assign parts = entry | split: "|" %}
   {% assign t = parts[1] %}
-  <h2 id="tag-{{ t | slugify: "none" }}">{{ t }}</h2>
+  <h2 id="tag-{{ t | replace: " ", "-" }}">{{ t }}</h2>
   <ul class="entry-list" role="list">
   {% assign matched = all | where_exp: "i", "i.tags contains t" | sort: "date" | reverse %}
   {% for item in matched %}

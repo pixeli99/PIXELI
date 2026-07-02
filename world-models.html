@@ -189,6 +189,9 @@ description: World Models 领域论文全景：时间线、方法对比、技术
        --bg (#18181a) gives ~5.4:1 and passes AA */
     .wm-chip.active { color: var(--bg); }
   }
+  /* active chip background == --accent; default outline is also --accent and vanishes.
+     use --bg color: near-white on dark-red, near-black on orange */
+  .wm-chip.active:focus-visible { outline-color: var(--bg); }
   .wm-summary {
     font-family: var(--font-sans);
     font-size: 0.78rem;
@@ -1700,6 +1703,16 @@ document.querySelectorAll('.wm-tab-wrap').forEach(function(wrap) {
     hint.className = 'scroll-hint';
     hint.textContent = '← 可左右滑动查看更多列 →';
     wrap.insertAdjacentElement('afterend', hint);
+  }
+});
+
+// 窄屏下架构图被裁掉时补一行滑动提示
+document.querySelectorAll('.wm-arch-diagram').forEach(function(pre) {
+  if (pre.scrollWidth > pre.clientWidth + 1) {
+    var hint = document.createElement('p');
+    hint.className = 'scroll-hint';
+    hint.textContent = '← 可左右滑动查看完整架构图 →';
+    pre.insertAdjacentElement('afterend', hint);
   }
 });
 

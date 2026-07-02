@@ -371,6 +371,59 @@ th {
 
 .muted { color: var(--muted); }
 
+/* —— Figures —— */
+figure {
+  margin: 1.8em 0;
+  text-align: center;
+}
+figure img { margin: 0 auto 0.5em; }
+figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.86em;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* —— Collapsible details —— */
+details {
+  border-left: 2px solid var(--border);
+  padding-left: 1.1em;
+  margin: 1.5em 0;
+}
+details[open] { border-left-color: var(--faint); }
+summary {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "▸ "; color: var(--faint); font-size: 0.8em; }
+details[open] summary::before { content: "▾ "; }
+summary:hover { color: var(--accent); }
+details > :not(summary):first-of-type { margin-top: 0.75em; }
+
+/* —— Keyboard input —— */
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  padding: 0.1em 0.4em;
+  white-space: nowrap;
+}
+
+/* —— Abbreviations —— */
+abbr[title] {
+  text-decoration: underline dotted;
+  text-decoration-color: var(--faint);
+  cursor: help;
+}
+
 /* —— Footnotes (kramdown 默认输出) —— */
 .footnotes {
   margin-top: 4rem;

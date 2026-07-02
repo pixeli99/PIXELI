@@ -114,6 +114,9 @@ h2 { font-size: 1.28rem; }
 h3 { font-size: 1.08rem; }
 h4 { font-size: 0.98rem; color: var(--muted); }
 
+/* Hash 跳转时 margin-top 在视口外，标题会贴顶；scroll-margin-top 留出呼吸空间 */
+h2[id], h3[id] { scroll-margin-top: 1.5rem; }
+
 p { margin: 1em 0; text-wrap: pretty; }
 
 strong { font-weight: 600; }

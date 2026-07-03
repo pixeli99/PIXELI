@@ -192,6 +192,11 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   /* active chip background == --accent; default outline is also --accent and vanishes.
      use --bg color: near-white on dark-red, near-black on orange */
   .wm-chip.active:focus-visible { outline-color: var(--bg); }
+  /* WCAG 2.5.8: on touch devices the chip's default ~20px height is below the
+     24px minimum target size; expand vertical padding so height reaches ~30px */
+  @media (pointer: coarse) {
+    .wm-chip { padding-top: 0.4em; padding-bottom: 0.4em; }
+  }
   .wm-summary {
     font-family: var(--font-sans);
     font-size: 0.78rem;

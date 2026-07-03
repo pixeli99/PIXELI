@@ -2,6 +2,7 @@
 layout: default
 ---
 
+<h1 class="sr-only">{{ site.title }}</h1>
 <div class="intro">
   <p>这里记一些读到的、想到的、写到的。</p>
   <p>——论文、随笔、片段。</p>

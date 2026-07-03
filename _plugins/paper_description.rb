@@ -9,6 +9,11 @@ Jekyll::Hooks.register :documents, :post_convert do |doc|
   match = doc.content.to_s.match(%r{<h2[^>]*>一句话</h2>(.*?)(?=<h2|\z)}m)
   next unless match
 
-  text = match[1].gsub(%r{<[^>]+>}, "").gsub(/\s+/, " ").strip
+  text = match[1]
+    .gsub(%r{<[^>]+>}, "")
+    .gsub(/\$\$[\s\S]+?\$\$/, "")
+    .gsub(/\$([^$\n]+)\$/) { $1.gsub(/\\[a-zA-Z]+/, "").gsub(/[{}]/, "").strip }
+    .gsub(/\s+/, " ")
+    .strip
   doc.data["description"] = text unless text.empty?
 end

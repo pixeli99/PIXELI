@@ -40,16 +40,41 @@ layout: default
 
 
   {% if page.collection == 'papers' and page.tags.size > 0 %}
-    {% assign tag0 = page.tags | first %}
-    {% assign related_papers = "" | split: "" %}
-    {% for p in site.papers reversed %}
-      {% unless p.url == page.url or p.published == false %}
-        {% if p.tags contains tag0 %}
-          {% assign related_papers = related_papers | push: p %}
-        {% endif %}
-      {% endunless %}
+    {% comment %}
+      收集所有 tag 匹配的候选 URL（含重复），重叠 tag 越多出现次数越多。
+      用出现次数作得分，sort 后取前 3，比只看第一个 tag 更相关。
+    {% endcomment %}
+    {% assign candidate_urls = "" | split: "" %}
+    {% for tag in page.tags %}
+      {% for p in site.papers %}
+        {% unless p.url == page.url or p.published == false %}
+          {% if p.tags contains tag %}
+            {% assign candidate_urls = candidate_urls | push: p.url %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
     {% endfor %}
-    {% assign related_papers = related_papers | slice: 0, 3 %}
+    {% assign uniq_urls = candidate_urls | uniq %}
+    {% assign scored = "" | split: "" %}
+    {% for u in uniq_urls %}
+      {% assign cnt = 0 %}
+      {% for v in candidate_urls %}{% if v == u %}{% assign cnt = cnt | plus: 1 %}{% endif %}{% endfor %}
+      {% capture row %}{{ cnt | prepend: "0000" | slice: -4, 4 }}|{{ u }}{% endcapture %}
+      {% assign scored = scored | push: row %}
+    {% endfor %}
+    {% assign scored = scored | sort | reverse %}
+    {% assign related_papers = "" | split: "" %}
+    {% for row in scored %}
+      {% if related_papers.size >= 3 %}{% break %}{% endif %}
+      {% assign parts = row | split: "|" %}
+      {% assign rurl = parts[1] %}
+      {% for p in site.papers %}
+        {% if p.url == rurl %}
+          {% assign related_papers = related_papers | push: p %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
     {% if related_papers.size > 0 %}
     <aside class="related-papers" aria-label="相关论文">
       <p class="related-label">相关论文</p>

@@ -4,6 +4,8 @@
 
 站点：<https://pixeli99.github.io/PIXELI/>
 
+> 键盘快捷键：在任何页面按 `/` 跳转搜索框。
+
 ## 首次启用
 
 仓库 **Settings → Pages → Build and deployment**：

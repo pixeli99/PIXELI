@@ -55,5 +55,15 @@
     <span class="dot">·</span>
     <a href="{{ '/notes.xml' | relative_url }}">笔记 RSS</a>
   </footer>
+  <script>
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (t === 'input' || t === 'textarea' || document.activeElement.isContentEditable) return;
+    var q = document.getElementById('q');
+    e.preventDefault();
+    if (q) { q.focus(); } else { window.location.href = '{{ "/search/" | relative_url }}'; }
+  });
+  </script>
 </body>
 </html>

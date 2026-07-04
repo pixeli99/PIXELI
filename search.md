@@ -79,13 +79,15 @@ description: 全文搜索全站论文笔记与随笔。
     return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
   }
 
-  function render(results, terms) {
+  function render(results, total, terms) {
     if (!results.length) {
       out.innerHTML = '';
       hint.textContent = '没有找到匹配内容';
       return;
     }
-    hint.textContent = '找到 ' + results.length + ' 条结果';
+    hint.textContent = total > results.length
+      ? '显示前 ' + results.length + ' 条（共 ' + total + ' 条）'
+      : '找到 ' + results.length + ' 条结果';
     out.innerHTML = results.map(function (d) {
       var kind = d.collection === 'papers' ? '论文' : '笔记';
       var authStr = (d.authors && d.collection === 'papers')
@@ -117,13 +119,13 @@ description: 全文搜索全站论文笔记与随笔。
     history.replaceState(null, '', newUrl);
     if (!val) { out.innerHTML = ''; hint.textContent = '输入关键词搜索全站'; return; }
     var terms = val.split(/\s+/);
-    var hits = docs
+    var scored = docs
       .map(function (d) { return { d: d, s: score(d, terms) }; })
       .filter(function (x) { return x.s > 0; })
-      .sort(function (a, b) { return b.s - a.s; })
-      .slice(0, 12)
-      .map(function (x) { return x.d; });
-    render(hits, terms);
+      .sort(function (a, b) { return b.s - a.s; });
+    var total = scored.length;
+    var hits = scored.slice(0, 20).map(function (x) { return x.d; });
+    render(hits, total, terms);
   }
 })();
 </script>

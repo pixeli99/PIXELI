@@ -14,7 +14,7 @@ layout: default
 <ul class="entry-list" role="list">
 {% for item in all limit: 12 %}
   {% if item.collection == "papers" %}
-    {% assign exc = item.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip %}
+    {% assign exc = item.description | default: '' %}
   {% else %}
     {% assign exc = item.excerpt | strip_html | strip %}
   {% endif %}

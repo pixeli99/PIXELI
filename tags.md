@@ -49,7 +49,7 @@ description: 按标签浏览全部论文笔记与随笔。
   {% assign matched = all | where_exp: "i", "i.tags contains t" | sort: "date" | reverse %}
   {% for item in matched %}
     {% if item.collection == "papers" %}
-      {% assign item_exc = item.content | split: '一句话' | last | split: '<h2' | first | strip_html | strip %}
+      {% assign item_exc = item.description | default: '' %}
     {% else %}
       {% assign item_exc = item.excerpt | strip_html | strip %}
     {% endif %}

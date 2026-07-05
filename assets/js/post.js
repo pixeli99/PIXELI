@@ -34,6 +34,11 @@ document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(functi
   h.appendChild(a);
 });
 document.querySelectorAll('.post-body pre').forEach(function(pre) {
+  var langEl = pre.closest('[class*="language-"]');
+  if (langEl) {
+    var m = langEl.className.match(/\blanguage-(\S+)\b/);
+    if (m && m[1] !== 'plaintext') pre.setAttribute('data-lang', m[1]);
+  }
   if (!navigator.clipboard) return;
   var btn = document.createElement('button');
   btn.className = 'copy-btn';

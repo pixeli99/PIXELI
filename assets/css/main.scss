@@ -191,6 +191,17 @@ pre {
 pre:hover .copy-btn,
 .copy-btn:focus-visible { opacity: 1; }
 @media (pointer: coarse) { .copy-btn { opacity: 0.55; } }
+pre[data-lang]::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0.45rem;
+  left: 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--faint);
+  pointer-events: none;
+  user-select: none;
+}
 pre code { background: none; padding: 0; font-size: 1em; }
 
 /* —— Tables —— */

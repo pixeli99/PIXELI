@@ -3,13 +3,27 @@ document.querySelectorAll('.post-body table').forEach(function(table) {
   wrap.className = 'table-scroll';
   table.parentNode.insertBefore(wrap, table);
   wrap.appendChild(table);
-  if (wrap.scrollWidth > wrap.clientWidth + 1) {
-    var hint = document.createElement('p');
-    hint.className = 'scroll-hint';
-    hint.textContent = '← 可左右滑动查看完整表格 →';
-    wrap.insertAdjacentElement('afterend', hint);
-  }
 });
+
+function addTableScrollHints() {
+  document.querySelectorAll('.post-body .table-scroll').forEach(function(wrap) {
+    if (wrap.scrollWidth > wrap.clientWidth + 1) {
+      var next = wrap.nextElementSibling;
+      if (next && next.classList.contains('scroll-hint')) return;
+      var hint = document.createElement('p');
+      hint.className = 'scroll-hint';
+      hint.textContent = '← 可左右滑动查看完整表格 →';
+      wrap.insertAdjacentElement('afterend', hint);
+    }
+  });
+}
+
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(addTableScrollHints);
+} else {
+  addTableScrollHints();
+}
+
 document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(function(h) {
   var a = document.createElement('a');
   a.href = '#' + h.id;
@@ -20,6 +34,7 @@ document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(functi
   h.appendChild(a);
 });
 document.querySelectorAll('.post-body pre').forEach(function(pre) {
+  if (!navigator.clipboard) return;
   var btn = document.createElement('button');
   btn.className = 'copy-btn';
   btn.setAttribute('aria-label', '复制代码');
@@ -35,6 +50,13 @@ document.querySelectorAll('.post-body pre').forEach(function(pre) {
         btn.textContent = '复制';
         btn.setAttribute('aria-label', '复制代码');
       }, 2000);
+    }).catch(function() {
+      btn.textContent = '失败';
+      btn.setAttribute('aria-label', '复制失败');
+      setTimeout(function() {
+        btn.textContent = '复制';
+        btn.setAttribute('aria-label', '复制代码');
+      }, 1500);
     });
   });
 });

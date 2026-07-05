@@ -35,6 +35,7 @@ description: 全文搜索全站论文笔记与随笔。
   function score(doc, terms) {
     var s = 0;
     var title   = doc.title.toLowerCase();
+    var excerpt = (doc.excerpt || '').toLowerCase();
     var text    = (doc.text    || '').toLowerCase();
     var tags    = (doc.tags    || []).join(' ').toLowerCase();
     var authors = (doc.authors || '').toLowerCase();
@@ -44,6 +45,7 @@ description: 全文搜索全站论文笔记与随笔。
       if (authors.indexOf(t) >= 0) s += 4;
       if (tags.indexOf(t)    >= 0) s += 4;
       if (venue.indexOf(t)   >= 0) s += 3;
+      if (excerpt.indexOf(t) >= 0) s += 3;
       if (text.indexOf(t)    >= 0) s += 1;
     });
     return s;

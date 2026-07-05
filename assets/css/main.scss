@@ -147,6 +147,11 @@ img {
   display: block;
   margin: 1.5em auto;
 }
+/* 文章内图片加细边框，防止白底截图与页面背景融合 */
+.post-body img {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
 
 /* —— Code —— */
 code {
@@ -682,6 +687,8 @@ mark {
   /* 搜索高亮：暗色背景下 14% 不透明度对比度仅 1.4:1，几乎不可见；
      40% → ~3.2:1，满足 WCAG 非文字对比度要求。 */
   mark { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+  /* 论文截图 / 架构图通常白底，在深色背景下对比刺眼；轻微降低亮度缓解。 */
+  .post-body img { opacity: 0.88; }
 }
 
 /* —— Reduced motion —— */

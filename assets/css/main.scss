@@ -745,6 +745,6 @@ mark {
   }
   .site-header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; }
   h1, h2, h3, h4 { break-after: avoid; }
-  pre, blockquote, table, img { break-inside: avoid; }
+  pre, blockquote, table, figure, img { break-inside: avoid; }
   p, li { orphans: 3; widows: 3; }
 }

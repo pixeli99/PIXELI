@@ -99,6 +99,8 @@ a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 /* Structural links must not change on visited — higher specificity overrides a:visited */
 .site-title:visited { color: var(--text); }
 .heading-anchor:visited { color: var(--faint); }
+/* 列表页标题不随访问状态变灰：知识库条目会被反复访问，全部变 muted 反而影响可读性 */
+.entry-list a:visited { color: var(--link); }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);

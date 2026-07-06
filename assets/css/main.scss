@@ -193,6 +193,7 @@ pre {
 pre:hover .copy-btn,
 .copy-btn:focus-visible { opacity: 1; }
 @media (pointer: coarse) { .copy-btn { opacity: 0.55; } }
+pre[data-lang] { padding-top: 2rem; }
 pre[data-lang]::before {
   content: attr(data-lang);
   position: absolute;

@@ -40,10 +40,12 @@ description: 全文搜索全站论文笔记与随笔。
     var tags    = (doc.tags    || []).join(' ').toLowerCase();
     var authors = (doc.authors || '').toLowerCase();
     var venue   = (doc.venue   || '').toLowerCase();
+    var link    = (doc.link    || '').toLowerCase();
     terms.forEach(function (t) {
       if (title.indexOf(t)   >= 0) s += 10;
       if (authors.indexOf(t) >= 0) s += 4;
       if (tags.indexOf(t)    >= 0) s += 4;
+      if (link.indexOf(t)    >= 0) s += 4;
       if (venue.indexOf(t)   >= 0) s += 3;
       if (excerpt.indexOf(t) >= 0) s += 3;
       if (text.indexOf(t)    >= 0) s += 1;

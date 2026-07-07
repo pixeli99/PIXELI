@@ -2,6 +2,8 @@
 # 结果只截到标题本身，导致 meta description / og:description 全部显示成
 # "一句话" 四个字。这里直接从渲染后的 HTML 里把那一段实际内容抠出来，
 # 写回 doc.data["description"]，jekyll-seo-tag 会优先读这个字段。
+require "cgi"
+
 Jekyll::Hooks.register :documents, :post_convert do |doc|
   next unless doc.collection.label == "papers"
   next if doc.data["description"]
@@ -11,6 +13,7 @@ Jekyll::Hooks.register :documents, :post_convert do |doc|
 
   text = match[1]
     .gsub(%r{<[^>]+>}, "")
+    .then { |s| CGI.unescapeHTML(s) }
     .gsub(/\$\$[\s\S]+?\$\$/, "")
     .gsub(/\$([^$\n]+)\$/) { $1.gsub(/\\[a-zA-Z]+/, "").gsub(/[{}]/, "").strip }
     .gsub(/\s+/, " ")

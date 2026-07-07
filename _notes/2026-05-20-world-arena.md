@@ -37,7 +37,7 @@ WorldArena 的存在，本身就标志着 world model 这条路线从"单点 dem
 | 2025-02 | Microsoft Muse / WHAM | [research.microsoft 博客](https://www.microsoft.com/en-us/research/blog/introducing-muse-our-first-generative-ai-model-designed-for-gameplay-ideation/) | Bleeding Edge / Quake II 游戏 world model |
 | 2025-03 | Wayve GAIA-2 | [wayve.ai/press](https://wayve.ai/press/wayve-unveils-gaia2/) | 多视角、可控的驾驶 world model |
 | 2025-06 | Meta V-JEPA 2 | [2506.09985](https://arxiv.org/abs/2506.09985) | 1.2B 自监督视频世界模型，主打 zero-shot 机器人规划 |
-| 2025-08 | DeepMind Genie 3 | [deepmind 博客](https://deepmind.google) | 第一个实时通用 interactive world model，720p/24fps |
+| 2025-08 | DeepMind Genie 3 | [deepmind 博客](https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/) | 第一个实时通用 interactive world model，720p/24fps |
 | 2025-09 | OpenAI Sora 2 | [openai.com/sora-2](https://openai.com/index/sora-2/) | 强调物理一致性、同步音频 |
 | 2025-11 | World Labs Marble | [worldlabs.ai](https://worldlabs.ai) | Fei-Fei Li，文本/图像/视频 → 可导出 3D 场景 |
 | 2025-12 | Wayve GAIA-3 | [wayve.ai/thinking](https://wayve.ai/thinking/gaia-3/) | 15B 参数，从 simulation 走向 evaluation |

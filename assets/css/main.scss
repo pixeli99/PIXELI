@@ -504,6 +504,7 @@ sup.footnote, a.footnote {
 }
 .post-body h2:hover .heading-anchor,
 .post-body h3:hover .heading-anchor { opacity: 1; }
+.heading-anchor:focus-visible { opacity: 1; }
 
 .post-nav {
   margin-top: 4rem;

@@ -64,3 +64,17 @@ document.querySelectorAll('.post-body pre').forEach(function(pre) {
     });
   });
 });
+
+// Collapse the BibTeX citation block into a <details> disclosure widget
+document.querySelectorAll('.post-body h2').forEach(function(h) {
+  if (h.textContent.replace(/§/g, '').trim() !== '引用') return;
+  var next = h.nextElementSibling;
+  if (!next || !next.classList.contains('language-bibtex')) return;
+  var details = document.createElement('details');
+  details.className = 'bibtex-details';
+  var summary = document.createElement('summary');
+  summary.textContent = 'BibTeX';
+  details.appendChild(summary);
+  next.parentNode.insertBefore(details, next);
+  details.appendChild(next);
+});

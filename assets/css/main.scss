@@ -354,12 +354,12 @@ th {
   color: var(--faint);
   margin-top: 0.5em;
   font-variant-numeric: tabular-nums;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
+  line-height: 1.8;
 }
-.post-meta .dot { color: var(--border); }
+.post-meta > * + *::before {
+  content: " · ";
+  color: var(--border);
+}
 .post-meta a {
   color: var(--muted);
   border-bottom: none;

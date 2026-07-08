@@ -28,9 +28,8 @@ document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(functi
   var a = document.createElement('a');
   a.href = '#' + h.id;
   a.className = 'heading-anchor';
-  a.setAttribute('aria-hidden', 'true');
-  a.setAttribute('tabindex', '-1');
-  a.textContent = '§';
+  a.setAttribute('aria-label', '链接至本节');
+  a.innerHTML = '<span aria-hidden="true">§</span>';
   h.appendChild(a);
 });
 document.querySelectorAll('.post-body pre').forEach(function(pre) {

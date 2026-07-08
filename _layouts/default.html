@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#fdfcf8" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#18181a" media="(prefers-color-scheme: dark)">
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  {% if page.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
   {%- seo title=false -%}
   {%- if page.collection == 'papers' and page.link and page.link != '——' -%}
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":{{ page.url | absolute_url | jsonify }},"datePublished":{{ page.date | date: "%Y-%m-%d" | jsonify }},"author":{"@type":"Person","name":{{ site.author | jsonify }}},"itemReviewed":{"@type":"ScholarlyArticle","name":{{ page.title | jsonify }},"url":{{ page.link | jsonify }}{% if page.authors %},"author":{{ page.authors | jsonify }}{% endif %}{% if page.venue and page.venue != '——' %},"isPartOf":{{ page.venue | jsonify }}{% endif %}}{% if page.description %},"reviewBody":{{ page.description | jsonify }}{% endif %}}</script>

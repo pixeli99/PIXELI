@@ -486,9 +486,10 @@ sup.footnote, a.footnote {
   width: 100%;
 }
 .entry-list .entry-excerpt {
+  font-family: var(--font-sans);
   color: var(--muted);
-  font-size: 0.93rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 .post-body { word-wrap: break-word; }
 .post-body > *:first-child { margin-top: 0; }

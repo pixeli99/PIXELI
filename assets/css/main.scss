@@ -207,6 +207,13 @@ pre[data-lang]::before {
 }
 pre code { background: none; padding: 0; font-size: 1em; }
 
+/* KaTeX display math：窄屏可横向滚动，避免公式溢出页宽 */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.15em;
+}
+
 /* —— Tables —— */
 table {
   width: 100%;

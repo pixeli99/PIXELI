@@ -1,0 +1,11 @@
+---
+layout: null
+permalink: /opensearch.xml
+---<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>{{ site.title }}</ShortName>
+  <Description>搜索 {{ site.title }} 论文笔记与随笔</Description>
+  <Url type="text/html" template="{{ site.url }}{{ site.baseurl }}/search/?q={searchTerms}"/>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Language>zh-CN</Language>
+</OpenSearchDescription>

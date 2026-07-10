@@ -32,7 +32,7 @@ description: 按标签浏览全部论文笔记与随笔。
 {% endfor %}
 {% assign sorted_by_freq = tag_freq_entries | sort | reverse %}
 
-<p class="tag-cloud">
+<nav class="tag-cloud" aria-label="按标签浏览">
 {% for entry in sorted_by_freq %}
   {% assign parts = entry | split: "|" %}
   {% assign t = parts[1] %}
@@ -40,7 +40,7 @@ description: 按标签浏览全部论文笔记与随笔。
   {% if count >= 15 %}{% assign tc_style = "font-size:1.08rem" %}{% elsif count >= 7 %}{% assign tc_style = "font-size:0.96rem" %}{% else %}{% assign tc_style = "" %}{% endif %}
   <a href="#tag-{{ t | replace: " ", "-" }}" aria-label="{{ t }}，{{ count }} 篇"{% if tc_style != "" %} style="{{ tc_style }}"{% endif %}>{{ t }}<sup aria-hidden="true">{{ count }}</sup></a>
 {% endfor %}
-</p>
+</nav>
 
 {% for entry in sorted_by_freq %}
   {% assign parts = entry | split: "|" %}

@@ -716,6 +716,17 @@ mark {
     gap: 0.5rem;
   }
   .post-nav-next { text-align: left; }
+  /* 15 个过滤按钮在 375px 屏幕上会折行到 5 行，占据大量纵向空间；
+     改为横向滚动条带，隐藏滚动条样式保持简洁 */
+  .papers-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.4rem;
+    scrollbar-width: none;
+  }
+  .papers-filter::-webkit-scrollbar { display: none; }
+  .pf-btn { flex-shrink: 0; }
 }
 
 /* —— Touch devices: always show heading anchors —— */

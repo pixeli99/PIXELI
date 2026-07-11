@@ -785,4 +785,7 @@ mark {
   h1, h2, h3, h4 { break-after: avoid; }
   pre, blockquote, table, figure, img { break-inside: avoid; }
   p, li { orphans: 3; widows: 3; }
+  details { display: block; }
+  details > summary { display: none; }
+  details > *:not(summary) { display: block !important; }
 }

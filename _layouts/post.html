@@ -18,7 +18,7 @@ layout: default
         <span>约 {{ words | divided_by: 350.0 | ceil }} 分钟</span>
       {% endif %}
       {% if page.link and page.link != '——' %}
-        <a href="{{ page.link }}" target="_blank" rel="noopener">{{ page.venue | default: "原文" }} ↗</a>
+        <a href="{{ page.link }}" target="_blank" rel="noopener noreferrer">{{ page.venue | default: "原文" }} ↗</a>
       {% endif %}
       {% if page.tags and page.tags.size > 0 %}
         <span class="post-tags">

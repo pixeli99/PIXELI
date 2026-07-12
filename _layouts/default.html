@@ -10,7 +10,13 @@
   {% if page.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
   {%- seo title=false -%}
   {%- if page.collection == 'papers' and page.link and page.link != '——' -%}
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":{{ page.url | absolute_url | jsonify }},"datePublished":{{ page.date | date: "%Y-%m-%d" | jsonify }},"author":{"@type":"Person","name":{{ site.author | jsonify }}},"itemReviewed":{"@type":"ScholarlyArticle","name":{{ page.title | jsonify }},"url":{{ page.link | jsonify }}{% if page.authors %},"author":{{ page.authors | jsonify }}{% endif %}{% if page.venue and page.venue != '——' %},"isPartOf":{{ page.venue | jsonify }}{% endif %}}{% if page.description %},"reviewBody":{{ page.description | jsonify }}{% endif %}}</script>
+  {%- assign _rbd = page.description | default: '' -%}
+  {%- if _rbd.size == 0 -%}
+    {%- assign _rbt = content | strip_html | normalize_whitespace -%}
+    {%- assign _rba = _rbt | split: "一句话 " | last -%}
+    {%- assign _rbd = _rba | split: " 方法 " | first | strip | truncate: 250, "" -%}
+  {%- endif -%}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":{{ page.url | absolute_url | jsonify }},"datePublished":{{ page.date | date: "%Y-%m-%d" | jsonify }},"author":{"@type":"Person","name":{{ site.author | jsonify }}},"itemReviewed":{"@type":"ScholarlyArticle","name":{{ page.title | jsonify }},"url":{{ page.link | jsonify }}{% if page.authors %},"author":{{ page.authors | jsonify }}{% endif %}{% if page.venue and page.venue != '——' %},"isPartOf":{{ page.venue | jsonify }}{% endif %}}{% if _rbd.size > 0 %},"reviewBody":{{ _rbd | jsonify }}{% endif %}}</script>
   {%- endif -%}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">

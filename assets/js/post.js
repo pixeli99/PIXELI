@@ -25,10 +25,11 @@ if (document.fonts && document.fonts.ready) {
 }
 
 document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(function(h) {
+  var heading = h.textContent.trim();
   var a = document.createElement('a');
   a.href = '#' + h.id;
   a.className = 'heading-anchor';
-  a.setAttribute('aria-label', '链接至本节');
+  a.setAttribute('aria-label', '链接至：' + heading);
   a.innerHTML = '<span aria-hidden="true">§</span>';
   h.appendChild(a);
 });

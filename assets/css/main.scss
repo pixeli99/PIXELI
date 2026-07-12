@@ -522,7 +522,7 @@ sup.footnote, a.footnote {
   font-size: 0.9rem;
   line-height: 1.5;
 }
-.post-body { word-wrap: break-word; }
+.post-body { overflow-wrap: break-word; }
 .post-body > *:first-child { margin-top: 0; }
 
 /* —— Heading anchors —— */

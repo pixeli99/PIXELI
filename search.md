@@ -119,6 +119,27 @@ noindex: true
   q.addEventListener('compositionend',   function () { composing = false; doSearch(); });
   q.addEventListener('input', function () { if (!composing) doSearch(); });
 
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') {
+      var first = out.querySelector('a');
+      if (first) { e.preventDefault(); first.focus(); }
+    }
+  });
+  out.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      var links = Array.from(out.querySelectorAll('a'));
+      var idx = links.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown' && idx < links.length - 1) {
+        e.preventDefault(); links[idx + 1].focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (idx > 0) links[idx - 1].focus(); else q.focus();
+      }
+    } else if (e.key === 'Escape') {
+      q.focus();
+    }
+  });
+
   function doSearch() {
     var val = q.value.trim().toLowerCase();
     var raw = q.value.trim();

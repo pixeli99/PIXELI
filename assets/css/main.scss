@@ -230,6 +230,7 @@ th {
   font-family: var(--font-sans);
   font-weight: 600;
 }
+thead th { border-bottom-width: 2px; }
 .table-scroll {
   overflow-x: auto;
   margin: 1.5em 0;

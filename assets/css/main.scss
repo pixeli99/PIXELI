@@ -797,7 +797,11 @@ mark {
   .related-papers,
   #q,
   .search-hint,
-  #hint {
+  #hint,
+  .year-nav,
+  .papers-filter,
+  #pf-status,
+  .tag-cloud {
     display: none !important;
   }
   .site-header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; }

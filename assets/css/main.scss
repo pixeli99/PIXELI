@@ -561,6 +561,8 @@ sup.footnote, a.footnote {
   border: none;
 }
 .post-nav a:hover { color: var(--accent); }
+/* 当 related-papers 紧接 post-nav 时，两块各有 border-top，4rem 间距偏重；收到 2rem */
+.related-papers + .post-nav { margin-top: 2rem; }
 
 /* —— Related papers —— */
 .related-papers {
@@ -616,6 +618,7 @@ sup.footnote, a.footnote {
   appearance: none;
 }
 #q::placeholder { color: var(--faint); opacity: 1; }
+#q:focus-visible { border-radius: 3px; }
 #q:disabled { opacity: 0.5; cursor: default; }
 mark {
   background: color-mix(in srgb, var(--accent) 14%, transparent);

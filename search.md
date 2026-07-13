@@ -4,6 +4,7 @@ title: 搜索
 permalink: /search/
 description: 全文搜索全站论文笔记与随笔。
 noindex: true
+sitemap: false
 ---
 
 # 搜索

@@ -133,6 +133,10 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   .wm-stream.s-token  { border-top-color: #555; }
   .wm-stream.s-pixel  { border-top-color: var(--muted); }
   .wm-stream.s-3d     { border-top-color: var(--faint); }
+  @media (prefers-color-scheme: dark) {
+    /* #555 on dark --bg (#18181a) is only 2.3:1; #888 is 4.5:1 and passes WCAG 1.4.11 */
+    .wm-stream.s-token { border-top-color: #888; }
+  }
   .wm-stream-name {
     font-family: var(--font-sans);
     font-weight: 600;
@@ -518,6 +522,11 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   .wm-pc-table .stream-name { font-family: var(--font-sans); font-weight: 600; color: var(--text); }
   .wm-pc-table .stream-tag { font-size: 0.7rem; color: var(--faint); display: block; font-family: var(--font-mono); margin-top: 0.1rem; }
   .wm-pc-table td ul { margin: 0; padding-left: 1.2em; font-size: 0.86rem; }
+
+  /* ----- 打印 ----- */
+  @media print {
+    .wm-controls { display: none !important; }
+  }
 
   /* ----- 移动 ----- */
   @media (max-width: 760px) {

@@ -522,6 +522,10 @@ sup.footnote, a.footnote {
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .post-body { overflow-wrap: break-word; }
 .post-body > *:first-child { margin-top: 0; }

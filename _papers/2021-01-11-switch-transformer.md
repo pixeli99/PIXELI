@@ -1,5 +1,5 @@
 ---
-title: Switch Transformer - Scaling to Trillion Parameter Models with Simple and Efficient Sparsity
+title: Switch Transformers - Scaling to Trillion Parameter Models with Simple and Efficient Sparsity
 date: 2021-01-11
 authors: Fedus, Zoph, Shazeer (Google)
 venue: JMLR 2022

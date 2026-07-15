@@ -13,11 +13,16 @@ layout: default
 {% assign all = site.notes | where_exp: "n", "n.published != false" | concat: published_papers | sort: "date" | reverse %}
 <ul class="entry-list" role="list">
 {% for item in all limit: 12 %}
-  {% if item.collection == "papers" %}
-    {% assign exc = item.description | default: '' %}
-  {% else %}
-    {% assign exc = item.excerpt | strip_html | strip %}
-  {% endif %}
+  {%- if item.collection == "papers" -%}
+    {%- assign exc = item.description | default: '' -%}
+    {%- if exc.size < 10 -%}
+      {%- assign _bt = item.content | strip_html | normalize_whitespace -%}
+      {%- assign _ba = _bt | split: "一句话 " | last -%}
+      {%- assign exc = _ba | split: " 方法 " | first | strip | truncate: 200, "" -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- assign exc = item.excerpt | strip_html | strip -%}
+  {%- endif -%}
   <li{% if exc.size > 10 %} class="with-excerpt"{% endif %}>
     <div class="entry-head">
       <a href="{{ item.url | relative_url }}">{{ item.title }}</a>

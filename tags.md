@@ -51,6 +51,11 @@ description: 按标签浏览全部论文笔记与随笔。
   {% for item in matched %}
     {% if item.collection == "papers" %}
       {% assign item_exc = item.description | default: '' %}
+      {% if item_exc.size < 10 %}
+        {% assign _bt = item.content | strip_html | normalize_whitespace %}
+        {% assign _ba = _bt | split: "一句话 " | last %}
+        {% assign item_exc = _ba | split: " 方法 " | first | strip | truncate: 200, "" %}
+      {% endif %}
     {% else %}
       {% assign item_exc = item.excerpt | strip_html | strip %}
     {% endif %}

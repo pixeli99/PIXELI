@@ -806,13 +806,17 @@ mark {
   .year-nav,
   .papers-filter,
   #pf-status,
-  .tag-cloud {
+  .tag-cloud,
+  .scroll-hint {
     display: none !important;
   }
   .site-header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; }
   h1, h2, h3, h4 { break-after: avoid; }
   pre, blockquote, table, figure, img { break-inside: avoid; }
   p, li { orphans: 3; widows: 3; }
+  /* 打印时去掉横向滚动限制，让表格自然撑满页宽 */
+  .table-scroll { overflow-x: visible; }
+  .post-body .table-scroll table { width: 100%; min-width: unset; }
   details { display: block; }
   details > summary { display: none; }
   details > *:not(summary) { display: block !important; }

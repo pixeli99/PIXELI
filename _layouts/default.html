@@ -8,14 +8,22 @@
   <meta name="theme-color" content="#18181a" media="(prefers-color-scheme: dark)">
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   {% if page.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
+  {%- comment -%} 论文页：提前提取"一句话"摘要，注入 meta description 和 og:description {%- endcomment -%}
+  {%- assign _rbd = '' -%}
+  {%- if page.collection == 'papers' and page.link and page.link != '——' -%}
+    {%- assign _rbd = page.description | default: '' -%}
+    {%- if _rbd.size == 0 -%}
+      {%- assign _rbt = content | strip_html | normalize_whitespace -%}
+      {%- assign _rba = _rbt | split: "一句话 " | last -%}
+      {%- assign _rbd = _rba | split: " 方法 " | first | strip | truncate: 250, "" -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- if _rbd.size > 0 -%}
+  <meta name="description" content="{{ _rbd | escape }}">
+  <meta property="og:description" content="{{ _rbd | escape }}">
+  {%- endif -%}
   {%- seo title=false -%}
   {%- if page.collection == 'papers' and page.link and page.link != '——' -%}
-  {%- assign _rbd = page.description | default: '' -%}
-  {%- if _rbd.size == 0 -%}
-    {%- assign _rbt = content | strip_html | normalize_whitespace -%}
-    {%- assign _rba = _rbt | split: "一句话 " | last -%}
-    {%- assign _rbd = _rba | split: " 方法 " | first | strip | truncate: 250, "" -%}
-  {%- endif -%}
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":{{ page.url | absolute_url | jsonify }},"datePublished":{{ page.date | date: "%Y-%m-%d" | jsonify }},"author":{"@type":"Person","name":{{ site.author | jsonify }}},"itemReviewed":{"@type":"ScholarlyArticle","name":{{ page.title | jsonify }},"url":{{ page.link | jsonify }}{% if page.authors %},"author":{{ page.authors | jsonify }}{% endif %}{% if page.venue and page.venue != '——' %},"isPartOf":{{ page.venue | jsonify }}{% endif %}}{% if _rbd.size > 0 %},"reviewBody":{{ _rbd | jsonify }}{% endif %}}</script>
   {%- endif -%}
 

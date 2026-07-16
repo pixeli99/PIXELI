@@ -726,12 +726,13 @@ mark {
   .post-nav-next { text-align: left; }
   /* 15 个过滤按钮在 375px 屏幕上会折行到 5 行，占据大量纵向空间；
      改为横向滚动条带，隐藏滚动条样式保持简洁。
+     overscroll-behavior-x: contain 防止滚到条带末端时触发页面横向回弹。
      mask-image 在右侧 2rem 处渐出，提示用户可横向滑动查看更多标签。
      mask 作用于 padding-box 视口而非滚动内容，因此始终固定在右边缘。 */
   .papers-filter {
     flex-wrap: nowrap;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     padding-bottom: 0.4rem;
     scrollbar-width: none;
     -webkit-mask-image: linear-gradient(to right, black calc(100% - 2rem), transparent);

@@ -35,6 +35,8 @@ body {
   font-family: var(--font-serif);
   line-height: 1.78;
   font-feature-settings: "kern", "liga", "calt";
+  /* Safari 支持；让行首开括号与行末闭括号悬挂到文字区外，改善 CJK 文本对齐 */
+  hanging-punctuation: first last;
 }
 
 ::selection {

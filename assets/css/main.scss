@@ -772,6 +772,9 @@ mark {
     --accent:  #d97757;
     --code-bg: #232325;
   }
+  /* 选中高亮：暗色 accent #d97757（亮橙红）+ 白字对比度仅 2.9:1，不达标；
+     改黑字后对比度升至 7.25:1，满足 WCAG AA。 */
+  ::selection { color: #000; }
   /* 搜索高亮：暗色背景下 14% 不透明度对比度仅 1.4:1，几乎不可见；
      40% → ~3.2:1，满足 WCAG 非文字对比度要求。 */
   mark { background: color-mix(in srgb, var(--accent) 40%, transparent); }

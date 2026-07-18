@@ -393,7 +393,7 @@ thead th { border-bottom-width: 2px; }
 }
 .post-meta > * + *::before {
   content: " · ";
-  color: var(--border);
+  color: var(--faint);
 }
 .post-meta a {
   color: var(--muted);

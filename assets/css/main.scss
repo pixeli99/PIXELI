@@ -879,15 +879,24 @@ mark {
 .highlight .bp { color: #999; }
 
 @media (prefers-color-scheme: dark) {
+  /* .hll (highlighted line) 覆盖亮黄背景 */
+  .highlight .hll { background-color: rgba(255, 220, 60, 0.12); }
   .highlight .c, .highlight .ch, .highlight .cm, .highlight .c1, .highlight .cs { color: #7a7a72; }
   .highlight .k, .highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr,
-  .highlight .o, .highlight .ow, .highlight .n, .highlight .py, .highlight .l, .highlight .ld,
-  .highlight .gd, .highlight .gi { color: #e8e6e0; }
+  .highlight .o, .highlight .ow, .highlight .n, .highlight .py, .highlight .l, .highlight .ld { color: #e8e6e0; }
+  /* diff 删除行：覆盖亮粉底色 #fdd，改用低饱和深红背景 */
+  .highlight .gd { color: #ef9090; background-color: rgba(229, 83, 75, 0.18); }
+  /* diff 插入行：覆盖亮绿底色 #dfd，改用低饱和深绿背景 */
+  .highlight .gi { color: #73c990; background-color: rgba(46, 160, 67, 0.18); }
   .highlight .kt { color: #82aaff; }
   .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx { color: #ffc58f; }
   .highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd,
   .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr,
   .highlight .s1, .highlight .ss { color: #addb67; }
+  /* .gr / .gt (错误输出) 覆盖深色背景下对比度不足的 #a00 */
+  .highlight .gr, .highlight .gt { color: #ef6b73; }
+  /* .gp (提示符前缀) 覆盖深色背景下对比度不足的 #555 */
+  .highlight .gp { color: #a8a6a0; }
   .highlight .na { color: #80cbc4; }
   .highlight .nb { color: #82aaff; }
   .highlight .nc { color: #82aaff; }

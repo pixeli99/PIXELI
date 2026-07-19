@@ -32,6 +32,20 @@ document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(functi
   a.setAttribute('aria-label', '链接至：' + heading);
   a.innerHTML = '<span aria-hidden="true">§</span>';
   h.appendChild(a);
+  if (navigator.clipboard) {
+    a.addEventListener('click', function() {
+      var url = location.origin + location.pathname + '#' + h.id;
+      navigator.clipboard.writeText(url).then(function() {
+        var sp = a.querySelector('[aria-hidden="true"]');
+        sp.textContent = '✓';
+        a.setAttribute('aria-label', '已复制链接');
+        setTimeout(function() {
+          sp.textContent = '§';
+          a.setAttribute('aria-label', '链接至：' + heading);
+        }, 1200);
+      });
+    });
+  }
 });
 document.querySelectorAll('.post-body pre').forEach(function(pre) {
   var langEl = pre.closest('[class*="language-"]');

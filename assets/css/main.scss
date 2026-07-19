@@ -35,6 +35,11 @@ body {
   font-family: var(--font-serif);
   line-height: 1.78;
   font-feature-settings: "kern", "liga", "calt";
+  /* 正文数字用旧体（oldstyle）：基线与小写字母协调，避免大写数字割裂行文节奏。
+     仅影响 Source Serif 4；Inter / JetBrains Mono 无此字形，静默降回默认值。
+     各处已有 font-variant-numeric: tabular-nums 的元素（post-meta、entry-list 等）
+     会完整覆盖此声明，恢复到等宽衬线数字，不受影响。 */
+  font-variant-numeric: oldstyle-nums proportional-nums;
   /* Safari 支持；让行首开括号与行末闭括号悬挂到文字区外，改善 CJK 文本对齐 */
   hanging-punctuation: first last;
   /* Source Serif 4 载入时带 opsz 轴（8..60），auto 让浏览器按渲染字号自动选光学尺寸 */

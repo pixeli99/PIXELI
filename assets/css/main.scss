@@ -648,7 +648,10 @@ sup.footnote, a.footnote {
 #q:focus-visible { border-radius: 3px; }
 #q:disabled { opacity: 0.5; cursor: default; }
 mark {
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  /* 搜索结果高亮：亮色模式下 accent #8a3324 混透明；
+     14% 的非文字对比度仅约 1.1:1，升至 30% 后约 1.7:1，高亮可分辨。
+     WCAG 非文字阈值 3:1 在此颜色组合下需 ~70% 不透明，视觉偏重，不采用。 */
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
   color: inherit;
   border-radius: 2px;
   padding: 0 0.08em;
@@ -785,8 +788,8 @@ mark {
   /* 选中高亮：暗色 accent #d97757（亮橙红）+ 白字对比度仅 2.9:1，不达标；
      改黑字后对比度升至 7.25:1，满足 WCAG AA。 */
   ::selection { color: #000; }
-  /* 搜索高亮：暗色背景下 14% 不透明度对比度仅 1.4:1，几乎不可见；
-     40% → ~3.2:1，满足 WCAG 非文字对比度要求。 */
+  /* 搜索高亮：暗色背景下 30%（亮色值）+ dark accent 颜色对比度仍低；
+     覆盖为 40%，visual contrast 约 1.8:1，明显优于亮色同比。 */
   mark { background: color-mix(in srgb, var(--accent) 40%, transparent); }
   /* 论文截图 / 架构图通常白底，在深色背景下对比刺眼；轻微降低亮度缓解。 */
   .post-body img { opacity: 0.88; }

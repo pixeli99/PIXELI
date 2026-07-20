@@ -245,6 +245,7 @@ th {
 thead th { border-bottom-width: 2px; }
 .table-scroll {
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   margin: 1.5em 0;
 }
 .post-body .table-scroll table {

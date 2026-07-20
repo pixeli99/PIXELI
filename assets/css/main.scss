@@ -471,6 +471,8 @@ details > :not(summary):first-of-type { margin-top: 0.75em; }
 /* BibTeX details wraps a code block directly — no left-border indent */
 details.bibtex-details { border-left: none; padding-left: 0; }
 details.bibtex-details summary { margin-bottom: 0.6em; }
+/* summary already labels the block "BibTeX"; suppress the redundant corner badge */
+details.bibtex-details pre[data-lang]::before { content: none; }
 
 /* —— Keyboard input —— */
 kbd {

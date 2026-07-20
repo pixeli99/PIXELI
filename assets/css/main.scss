@@ -272,6 +272,7 @@ thead th { border-bottom-width: 2px; }
   border: none;
 }
 .year-nav a:hover { color: var(--accent); }
+.year-nav a[aria-disabled="true"] { opacity: 0.35; pointer-events: none; cursor: default; }
 .year-nav sup {
   color: var(--faint);
   margin-left: 0.12em;

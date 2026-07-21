@@ -6,6 +6,7 @@ venue: arXiv preprint
 link: https://arxiv.org/abs/2407.04153
 tags: [MoE, Routing, Scaling, Inference]
 math: true
+description: 把 MoE 的 expert 数推到 100 万，每个 expert 退化成一个 single-neuron MLP，用 product-key 检索把路由复杂度从 O(N) 降到 O(√N)，得到 PEER（Parameter Efficient Expert Retrieval）层。
 ---
 
 ## 一句话

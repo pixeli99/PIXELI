@@ -6,6 +6,7 @@ venue: ICML 2024
 link: https://arxiv.org/abs/2404.19737
 tags: [Training, Inference, Scaling]
 math: true
+description: 训练时让 LM 在同一个位置一次性预测后续多个 token（每个 future step 一个独立的 output head 共享 trunk），既能涨下游指标，又能在推理时直接当 speculative decoding 的 draft model 用，最高 3× wall-clock 加速。
 ---
 
 ## 一句话

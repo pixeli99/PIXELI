@@ -916,6 +916,8 @@ mark {
   .highlight .nc { color: #82aaff; }
   .highlight .no { color: #80cbc4; }
   .highlight .nd { color: #c792ea; }
+  /* .ni 在亮色模式下用 #800080（紫），深色背景 #232325 对比度仅 1.68:1，补充覆盖 */
+  .highlight .ni { color: #c792ea; }
   .highlight .ne { color: #ef6b73; }
   .highlight .nf, .highlight .fm { color: #d97757; }
   .highlight .nl { color: #d97757; }

@@ -1,7 +1,7 @@
 ---
 title: World Arena 与 World Model 脉络
 date: 2026-05-20
-tags: [World Model, 评测, 综述]
+tags: [World Model, Benchmark, 综述]
 excerpt: 先把"World Arena"这个名字搞清楚（清华 WorldArena vs. WorldMark），再串起从 Ha & Schmidhuber 2018 到 Genie 3 / Cosmos / Marble 这条线，重点是几条隐线：定义之争、可控性、评测、数据。
 ---
 

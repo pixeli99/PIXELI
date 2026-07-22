@@ -83,16 +83,17 @@ layout: default
     {% endif %}
   {% endif %}
 
+  {% assign _list_label = "笔记" %}{% if page.collection == 'papers' %}{% assign _list_label = "论文" %}{% endif %}
   <nav class="post-nav" aria-label="文章导航">
     <span class="post-nav-prev">
       {% if page.previous and page.previous.collection == page.collection %}
-        <a href="{{ page.previous.url | relative_url }}">&#8592; {{ page.previous.title | truncate: 36, "…" }}</a>
+        <a href="{{ page.previous.url | relative_url }}" aria-label="上一篇：{{ page.previous.title }}"><span aria-hidden="true">&#8592;</span> {{ page.previous.title | truncate: 36, "…" }}</a>
       {% endif %}
     </span>
-    <a class="post-nav-up" href="{{ '/' | append: page.collection | append: '/' | relative_url }}">回列表</a>
+    <a class="post-nav-up" href="{{ '/' | append: page.collection | append: '/' | relative_url }}" aria-label="回{{ _list_label }}列表">回列表</a>
     <span class="post-nav-next">
       {% if page.next and page.next.collection == page.collection %}
-        <a href="{{ page.next.url | relative_url }}">{{ page.next.title | truncate: 36, "…" }} &#8594;</a>
+        <a href="{{ page.next.url | relative_url }}" aria-label="下一篇：{{ page.next.title }}">{{ page.next.title | truncate: 36, "…" }} <span aria-hidden="true">&#8594;</span></a>
       {% endif %}
     </span>
   </nav>

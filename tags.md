@@ -37,8 +37,8 @@ description: 按标签浏览全部论文笔记与随笔。
   {% assign parts = entry | split: "|" %}
   {% assign t = parts[1] %}
   {% assign count = parts[0] | plus: 0 %}
-  {% if count >= 15 %}{% assign tc_style = "font-size:1.08rem" %}{% elsif count >= 7 %}{% assign tc_style = "font-size:0.96rem" %}{% else %}{% assign tc_style = "" %}{% endif %}
-  <a href="#tag-{{ t | replace: " ", "-" }}" aria-label="{{ t }}，{{ count }} 篇"{% if tc_style != "" %} style="{{ tc_style }}"{% endif %}>{{ t }}<sup aria-hidden="true">{{ count }}</sup></a>
+  {% if count >= 15 %}{% assign tc_class = "tc-lg" %}{% elsif count >= 7 %}{% assign tc_class = "tc-md" %}{% else %}{% assign tc_class = "" %}{% endif %}
+  <a href="#tag-{{ t | replace: " ", "-" }}" aria-label="{{ t }}，{{ count }} 篇"{% if tc_class != "" %} class="{{ tc_class }}"{% endif %}>{{ t }}<sup aria-hidden="true">{{ count }}</sup></a>
 {% endfor %}
 </nav>
 

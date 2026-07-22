@@ -4,7 +4,7 @@ date: 2026-05-14
 authors: Google
 venue: arXiv preprint
 link: https://arxiv.org/abs/2605.14443
-tags: [RL, Reasoning, Tool Use, Post-training]
+tags: [RL, Reasoning, Tool Use, Post-Training]
 math: true
 ---
 

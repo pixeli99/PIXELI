@@ -4,7 +4,7 @@ date: 2026-05-14
 authors: Meta AI / Oxford VGG
 venue: CVPR 2026 (Oral)
 link: https://arxiv.org/abs/2605.15195
-tags: [3D, Spatial, Self-supervised, Scaling]
+tags: [3D, Spatial, Self-Supervised, Scaling]
 math: true
 ---
 

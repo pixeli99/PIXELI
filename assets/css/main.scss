@@ -406,6 +406,7 @@ thead th { border-bottom-width: 2px; }
   content: " · ";
   color: var(--faint);
 }
+.post-meta span { color: var(--muted); }
 .post-meta a {
   color: var(--muted);
   border-bottom: none;

@@ -565,9 +565,10 @@ sup.footnote, a.footnote {
 .post-body h2:hover .heading-anchor,
 .post-body h3:hover .heading-anchor { opacity: 1; }
 .heading-anchor:focus-visible { opacity: 1; }
-/* 直链定位到某节时，给目标标题加淡彩背景——让读者确认落点 */
-.post-body h2:target,
-.post-body h3:target {
+/* 直链定位到某节时，给目标标题加淡彩背景——让读者确认落点。
+   不限于 post-body：标签页分类标题、论文列表年份标题跳转同样受益。 */
+h2[id]:target,
+h3[id]:target {
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   border-radius: 3px;
   margin-left: -0.4em;

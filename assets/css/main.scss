@@ -386,7 +386,7 @@ thead th { border-bottom-width: 2px; }
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.14em;
-  color: var(--faint);
+  color: var(--muted);
   text-transform: uppercase;
   margin: 2.6rem 0 0.4rem;
 }
@@ -609,7 +609,7 @@ h3[id]:target {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
   margin: 0 0 0.6rem;
 }
 .related-papers ul {
@@ -707,7 +707,7 @@ mark {
   font-size: 3.2rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: var(--faint);
+  color: var(--muted);
 }
 .not-found p { color: var(--muted); }
 

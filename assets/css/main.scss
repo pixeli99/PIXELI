@@ -717,7 +717,7 @@ mark {
   padding-top: 1.6rem;
   padding-bottom: 3rem;
   border-top: 1px solid var(--border);
-  color: var(--faint);
+  color: var(--muted);
   font-family: var(--font-sans);
   font-size: 0.82rem;
   display: flex;
@@ -725,7 +725,7 @@ mark {
   justify-content: center;
   gap: 0.5rem;
 }
-.site-footer a { color: var(--faint); border: none; }
+.site-footer a { color: var(--muted); border: none; }
 .site-footer a:hover { color: var(--accent); }
 .site-footer .dot { color: var(--border); }
 

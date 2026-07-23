@@ -340,14 +340,14 @@ thead th { border-bottom-width: 2px; }
 .entry-tail .kind {
   font-family: var(--font-sans);
   font-size: 0.72rem;
-  color: var(--faint);
+  color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 .entry-authors {
   font-family: var(--font-sans);
   font-size: 0.75rem;
-  color: var(--faint);
+  color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -356,7 +356,7 @@ thead th { border-bottom-width: 2px; }
 .entry-venue {
   font-family: var(--font-sans);
   font-size: 0.72rem;
-  color: var(--faint);
+  color: var(--muted);
   font-style: italic;
   white-space: nowrap;
   overflow: hidden;

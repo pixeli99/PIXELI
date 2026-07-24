@@ -108,7 +108,7 @@ a:visited { color: var(--muted); }
 a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 /* Structural links must not change on visited — higher specificity overrides a:visited */
 .site-title:visited { color: var(--text); }
-.heading-anchor:visited { color: var(--faint); }
+.heading-anchor:visited { color: var(--muted); }
 /* 列表页标题不随访问状态变灰：知识库条目会被反复访问，全部变 muted 反而影响可读性 */
 .entry-list a:visited { color: var(--link); }
 
@@ -470,7 +470,7 @@ summary {
   list-style: none;
 }
 summary::-webkit-details-marker { display: none; }
-summary::before { content: "▸ "; color: var(--faint); font-size: 0.8em; }
+summary::before { content: "▸ "; color: var(--muted); font-size: 0.8em; }
 details[open] summary::before { content: "▾ "; }
 summary:hover { color: var(--accent); }
 details > :not(summary):first-of-type { margin-top: 0.75em; }
@@ -520,7 +520,7 @@ sup.footnote, a.footnote {
 .reversefootnote {
   border-bottom: none;
   margin-left: 0.3em;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 /* —— Entry list with optional excerpt —— */
@@ -553,7 +553,7 @@ sup.footnote, a.footnote {
 /* —— Heading anchors —— */
 .heading-anchor {
   margin-left: 0.35em;
-  color: var(--faint);
+  color: var(--muted);
   border: none;
   font-weight: 400;
   font-family: var(--font-sans);

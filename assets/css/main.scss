@@ -212,7 +212,7 @@ pre[data-lang]::before {
   left: 0.7rem;
   font-family: var(--font-sans);
   font-size: 0.72rem;
-  color: var(--faint);
+  color: var(--muted);
   pointer-events: none;
   user-select: none;
 }
@@ -256,7 +256,7 @@ thead th { border-bottom-width: 2px; }
 .scroll-hint {
   font-family: var(--font-sans);
   font-size: 0.72rem;
-  color: var(--faint);
+  color: var(--muted);
   margin: 0.4em 0 0;
 }
 

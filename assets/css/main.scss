@@ -403,7 +403,7 @@ thead th { border-bottom-width: 2px; }
   line-height: 1.8;
 }
 .post-meta > * + *::before {
-  content: " · ";
+  content: " · " / "";
   color: var(--faint);
 }
 .post-meta span { color: var(--muted); }

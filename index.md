@@ -28,6 +28,7 @@ layout: default
       <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
       <span class="entry-tail">
         {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
+        {% if item.collection == "papers" and item.authors %}<span class="entry-authors" title="{{ item.authors }}">{{ item.authors }}</span>{% endif %}
         <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%Y-%m-%d" }}</time>
       </span>
     </div>

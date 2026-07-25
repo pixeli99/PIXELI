@@ -439,6 +439,14 @@ thead th { border-bottom-width: 2px; }
 .tag-cloud a.tc-lg { font-size: 1.08rem; }
 .tag-cloud a.tc-md { font-size: 0.96rem; }
 
+.tag-count {
+  font-size: 0.72em;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 0.3em;
+  font-variant-numeric: tabular-nums;
+}
+
 .muted { color: var(--muted); }
 
 /* —— Figures —— */

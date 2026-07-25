@@ -17,6 +17,7 @@ social:
 
 lang: zh-CN
 timezone: Asia/Shanghai
+title_separator: "·"
 
 permalink: /:collection/:path/
 

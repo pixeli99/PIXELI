@@ -758,6 +758,7 @@ mark {
     align-items: flex-start;
     gap: 0.15rem;
   }
+  .entry-tail { flex-wrap: wrap; }
   .post-title { font-size: 1.5rem; }
   .post-nav {
     flex-direction: column;

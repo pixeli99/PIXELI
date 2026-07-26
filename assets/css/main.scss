@@ -780,6 +780,10 @@ mark {
     mask-image: linear-gradient(to right, black calc(100% - 2rem), transparent);
   }
   .papers-filter::-webkit-scrollbar { display: none; }
+  .papers-filter.pf-scrolled-end {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
   .pf-btn { flex-shrink: 0; }
 }
 

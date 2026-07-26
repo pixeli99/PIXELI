@@ -122,4 +122,15 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
     if (activeBtn) activeBtn.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'instant' });
   }
 })();
+
+(function () {
+  var pf = document.querySelector('.papers-filter');
+  if (!pf) return;
+  function checkEnd() {
+    pf.classList.toggle('pf-scrolled-end', pf.scrollLeft + pf.clientWidth >= pf.scrollWidth - 2);
+  }
+  pf.addEventListener('scroll', checkEnd, { passive: true });
+  window.addEventListener('resize', checkEnd, { passive: true });
+  checkEnd();
+})();
 </script>

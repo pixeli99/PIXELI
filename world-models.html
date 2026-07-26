@@ -544,6 +544,30 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   }
   .wm-h:hover .heading-anchor,
   .wm-h3:hover .heading-anchor { opacity: 1; }
+
+  /* ----- 页内目录 ----- */
+  .wm-toc {
+    margin: 1.4rem 0 2rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  .wm-toc-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .wm-toc ol { margin: 0; padding-left: 1.3em; }
+  .wm-toc li { margin: 0.1em 0; }
+  .wm-toc a { color: var(--muted); border: none; }
+  .wm-toc a:hover { color: var(--accent); }
 </style>
 
 <h1 style="margin-top:0;margin-bottom:0.4rem">World Models 全景 · 2026 Q2</h1>
@@ -558,6 +582,21 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   ③ <strong>视觉好 ≠ 一致性好</strong>，<strong>闭源旗舰</strong>（Sora 2、Genie 3、Marble、GAIA-3）<strong>不在公开 benchmark 榜上</strong>；长 horizon 一致性整个 field 都没解决。
 </div>
 
+<nav class="wm-toc" aria-label="目录">
+  <span class="wm-toc-label">目录</span>
+  <ol>
+    <li><a href="#sec-1">1 这是什么</a></li>
+    <li><a href="#sec-2">2 发展三段</a></li>
+    <li><a href="#sec-3">3 经典结构解剖</a></li>
+    <li><a href="#sec-4">4 当前阵营</a></li>
+    <li><a href="#sec-5">5 评测怎么看</a></li>
+    <li><a href="#sec-6">6 流派优劣对照</a></li>
+    <li><a href="#sec-7">7 还没解决</a></li>
+    <li><a href="#sec-8">8 一句话总结</a></li>
+    <li><a href="#sec-appendix">附录 · 39 模型主表</a></li>
+    <li><a href="#sec-further">延伸阅读</a></li>
+  </ol>
+</nav>
 
 <h2 id="sec-1" class="wm-h"><span class="wm-sec">§</span> 1 这是什么<span class="num">定义 · 应用 · 为什么 2024 后才热</span></h2>
 

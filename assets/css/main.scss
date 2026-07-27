@@ -206,7 +206,7 @@ pre:hover .copy-btn,
 @media (pointer: coarse) { .copy-btn { opacity: 0.55; } }
 pre[data-lang] { padding-top: 2rem; }
 pre[data-lang]::before {
-  content: attr(data-lang);
+  content: attr(data-lang) / "";
   position: absolute;
   top: 0.45rem;
   left: 0.7rem;
@@ -478,8 +478,8 @@ summary {
   list-style: none;
 }
 summary::-webkit-details-marker { display: none; }
-summary::before { content: "▸ "; color: var(--muted); font-size: 0.8em; }
-details[open] summary::before { content: "▾ "; }
+summary::before { content: "▸ " / ""; color: var(--muted); font-size: 0.8em; }
+details[open] summary::before { content: "▾ " / ""; }
 summary:hover { color: var(--accent); }
 details > :not(summary):first-of-type { margin-top: 0.75em; }
 /* BibTeX details wraps a code block directly — no left-border indent */

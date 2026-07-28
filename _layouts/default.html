@@ -26,6 +26,10 @@
   {%- if page.collection == 'papers' and page.link and page.link != '——' -%}
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":{{ page.url | absolute_url | jsonify }},"datePublished":{{ page.date | date: "%Y-%m-%d" | jsonify }},"author":{"@type":"Person","name":{{ site.author | jsonify }}},"itemReviewed":{"@type":"ScholarlyArticle","name":{{ page.title | jsonify }},"url":{{ page.link | jsonify }}{% if page.authors %},"author":{{ page.authors | jsonify }}{% endif %}{% if page.venue and page.venue != '——' %},"isPartOf":{{ page.venue | jsonify }}{% endif %}}{% if _rbd.size > 0 %},"reviewBody":{{ _rbd | jsonify }}{% endif %}}</script>
   {%- endif -%}
+  {%- if page.collection == 'notes' -%}
+  {%- assign _note_desc = page.excerpt | strip_html | strip | truncate: 250, "" -%}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","url":{{ page.url | absolute_url | jsonify }},"headline":{{ page.title | jsonify }},"datePublished":{{ page.date | date: "%Y-%m-%d" | jsonify }},"author":{"@type":"Person","name":{{ site.author | jsonify }},"url":"https://github.com/{{ site.author }}"}{% if _note_desc.size > 0 %},"description":{{ _note_desc | jsonify }}{% endif %}{% if page.tags.size > 0 %},"keywords":{{ page.tags | join: ", " | jsonify }}{% endif %}}</script>
+  {%- endif -%}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

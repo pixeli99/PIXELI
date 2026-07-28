@@ -415,6 +415,16 @@ thead th { border-bottom-width: 2px; }
 .post-meta time { color: var(--muted); }
 .post-tags a { margin-right: 0.3rem; }
 
+/* 搜索结果 entry-tail 里的 topic 标签 */
+.sr-tag {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--muted);
+  background: var(--code-bg);
+  border-radius: 2px;
+  padding: 0.05em 0.4em;
+}
+
 .tag-cloud {
   margin: 1.8em 0 2.4em;
   line-height: 2.2;

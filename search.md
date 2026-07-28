@@ -103,7 +103,13 @@ sitemap: false
       var v = d.venue || '';
       var venueStr = (d.collection === 'papers' && v && v.indexOf('arXiv') < 0 && v.indexOf('博客') < 0)
         ? '<span class="entry-venue" title="' + esc(v) + '">' + highlight(esc(v), terms) + '</span>' : '';
-      var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' + authStr + venueStr +
+      var tagStr = '';
+      if (d.tags && d.tags.length > 0) {
+        tagStr = d.tags.slice(0, 2).map(function(t) {
+          return '<span class="sr-tag">' + highlight(esc(t), terms) + '</span>';
+        }).join('');
+      }
+      var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' + tagStr + authStr + venueStr +
                  (d.date ? '<time datetime="' + esc(d.date) + '">' + esc(d.date) + '</time>' : '') + '</span>';
       var head = '<div class="entry-head"><a href="' + esc(d.url) + '">' + highlight(esc(d.title), terms) + '</a>' + tail + '</div>';
       var excText = d.excerpt || '';

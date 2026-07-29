@@ -127,7 +127,11 @@ sitemap: false
   q.addEventListener('input', function () { if (!composing) doSearch(); });
 
   q.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowDown') {
+    if (e.key === 'Escape' && q.value) {
+      e.preventDefault();
+      q.value = '';
+      doSearch();
+    } else if (e.key === 'ArrowDown') {
       var first = out.querySelector('a');
       if (first) { e.preventDefault(); first.focus(); }
     }

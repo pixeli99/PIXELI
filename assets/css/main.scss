@@ -425,6 +425,18 @@ thead th { border-bottom-width: 2px; }
   padding: 0.05em 0.4em;
 }
 
+/* 笔记列表 entry-tail 里的标签链接 */
+a.entry-tag {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--muted);
+  background: var(--code-bg);
+  border-bottom: none;
+  border-radius: 2px;
+  padding: 0.05em 0.4em;
+}
+a.entry-tag:hover { color: var(--accent); }
+
 .tag-cloud {
   margin: 1.8em 0 2.4em;
   line-height: 2.2;

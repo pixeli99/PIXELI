@@ -890,6 +890,14 @@ mark {
   details { display: block; }
   details > summary { display: none; }
   details > *:not(summary) { display: block !important; }
+  /* 打印时在原文外链后附完整 URL，方便离线查找来源 */
+  .post-meta a[href^="http"]::after,
+  .post-body a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #555;
+    word-break: break-all;
+  }
 }
 
 /* —— Syntax highlighting (Rouge) — merged from syntax.css —— */

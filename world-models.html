@@ -568,6 +568,7 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   .wm-toc li { margin: 0.1em 0; }
   .wm-toc a { color: var(--muted); border: none; }
   .wm-toc a:hover { color: var(--accent); }
+  .wm-toc a.wm-toc-active { color: var(--accent); font-weight: 500; }
 </style>
 
 <h1 style="margin-top:0;margin-bottom:0.4rem">World Models 全景 · 2026 Q2</h1>
@@ -1773,6 +1774,34 @@ document.querySelectorAll('.wm-arch-diagram').forEach(function(pre) {
     pre.insertAdjacentElement('afterend', hint);
   }
 });
+
+// TOC scrollspy：随滚动高亮当前章节
+(function () {
+  var links = Array.from(document.querySelectorAll('.wm-toc a[href^="#"]'));
+  if (!links.length) return;
+  var headings = links
+    .map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); })
+    .filter(Boolean);
+  function update() {
+    var offset = 100;
+    var active = null;
+    for (var i = headings.length - 1; i >= 0; i--) {
+      if (headings[i].getBoundingClientRect().top <= offset) {
+        active = headings[i].id;
+        break;
+      }
+    }
+    links.forEach(function (a) {
+      a.classList.toggle('wm-toc-active', !!active && a.getAttribute('href') === '#' + active);
+    });
+  }
+  var raf = null;
+  window.addEventListener('scroll', function () {
+    if (raf) return;
+    raf = requestAnimationFrame(function () { raf = null; update(); });
+  }, { passive: true });
+  update();
+})();
 
 // World Models 页章节锚点链接
 document.querySelectorAll('.wm-h[id], .wm-h3[id]').forEach(function(h) {

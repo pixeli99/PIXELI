@@ -325,7 +325,8 @@ thead th { border-bottom-width: 2px; }
   flex: 1;
 }
 .entry-list a:hover { color: var(--accent); }
-.entry-list time {
+.entry-list time,
+.entry-date {
   font-family: var(--font-sans);
   font-size: 0.82rem;
   color: var(--muted);

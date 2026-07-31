@@ -417,26 +417,17 @@ thead th { border-bottom-width: 2px; }
 .post-meta time { color: var(--muted); }
 .post-tags a { margin-right: 0.3rem; }
 
-/* 搜索结果 entry-tail 里的 topic 标签 */
-.sr-tag {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  color: var(--muted);
-  background: var(--code-bg);
-  border-radius: 2px;
-  padding: 0.05em 0.4em;
-}
-
-/* 笔记列表 entry-tail 里的标签链接 */
+/* 搜索结果 / 笔记列表 entry-tail 内的小标签（span.sr-tag 和 a.entry-tag 共享外观） */
+.sr-tag,
 a.entry-tag {
   font-family: var(--font-sans);
   font-size: 0.72rem;
   color: var(--muted);
   background: var(--code-bg);
-  border-bottom: none;
   border-radius: 2px;
   padding: 0.05em 0.4em;
 }
+a.entry-tag { border-bottom: none; }
 a.entry-tag:hover { color: var(--accent); }
 
 .tag-cloud {
@@ -691,6 +682,7 @@ h3[id]:target {
 }
 #q::placeholder { color: var(--muted); opacity: 1; }
 #q:focus-visible { border-radius: 3px; }
+#q { transition: opacity 0.15s; }
 #q:disabled { opacity: 0.5; cursor: default; }
 mark {
   /* 搜索结果高亮：亮色模式下 accent #8a3324 混透明；

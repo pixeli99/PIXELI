@@ -109,6 +109,9 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
       ? (location.pathname + '?tag=' + encodeURIComponent(tag))
       : location.pathname;
     history.replaceState(null, '', newUrl);
+    document.title = tag
+      ? (tag + ' · 论文 · {{ site.title }}')
+      : '论文 · {{ site.title }}';
   }
   btns.forEach(function (btn) {
     btn.addEventListener('click', function () {

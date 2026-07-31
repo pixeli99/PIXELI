@@ -1792,7 +1792,10 @@ document.querySelectorAll('.wm-arch-diagram').forEach(function(pre) {
       }
     }
     links.forEach(function (a) {
-      a.classList.toggle('wm-toc-active', !!active && a.getAttribute('href') === '#' + active);
+      var on = !!active && a.getAttribute('href') === '#' + active;
+      a.classList.toggle('wm-toc-active', on);
+      if (on) { a.setAttribute('aria-current', 'location'); }
+      else { a.removeAttribute('aria-current'); }
     });
   }
   var raf = null;

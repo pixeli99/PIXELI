@@ -49,6 +49,8 @@ defaults:
     values:
       layout: post
 
+strict_front_matter: true
+
 markdown: kramdown
 highlighter: rouge
 

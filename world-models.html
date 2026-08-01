@@ -1827,7 +1827,7 @@ document.querySelectorAll('.wm-h[id], .wm-h3[id]').forEach(function(h) {
           sp.textContent = '§';
           a.setAttribute('aria-label', '链接至：' + heading);
         }, 1200);
-      });
+      }).catch(function() {});
     });
   }
 });

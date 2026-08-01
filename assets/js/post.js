@@ -43,7 +43,7 @@ document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(functi
           sp.textContent = '§';
           a.setAttribute('aria-label', '链接至：' + heading);
         }, 1200);
-      });
+      }).catch(function() {});
     });
   }
 });

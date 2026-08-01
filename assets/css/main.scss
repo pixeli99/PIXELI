@@ -679,10 +679,10 @@ h3[id]:target {
   caret-color: var(--accent);
   -webkit-appearance: none;
   appearance: none;
+  transition: opacity 0.15s;
 }
 #q::placeholder { color: var(--muted); opacity: 1; }
 #q:focus-visible { border-radius: 3px; }
-#q { transition: opacity 0.15s; }
 #q:disabled { opacity: 0.5; cursor: default; }
 mark {
   /* 搜索结果高亮：亮色模式下 accent #8a3324 混透明；

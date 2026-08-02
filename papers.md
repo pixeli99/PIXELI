@@ -24,7 +24,7 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
 </nav>
 
 <div class="papers-filter" role="group" aria-label="按标签过滤">
-  <button class="pf-btn pf-active" data-tag="" aria-pressed="true">全部</button>
+  <button class="pf-btn pf-active" data-tag="" aria-pressed="true" aria-label="全部，{{ papers_sorted.size }} 篇">全部<sup aria-hidden="true">{{ papers_sorted.size }}</sup></button>
   {% for row in _freq_rows %}{% assign _parts = row | split: "|" %}{% assign _n = _parts[0] | plus: 0 %}<button class="pf-btn" data-tag="{{ _parts[1] }}" aria-pressed="false" aria-label="{{ _parts[1] }}，{{ _n }} 篇">{{ _parts[1] }}<sup aria-hidden="true">{{ _n }}</sup></button>{% endfor %}
 </div>
 <p class="sr-only" id="pf-status" role="status" aria-live="polite" aria-atomic="true"></p>

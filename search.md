@@ -156,6 +156,7 @@ sitemap: false
     var raw = q.value.trim();
     var newUrl = raw ? (location.pathname + '?q=' + encodeURIComponent(raw)) : location.pathname;
     history.replaceState(null, '', newUrl);
+    document.title = raw ? (raw + ' · 搜索 · {{ site.title }}') : '搜索 · {{ site.title }}';
     if (!val) { out.innerHTML = ''; hint.textContent = '输入关键词搜索全站'; return; }
     var terms = val.split(/\s+/);
     var scored = docs

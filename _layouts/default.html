@@ -8,7 +8,9 @@
   <meta name="theme-color" content="#18181a" media="(prefers-color-scheme: dark)">
   <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   {% if page.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
-  {%- comment -%} 论文页：提前提取"一句话"摘要，注入 meta description 和 og:description {%- endcomment -%}
+  {%- comment -%} 论文页：提前提取"一句话"摘要，供 JSON-LD reviewBody 使用。
+    meta description / og:description 由 jekyll-seo-tag 统一输出（读 page.description，
+    已由 _plugins/paper_description.rb 在 post_convert 钩子中注入）。{%- endcomment -%}
   {%- assign _rbd = '' -%}
   {%- if page.collection == 'papers' and page.link and page.link != '——' -%}
     {%- assign _rbd = page.description | default: '' -%}
@@ -17,10 +19,6 @@
       {%- assign _rba = _rbt | split: "一句话 " | last -%}
       {%- assign _rbd = _rba | split: " 方法 " | first | strip | truncate: 250, "" -%}
     {%- endif -%}
-  {%- endif -%}
-  {%- if _rbd.size > 0 -%}
-  <meta name="description" content="{{ _rbd | escape }}">
-  <meta property="og:description" content="{{ _rbd | escape }}">
   {%- endif -%}
   {%- seo title=false -%}
   {%- if page.collection == 'papers' and page.link and page.link != '——' -%}

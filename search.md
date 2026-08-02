@@ -106,7 +106,7 @@ sitemap: false
       var tagStr = '';
       if (d.tags && d.tags.length > 0) {
         tagStr = d.tags.slice(0, 2).map(function(t) {
-          return '<span class="sr-tag">' + highlight(esc(t), terms) + '</span>';
+          return '<a href="{{ "/tags/" | relative_url }}#tag-' + t.replace(/ /g, '-') + '" class="entry-tag">' + highlight(esc(t), terms) + '</a>';
         }).join('');
       }
       var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' + tagStr + authStr + venueStr +
@@ -132,13 +132,13 @@ sitemap: false
       q.value = '';
       doSearch();
     } else if (e.key === 'ArrowDown') {
-      var first = out.querySelector('a');
+      var first = out.querySelector('.entry-head > a');
       if (first) { e.preventDefault(); first.focus(); }
     }
   });
   out.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-      var links = Array.from(out.querySelectorAll('a'));
+      var links = Array.from(out.querySelectorAll('.entry-head > a'));
       var idx = links.indexOf(document.activeElement);
       if (e.key === 'ArrowDown' && idx < links.length - 1) {
         e.preventDefault(); links[idx + 1].focus();

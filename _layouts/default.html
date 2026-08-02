@@ -22,7 +22,8 @@
   {%- endif -%}
   {%- seo title=false -%}
   {%- if page.url == "/" -%}
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":{{ site.url | append: site.baseurl | jsonify }},"name":{{ site.title | jsonify }},"description":{{ site.description | jsonify }},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":{{ site.url | append: site.baseurl | append: "/search/?q={search_term_string}" | jsonify }}},"query-input":"required name=search_term_string"}}</script>
+  {%- assign _su = site.url | append: site.baseurl -%}
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"{{ _su }}","name":{{ site.title | jsonify }},"description":{{ site.description | jsonify }},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"{{ _su }}/search/?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
   {%- endif -%}
   {%- if page.collection == 'papers' and page.link and page.link != '——' -%}
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":{{ page.url | absolute_url | jsonify }},"datePublished":{{ page.date | date: "%Y-%m-%d" | jsonify }},"author":{"@type":"Person","name":{{ site.author | jsonify }}},"itemReviewed":{"@type":"ScholarlyArticle","name":{{ page.title | jsonify }},"url":{{ page.link | jsonify }}{% if page.authors %},"author":{{ page.authors | jsonify }}{% endif %}{% if page.venue and page.venue != '——' %},"isPartOf":{{ page.venue | jsonify }}{% endif %}}{% if _rbd.size > 0 %},"reviewBody":{{ _rbd | jsonify }}{% endif %}}</script>

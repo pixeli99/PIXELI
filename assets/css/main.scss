@@ -648,6 +648,10 @@ h3[id]:target {
   margin: 0;
 }
 .related-papers li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.8rem;
   font-family: var(--font-sans);
   font-size: 0.9rem;
   padding: 0.35em 0;
@@ -657,8 +661,16 @@ h3[id]:target {
 .related-papers li a {
   color: var(--muted);
   border: none;
+  flex: 1;
+  min-width: 0;
 }
 .related-papers li a:hover { color: var(--accent); }
+.related-date {
+  font-size: 0.78rem;
+  color: var(--faint);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
 
 /* —— Search —— */
 #hint,

@@ -76,7 +76,10 @@ layout: default
       <p class="related-label">相关论文</p>
       <ul>
         {% for p in related_papers %}
-          <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
+          <li>
+            <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+            <time datetime="{{ p.date | date_to_xmlschema }}" class="related-date">{{ p.date | date: "%Y" }}</time>
+          </li>
         {% endfor %}
       </ul>
     </aside>

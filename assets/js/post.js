@@ -80,6 +80,20 @@ document.querySelectorAll('.post-body pre').forEach(function(pre) {
   });
 });
 
+// [ / ] keyboard shortcuts: navigate to prev / next post in the same collection
+(function() {
+  var prevA = document.querySelector('.post-nav-prev a');
+  var nextA = document.querySelector('.post-nav-next a');
+  if (!prevA && !nextA) return;
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+    var t = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (t === 'input' || t === 'textarea' || document.activeElement.isContentEditable) return;
+    if (e.key === '[' && prevA) { e.preventDefault(); location.href = prevA.href; }
+    if (e.key === ']' && nextA) { e.preventDefault(); location.href = nextA.href; }
+  });
+})();
+
 // Collapse the BibTeX citation block into a <details> disclosure widget
 document.querySelectorAll('.post-body h2').forEach(function(h) {
   if (h.textContent.replace(/§/g, '').trim() !== '引用') return;

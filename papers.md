@@ -99,11 +99,16 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
     }
   }
   function setActive(tag) {
+    var anyActive = false;
     btns.forEach(function (b) {
       var active = b.getAttribute('data-tag') === tag;
       b.classList.toggle('pf-active', active);
       b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      b.tabIndex = active ? 0 : -1;
+      if (active) anyActive = true;
     });
+    // 若 URL ?tag= 的值不在过滤栏（篇数<4），保证至少第一个按钮可获焦
+    if (!anyActive && btns.length) btns[0].tabIndex = 0;
     applyFilter(tag);
     var newUrl = tag
       ? (location.pathname + '?tag=' + encodeURIComponent(tag))
@@ -112,6 +117,27 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
     document.title = tag
       ? (tag + ' · 论文 · {{ site.title }}')
       : '论文 · {{ site.title }}';
+  }
+  // 初始化 roving tabindex：仅活跃按钮（"全部"）在 Tab 顺序里，其余退出
+  btns.forEach(function (b) {
+    b.tabIndex = b.classList.contains('pf-active') ? 0 : -1;
+  });
+  // 方向键在过滤栏内移动焦点，不触发激活
+  var pfEl = document.querySelector('.papers-filter');
+  if (pfEl) {
+    pfEl.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      var arr = Array.from(btns);
+      var idx = arr.indexOf(document.activeElement);
+      if (idx < 0) return;
+      e.preventDefault();
+      var next = e.key === 'ArrowLeft'
+        ? (idx - 1 + arr.length) % arr.length
+        : (idx + 1) % arr.length;
+      arr[idx].tabIndex = -1;
+      arr[next].tabIndex = 0;
+      arr[next].focus();
+    });
   }
   btns.forEach(function (btn) {
     btn.addEventListener('click', function () {

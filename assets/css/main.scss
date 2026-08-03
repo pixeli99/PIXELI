@@ -900,6 +900,11 @@ mark {
   /* 打印时去掉横向滚动限制，让表格自然撑满页宽 */
   .table-scroll { overflow-x: visible; }
   .post-body .table-scroll table { width: 100%; min-width: unset; }
+  /* 打印时代码块（含 BibTeX）去掉横向溢出，改为自动换行：
+     A4/Letter 每行约 80 字符，长 author 字段不换行会被截断。
+     overflow-wrap: break-word 仅在必要时打断长 token（URL、citekey），
+     不影响正常空格处的换行。 */
+  pre { white-space: pre-wrap; overflow-x: visible; overflow-wrap: break-word; }
   details { display: block; }
   details > summary { display: none; }
   details > *:not(summary) { display: block !important; }

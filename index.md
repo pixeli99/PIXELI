@@ -30,6 +30,7 @@ layout: default
         {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
         {% if item.collection == "papers" and item.authors %}<span class="entry-authors" title="{{ item.authors }}">{{ item.authors }}</span>{% endif %}
         {% if item.collection == "papers" %}{% unless item.venue contains 'arXiv' or item.venue contains '博客' or item.venue == nil or item.venue == '' %}<span class="entry-venue" title="{{ item.venue }}">{{ item.venue }}</span>{% endunless %}{% endif %}
+        {% if item.collection == "notes" and item.tags.size > 0 %}{% for t in item.tags limit: 2 %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | replace: ' ', '-' }}" class="entry-tag">{{ t }}</a>{% endfor %}{% endif %}
         <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%Y-%m-%d" }}</time>
       </span>
     </div>

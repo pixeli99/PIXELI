@@ -121,6 +121,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5em;
   letter-spacing: -0.005em;
   text-wrap: balance;
+  /* body 继承了 oldstyle-nums；大号标题数字（年份、版本号）用 lining 更端正 */
+  font-variant-numeric: lining-nums;
 }
 h1 { font-size: 1.7rem; }
 h2 { font-size: 1.28rem; }
@@ -427,7 +429,8 @@ a.entry-tag {
   border-radius: 2px;
   padding: 0.05em 0.4em;
 }
-a.entry-tag { border-bottom: none; }
+/* .entry-list a 有 flex:1；标签链在 inline-flex 的 entry-tail 里不需要弹性增长 */
+a.entry-tag { border-bottom: none; flex: none; }
 a.entry-tag:hover { color: var(--accent); }
 
 .tag-cloud {

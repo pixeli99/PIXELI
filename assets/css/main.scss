@@ -893,7 +893,21 @@ mark {
   .scroll-hint {
     display: none !important;
   }
-  .site-header { border-bottom: 1px solid #000; margin-bottom: 1.5rem; }
+  /* 打印时去掉屏幕导航的纵向留白和横向居中约束，充分利用纸面宽度 */
+  .site-header,
+  .site-content {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .site-header {
+    border-bottom: 1px solid #000;
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 0.8rem;
+  }
   h1, h2, h3, h4 { break-after: avoid; }
   pre, blockquote, table, figure, img { break-inside: avoid; }
   p, li { orphans: 3; widows: 3; }

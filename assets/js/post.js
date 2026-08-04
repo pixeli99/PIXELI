@@ -107,3 +107,12 @@ document.querySelectorAll('.post-body h2').forEach(function(h) {
   next.parentNode.insertBefore(details, next);
   details.appendChild(next);
 });
+
+// If URL hash targets the 引用 heading, auto-open its BibTeX details widget
+(function() {
+  if (!location.hash) return;
+  var el = document.getElementById(location.hash.slice(1));
+  if (!el) return;
+  var next = el.nextElementSibling;
+  if (next && next.classList.contains('bibtex-details')) next.open = true;
+})();

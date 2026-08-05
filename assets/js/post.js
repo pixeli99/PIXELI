@@ -116,3 +116,19 @@ document.querySelectorAll('.post-body h2').forEach(function(h) {
   var next = el.nextElementSibling;
   if (next && next.classList.contains('bibtex-details')) next.open = true;
 })();
+
+// Chrome does not expand closed <details> when printing; expand them all before
+// printing and restore their state afterward so the BibTeX citation appears in print.
+(function() {
+  window.addEventListener('beforeprint', function() {
+    document.querySelectorAll('details').forEach(function(d) {
+      d._printWasOpen = d.open;
+      d.open = true;
+    });
+  });
+  window.addEventListener('afterprint', function() {
+    document.querySelectorAll('details').forEach(function(d) {
+      d.open = d._printWasOpen;
+    });
+  });
+})();

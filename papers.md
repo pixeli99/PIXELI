@@ -11,12 +11,12 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
 
 {% assign papers_sorted = site.papers | where_exp: "p", "p.published != false" | sort: "date" | reverse %}
 {% assign papers_by_year = papers_sorted | group_by_exp: "p", "p.date | date: '%Y'" %}
-{% comment %}Build tag frequency list for the filter bar (tags with ≥4 papers){% endcomment %}
+{% comment %}Build tag frequency list for the filter bar (tags with ≥3 papers){% endcomment %}
 {% assign _all_tags = "" | split: "" %}
 {% for p in papers_sorted %}{% for t in p.tags %}{% assign _all_tags = _all_tags | push: t %}{% endfor %}{% endfor %}
 {% assign _uniq_tags = _all_tags | uniq %}
 {% assign _freq_rows = "" | split: "" %}
-{% for t in _uniq_tags %}{% assign _cnt = 0 %}{% for v in _all_tags %}{% if v == t %}{% assign _cnt = _cnt | plus: 1 %}{% endif %}{% endfor %}{% if _cnt >= 4 %}{% capture _row %}{{ _cnt | prepend: "00000" | slice: -5, 5 }}|{{ t }}{% endcapture %}{% assign _freq_rows = _freq_rows | push: _row %}{% endif %}{% endfor %}
+{% for t in _uniq_tags %}{% assign _cnt = 0 %}{% for v in _all_tags %}{% if v == t %}{% assign _cnt = _cnt | plus: 1 %}{% endif %}{% endfor %}{% if _cnt >= 3 %}{% capture _row %}{{ _cnt | prepend: "00000" | slice: -5, 5 }}|{{ t }}{% endcapture %}{% assign _freq_rows = _freq_rows | push: _row %}{% endif %}{% endfor %}
 {% assign _freq_rows = _freq_rows | sort | reverse %}
 
 <nav class="year-nav" aria-label="按年份跳转">

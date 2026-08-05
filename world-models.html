@@ -1640,6 +1640,24 @@ function renderMaster() {
   });
 }
 
+// Roving tabindex per filter group — matches papers-filter keyboard pattern
+document.querySelectorAll('.wm-filter-row').forEach(row => {
+  var chips = Array.from(row.querySelectorAll('.wm-chip'));
+  chips.forEach(b => { b.tabIndex = b.classList.contains('active') ? 0 : -1; });
+  row.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    var idx = chips.indexOf(document.activeElement);
+    if (idx < 0) return;
+    e.preventDefault();
+    var next = e.key === 'ArrowLeft'
+      ? (idx - 1 + chips.length) % chips.length
+      : (idx + 1) % chips.length;
+    chips[idx].tabIndex = -1;
+    chips[next].tabIndex = 0;
+    chips[next].focus();
+  });
+});
+
 document.querySelectorAll('.wm-chip').forEach(btn => {
   btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
   btn.addEventListener('click', () => {
@@ -1649,6 +1667,7 @@ document.querySelectorAll('.wm-chip').forEach(btn => {
       const active = b.dataset.value === v;
       b.classList.toggle('active', active);
       b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      b.tabIndex = active ? 0 : -1;
     });
     renderMaster();
   });

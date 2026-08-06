@@ -829,9 +829,12 @@ mark {
   .pf-btn { flex-shrink: 0; }
 }
 
-/* —— Touch devices: always show heading anchors —— */
+/* —— Touch devices —— */
 @media (pointer: coarse) {
   .heading-anchor { opacity: 0.4; }
+  /* WCAG 2.5.8: raise touch target to ≥24 px */
+  .copy-btn { padding-top: 0.4em; padding-bottom: 0.4em; }
+  .pf-btn   { padding-top: 0.35em; padding-bottom: 0.35em; }
 }
 
 /* —— Dark mode —— */

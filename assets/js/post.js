@@ -7,13 +7,22 @@ document.querySelectorAll('.post-body table').forEach(function(table) {
 
 function addTableScrollHints() {
   document.querySelectorAll('.post-body .table-scroll').forEach(function(wrap) {
-    if (wrap.scrollWidth > wrap.clientWidth + 1) {
-      var next = wrap.nextElementSibling;
-      if (next && next.classList.contains('scroll-hint')) return;
+    var overflowing = wrap.scrollWidth > wrap.clientWidth + 1;
+    var next = wrap.nextElementSibling;
+    var hintEl = (next && next.classList.contains('scroll-hint')) ? next : null;
+    if (overflowing && !hintEl) {
       var hint = document.createElement('p');
       hint.className = 'scroll-hint';
       hint.textContent = '← 可左右滑动查看完整表格 →';
       wrap.insertAdjacentElement('afterend', hint);
+    } else if (!overflowing && hintEl) {
+      hintEl.remove();
+    }
+    // keyboard-accessible scroll: tabindex only when content actually overflows
+    if (overflowing) {
+      wrap.setAttribute('tabindex', '0');
+    } else {
+      wrap.removeAttribute('tabindex');
     }
   });
 }
@@ -23,6 +32,13 @@ if (document.fonts && document.fonts.ready) {
 } else {
   addTableScrollHints();
 }
+
+// recheck overflow on viewport resize so hint/tabindex stay in sync
+var _rstTimer;
+window.addEventListener('resize', function() {
+  clearTimeout(_rstTimer);
+  _rstTimer = setTimeout(addTableScrollHints, 200);
+}, { passive: true });
 
 document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(function(h) {
   var heading = h.textContent.trim();

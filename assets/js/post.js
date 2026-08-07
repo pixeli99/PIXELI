@@ -13,6 +13,7 @@ function addTableScrollHints() {
     if (overflowing && !hintEl) {
       var hint = document.createElement('p');
       hint.className = 'scroll-hint';
+      hint.setAttribute('aria-hidden', 'true');
       hint.textContent = '← 可左右滑动查看完整表格 →';
       wrap.insertAdjacentElement('afterend', hint);
     } else if (!overflowing && hintEl) {

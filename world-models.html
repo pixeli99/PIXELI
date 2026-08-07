@@ -1780,6 +1780,7 @@ document.querySelectorAll('.wm-tab-wrap').forEach(function(wrap) {
   if (wrap.scrollWidth > wrap.clientWidth + 1) {
     var hint = document.createElement('p');
     hint.className = 'scroll-hint';
+    hint.setAttribute('aria-hidden', 'true');
     hint.textContent = '← 可左右滑动查看更多列 →';
     wrap.insertAdjacentElement('afterend', hint);
   }
@@ -1790,6 +1791,7 @@ document.querySelectorAll('.wm-arch-diagram').forEach(function(pre) {
   if (pre.scrollWidth > pre.clientWidth + 1) {
     var hint = document.createElement('p');
     hint.className = 'scroll-hint';
+    hint.setAttribute('aria-hidden', 'true');
     hint.textContent = '← 可左右滑动查看完整架构图 →';
     pre.insertAdjacentElement('afterend', hint);
   }

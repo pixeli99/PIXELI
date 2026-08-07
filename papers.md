@@ -107,7 +107,7 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
       b.tabIndex = active ? 0 : -1;
       if (active) anyActive = true;
     });
-    // 若 URL ?tag= 的值不在过滤栏（篇数<4），保证至少第一个按钮可获焦
+    // 若 URL ?tag= 的值不在过滤栏（篇数<3），保证至少第一个按钮可获焦
     if (!anyActive && btns.length) btns[0].tabIndex = 0;
     applyFilter(tag);
     var newUrl = tag

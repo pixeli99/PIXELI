@@ -88,7 +88,8 @@ bundle exec jekyll serve
 _notes/           随笔
 _papers/          论文阅读
 _layouts/         布局
-assets/           CSS、Favicon
+_plugins/         Jekyll 插件（关闭 smart_quotes、自动抽取论文摘要）
+assets/           CSS、JS、Favicon
 index.md          首页（合并最近 12 条）
 notes.md          /notes/
 papers.md         /papers/

@@ -1645,13 +1645,14 @@ document.querySelectorAll('.wm-filter-row').forEach(row => {
   var chips = Array.from(row.querySelectorAll('.wm-chip'));
   chips.forEach(b => { b.tabIndex = b.classList.contains('active') ? 0 : -1; });
   row.addEventListener('keydown', e => {
-    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'Home' && e.key !== 'End') return;
     var idx = chips.indexOf(document.activeElement);
     if (idx < 0) return;
     e.preventDefault();
-    var next = e.key === 'ArrowLeft'
-      ? (idx - 1 + chips.length) % chips.length
-      : (idx + 1) % chips.length;
+    var next;
+    if (e.key === 'Home') { next = 0; }
+    else if (e.key === 'End') { next = chips.length - 1; }
+    else { next = e.key === 'ArrowLeft' ? (idx - 1 + chips.length) % chips.length : (idx + 1) % chips.length; }
     chips[idx].tabIndex = -1;
     chips[next].tabIndex = 0;
     chips[next].focus();

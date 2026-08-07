@@ -126,14 +126,15 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
   var pfEl = document.querySelector('.papers-filter');
   if (pfEl) {
     pfEl.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'Home' && e.key !== 'End') return;
       var arr = Array.from(btns);
       var idx = arr.indexOf(document.activeElement);
       if (idx < 0) return;
       e.preventDefault();
-      var next = e.key === 'ArrowLeft'
-        ? (idx - 1 + arr.length) % arr.length
-        : (idx + 1) % arr.length;
+      var next;
+      if (e.key === 'Home') { next = 0; }
+      else if (e.key === 'End') { next = arr.length - 1; }
+      else { next = e.key === 'ArrowLeft' ? (idx - 1 + arr.length) % arr.length : (idx + 1) % arr.length; }
       arr[idx].tabIndex = -1;
       arr[next].tabIndex = 0;
       arr[next].focus();

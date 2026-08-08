@@ -409,7 +409,7 @@ thead th { border-bottom-width: 2px; }
   font-variant-numeric: tabular-nums;
   line-height: 1.8;
 }
-.post-meta > * + *::before {
+.post-meta > *:not(:last-child)::after {
   content: " · " / "";
   color: var(--faint);
 }

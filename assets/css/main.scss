@@ -242,6 +242,8 @@ th, td {
   text-align: left;
   padding: 0.5em 0.8em;
   border-bottom: 1px solid var(--border);
+  /* body 继承了 oldstyle proportional；表格列数字需等宽对齐，用 tabular lining */
+  font-variant-numeric: tabular-nums lining-nums;
 }
 th {
   font-family: var(--font-sans);

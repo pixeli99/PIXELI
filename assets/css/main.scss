@@ -324,6 +324,7 @@ thead th { border-bottom-width: 2px; }
   padding: 0.65em 0;
   border-bottom: 1px dashed var(--border);
 }
+.entry-list li:last-child { border-bottom: none; }
 .entry-list a {
   border-bottom: none;
   flex: 1;

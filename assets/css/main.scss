@@ -437,6 +437,9 @@ a.entry-tag {
 /* .entry-list a 有 flex:1；标签链在 inline-flex 的 entry-tail 里不需要弹性增长 */
 a.entry-tag { border-bottom: none; flex: none; }
 a.entry-tag:hover { color: var(--accent); }
+/* .entry-list a:visited (0-2-1) 会把 entry-tag 访问后颜色提升为 --link；
+   此规则同优先级但在后面，覆盖回 --muted，与未访问状态保持一致。 */
+a.entry-tag:visited { color: var(--muted); }
 
 .tag-cloud {
   margin: 1.8em 0 2.4em;

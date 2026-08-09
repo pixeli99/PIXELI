@@ -208,7 +208,6 @@ pre {
 }
 pre:hover .copy-btn,
 .copy-btn:focus-visible { opacity: 1; }
-@media (pointer: coarse) { .copy-btn { opacity: 0.55; } }
 pre[data-lang] { padding-top: 2rem; }
 pre[data-lang]::before {
   content: attr(data-lang) / "";
@@ -843,7 +842,7 @@ mark {
 @media (pointer: coarse) {
   .heading-anchor { opacity: 0.4; }
   /* WCAG 2.5.8: raise touch target to ≥24 px */
-  .copy-btn { padding-top: 0.4em; padding-bottom: 0.4em; }
+  .copy-btn { opacity: 0.55; padding-top: 0.4em; padding-bottom: 0.4em; }
   .pf-btn   { padding-top: 0.35em; padding-bottom: 0.35em; }
 }
 

@@ -939,8 +939,10 @@ mark {
   details { display: block; }
   details > summary { display: none; }
   details > *:not(summary) { display: block !important; }
-  /* 打印时在原文外链后附完整 URL，方便离线查找来源 */
-  .post-meta a[href^="http"]::after,
+  /* 打印时在正文外链后附完整 URL，方便离线查找来源。
+     不含 .post-meta：post-meta 里的原文链接已由展开的 BibTeX 块记录 URL；
+     且 print 规则（特指度 0-2-2）会覆盖 post-meta > *:not(:last-child)::after
+     的 " · " 分隔符（特指度 0-2-1），导致标签前的点号消失。 */
   .post-body a[href^="http"]::after {
     content: " (" attr(href) ")";
     font-size: 0.75em;

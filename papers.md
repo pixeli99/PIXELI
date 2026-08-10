@@ -63,11 +63,14 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
     var total = 0;
     document.querySelectorAll('.entry-list').forEach(function (ul) {
       var visible = 0;
+      var lastVisible = null;
+      ul.querySelectorAll('li.pf-last').forEach(function (li) { li.classList.remove('pf-last'); });
       ul.querySelectorAll('li[data-tags]').forEach(function (li) {
         var match = !tag || li.getAttribute('data-tags').split(',').indexOf(tag) >= 0;
         li.hidden = !match;
-        if (match) { visible++; total++; }
+        if (match) { visible++; total++; lastVisible = li; }
       });
+      if (lastVisible) lastVisible.classList.add('pf-last');
       var h = ul.previousElementSibling;
       if (h && h.classList.contains('section-label')) {
         h.hidden = visible === 0;

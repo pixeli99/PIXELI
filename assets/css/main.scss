@@ -326,6 +326,8 @@ thead th { border-bottom-width: 2px; }
   border-bottom: 1px dashed var(--border);
 }
 .entry-list li:last-child { border-bottom: none; }
+/* 过滤后最末可见项：JS 加 pf-last 类，覆盖末前各项仍残留的底线 */
+.entry-list .pf-last { border-bottom: none; }
 .entry-list a {
   border-bottom: none;
   flex: 1;

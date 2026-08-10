@@ -611,11 +611,12 @@ sup.footnote, a.footnote {
    flash 动画从 22% 亮闪起，1.4s 褪回 10%；
    prefers-reduced-motion 已由全局规则将 animation-duration 压到 0.001ms，此处无需单独豁免。 */
 @keyframes target-flash {
-  from { background: color-mix(in srgb, var(--accent) 22%, transparent); }
-  to   { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  from { background: rgba(138, 51, 36, 0.22); background: color-mix(in srgb, var(--accent) 22%, transparent); }
+  to   { background: rgba(138, 51, 36, 0.10); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 }
 h2[id]:target,
 h3[id]:target {
+  background: rgba(138, 51, 36, 0.10);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   border-radius: 3px;
   margin-left: -0.4em;
@@ -717,7 +718,9 @@ h3[id]:target {
 mark {
   /* 搜索结果高亮：亮色模式下 accent #8a3324 混透明；
      14% 的非文字对比度仅约 1.1:1，升至 30% 后约 1.7:1，高亮可分辨。
-     WCAG 非文字阈值 3:1 在此颜色组合下需 ~70% 不透明，视觉偏重，不采用。 */
+     WCAG 非文字阈值 3:1 在此颜色组合下需 ~70% 不透明，视觉偏重，不采用。
+     rgba() 是旧浏览器（color-mix() 2023 年前不支持）的降级回退。 */
+  background: rgba(138, 51, 36, 0.30);
   background: color-mix(in srgb, var(--accent) 30%, transparent);
   color: inherit;
   border-radius: 2px;
@@ -877,7 +880,7 @@ main:focus { outline: none; }
   ::selection { color: #000; }
   /* 搜索高亮：暗色背景下 30%（亮色值）+ dark accent 颜色对比度仍低；
      覆盖为 40%，visual contrast 约 1.8:1，明显优于亮色同比。 */
-  mark { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+  mark { background: rgba(217, 119, 87, 0.40); background: color-mix(in srgb, var(--accent) 40%, transparent); }
   /* 论文截图 / 架构图通常白底，在深色背景下对比刺眼；轻微降低亮度缓解。 */
   .post-body img { opacity: 0.88; }
 }

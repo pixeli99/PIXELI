@@ -726,6 +726,8 @@ mark {
 }
 
 /* —— Accessibility utility —— */
+/* skip link 把焦点移到 <main tabindex="-1">，不应出现可见轮廓 */
+main:focus { outline: none; }
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;

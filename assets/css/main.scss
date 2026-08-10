@@ -818,6 +818,16 @@ mark {
     gap: 0.5rem;
   }
   .post-nav-next { text-align: left; }
+  /* 年份导航在 10 个年份时宽约 620px，375px 屏幕下会折行；
+     改为横向滚动，与过滤栏保持一致。白名单 nowrap 防止链接内文字断行。 */
+  .year-nav {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    white-space: nowrap;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+  }
+  .year-nav::-webkit-scrollbar { display: none; }
   /* 15 个过滤按钮在 375px 屏幕上会折行到 5 行，占据大量纵向空间；
      改为横向滚动条带，隐藏滚动条样式保持简洁。
      overscroll-behavior-x: contain 防止滚到条带末端时触发页面横向回弹。

@@ -107,7 +107,9 @@ a {
   border-bottom: 1px solid var(--faint);
   transition: border-color 0.15s, color 0.15s;
 }
-a:visited { color: var(--muted); }
+/* 暗色模式下 --faint (#848280) 比 --muted (#a8a6a0) 更暗，
+   不加此行则访问过的链接下划线比文字本身更显眼，视觉权重倒置。 */
+a:visited { color: var(--muted); border-bottom-color: var(--muted); }
 a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 /* Structural links must not change on visited — higher specificity overrides a:visited */
 .site-title:visited { color: var(--text); }

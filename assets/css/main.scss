@@ -210,6 +210,7 @@ pre {
 }
 pre:hover .copy-btn,
 .copy-btn:focus-visible { opacity: 1; }
+.copy-btn:active { border-color: var(--muted); }
 pre[data-lang] { padding-top: 2rem; }
 pre[data-lang]::before {
   content: attr(data-lang) / "";
@@ -309,6 +310,10 @@ thead th { border-bottom-width: 2px; }
   transition: color 0.15s, border-color 0.15s;
 }
 .pf-btn:hover { color: var(--accent); border-color: var(--accent); }
+.pf-btn:active {
+  background: rgba(138, 51, 36, 0.06);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
 .pf-btn.pf-active { color: var(--accent); border-color: var(--accent); font-weight: 500; }
 .pf-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
 .pf-btn sup { color: var(--muted); margin-left: 0.2em; font-size: 0.75em; font-variant-numeric: tabular-nums; }
@@ -511,9 +516,11 @@ summary::-webkit-details-marker { display: none; }
 summary::before { content: "▸ " / ""; color: var(--muted); font-size: 0.8em; }
 details[open] summary::before { content: "▾ " / ""; }
 summary:hover,
-summary:focus-visible { color: var(--accent); }
+summary:focus-visible,
+summary:active { color: var(--accent); }
 summary:hover::before,
-summary:focus-visible::before { color: var(--accent); }
+summary:focus-visible::before,
+summary:active::before { color: var(--accent); }
 details > :not(summary):first-of-type { margin-top: 0.75em; }
 /* BibTeX details wraps a code block directly — no left-border indent */
 details.bibtex-details { border-left: none; padding-left: 0; }

@@ -161,6 +161,7 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
   if (!pf) return;
   function checkEnd() {
     pf.classList.toggle('pf-scrolled-end', pf.scrollLeft + pf.clientWidth >= pf.scrollWidth - 2);
+    pf.classList.toggle('pf-scrolled-start', pf.scrollLeft > 2);
   }
   pf.addEventListener('scroll', checkEnd, { passive: true });
   window.addEventListener('resize', checkEnd, { passive: true });

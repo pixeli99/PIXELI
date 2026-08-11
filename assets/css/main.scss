@@ -852,6 +852,15 @@ main:focus { outline: none; }
     -webkit-mask-image: none;
     mask-image: none;
   }
+  /* 过滤栏已向右滑动时，左边也渐出，提示仍有内容在左侧 */
+  .papers-filter.pf-scrolled-start {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+    mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+  }
+  .papers-filter.pf-scrolled-start.pf-scrolled-end {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 2rem);
+    mask-image: linear-gradient(to right, transparent, black 2rem);
+  }
   .pf-btn { flex-shrink: 0; }
 }
 

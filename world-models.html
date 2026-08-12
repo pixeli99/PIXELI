@@ -542,7 +542,16 @@ description: World Models 领域论文全景：时间线、方法对比、技术
     .site-header, .site-content, .site-footer { max-width: 100%; padding-left: 1rem; padding-right: 1rem; }
     .wm-streams { grid-template-columns: 1fr; }
     .wm-detail { grid-template-columns: 1fr; }
-    .wm-filter-label { width: 100%; margin-bottom: -0.2rem; }
+    .wm-filter-row {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scrollbar-width: none;
+      padding-bottom: 0.3rem;
+    }
+    .wm-filter-row::-webkit-scrollbar { display: none; }
+    .wm-filter-label { flex-shrink: 0; }
+    .wm-chip { flex-shrink: 0; }
     table.wm-tab { font-size: 0.8rem; }
     table.wm-tab thead th { font-size: 0.62rem; padding: 0.45rem 0.5rem; }
     table.wm-tab tbody td { padding: 0.4rem 0.5rem; }

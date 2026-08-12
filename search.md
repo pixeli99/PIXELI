@@ -45,6 +45,13 @@ sitemap: false
     var authors = (doc.authors || '').toLowerCase();
     var venue   = (doc.venue   || '').toLowerCase();
     var link    = (doc.link    || '').toLowerCase();
+    if (terms.length > 1) {
+      var phrase = terms.join(' ');
+      if (title.indexOf(phrase)   >= 0) s += 12;
+      if (tags.indexOf(phrase)    >= 0) s += 5;
+      if (excerpt.indexOf(phrase) >= 0) s += 4;
+      if (text.indexOf(phrase)    >= 0) s += 2;
+    }
     terms.forEach(function (t) {
       if (title.indexOf(t)   >= 0) s += 10;
       if (authors.indexOf(t) >= 0) s += 4;

@@ -19,11 +19,13 @@ function addTableScrollHints() {
     } else if (!overflowing && hintEl) {
       hintEl.remove();
     }
-    // keyboard-accessible scroll: tabindex only when content actually overflows
+    // keyboard-accessible scroll: tabindex + accessible name only when content overflows
     if (overflowing) {
       wrap.setAttribute('tabindex', '0');
+      wrap.setAttribute('aria-label', '可横向滚动的表格');
     } else {
       wrap.removeAttribute('tabindex');
+      wrap.removeAttribute('aria-label');
     }
   });
 }

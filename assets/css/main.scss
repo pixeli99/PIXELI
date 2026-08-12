@@ -430,7 +430,15 @@ thead th { border-bottom-width: 2px; }
 }
 .post-meta a:hover { color: var(--accent); }
 .post-meta time { color: var(--muted); }
-.post-tags a { margin-right: 0.3rem; }
+/* post-meta 里的标签渲染成芯片，与列表页 entry-tag / 搜索结果保持外观一致 */
+.post-tags a {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--code-bg);
+  border-radius: 2px;
+  padding: 0.05em 0.4em;
+  margin-right: 0.2rem;
+}
 
 /* 搜索结果 / 笔记列表 entry-tail 内的小标签（span.sr-tag 和 a.entry-tag 共享外观） */
 .sr-tag,

@@ -45,6 +45,7 @@ sitemap: false
     var authors = (doc.authors || '').toLowerCase();
     var venue   = (doc.venue   || '').toLowerCase();
     var link    = (doc.link    || '').toLowerCase();
+    var date    = (doc.date    || '');
     if (terms.length > 1) {
       var phrase = terms.join(' ');
       if (title.indexOf(phrase)   >= 0) s += 12;
@@ -59,6 +60,7 @@ sitemap: false
       if (link.indexOf(t)    >= 0) s += 4;
       if (venue.indexOf(t)   >= 0) s += 3;
       if (excerpt.indexOf(t) >= 0) s += 3;
+      if (date.indexOf(t)    >= 0) s += 2;
       if (text.indexOf(t)    >= 0) s += 1;
     });
     return s;

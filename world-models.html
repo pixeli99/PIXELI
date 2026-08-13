@@ -548,8 +548,19 @@ description: World Models 领域论文全景：时间线、方法对比、技术
       overscroll-behavior-x: contain;
       scrollbar-width: none;
       padding-bottom: 0.3rem;
+      -webkit-mask-image: linear-gradient(to right, black calc(100% - 2rem), transparent);
+      mask-image: linear-gradient(to right, black calc(100% - 2rem), transparent);
     }
     .wm-filter-row::-webkit-scrollbar { display: none; }
+    .wm-filter-row.wm-scroll-end { -webkit-mask-image: none; mask-image: none; }
+    .wm-filter-row.wm-scroll-start {
+      -webkit-mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+      mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+    }
+    .wm-filter-row.wm-scroll-start.wm-scroll-end {
+      -webkit-mask-image: linear-gradient(to right, transparent, black 2rem);
+      mask-image: linear-gradient(to right, transparent, black 2rem);
+    }
     .wm-filter-label { flex-shrink: 0; }
     .wm-chip { flex-shrink: 0; }
     table.wm-tab { font-size: 0.8rem; }
@@ -1671,6 +1682,14 @@ document.querySelectorAll('.wm-filter-row').forEach(row => {
     chips[next].tabIndex = 0;
     chips[next].focus();
   });
+  // 移动端渐出指示，镜像 papers-filter 的行为
+  function checkRowScroll() {
+    row.classList.toggle('wm-scroll-end', row.scrollLeft + row.clientWidth >= row.scrollWidth - 2);
+    row.classList.toggle('wm-scroll-start', row.scrollLeft > 2);
+  }
+  row.addEventListener('scroll', checkRowScroll, { passive: true });
+  window.addEventListener('resize', checkRowScroll, { passive: true });
+  checkRowScroll();
 });
 
 document.querySelectorAll('.wm-chip').forEach(btn => {

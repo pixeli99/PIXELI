@@ -167,4 +167,15 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
   window.addEventListener('resize', checkEnd, { passive: true });
   checkEnd();
 })();
+
+(function () {
+  var yn = document.querySelector('.year-nav');
+  if (!yn) return;
+  function checkEnd() {
+    yn.classList.toggle('yn-scrolled-end', yn.scrollLeft + yn.clientWidth >= yn.scrollWidth - 2);
+  }
+  yn.addEventListener('scroll', checkEnd, { passive: true });
+  window.addEventListener('resize', checkEnd, { passive: true });
+  checkEnd();
+})();
 </script>

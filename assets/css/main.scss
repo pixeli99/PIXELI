@@ -859,6 +859,14 @@ main:focus { outline: none; }
     -webkit-mask-image: none;
     mask-image: none;
   }
+  .year-nav.yn-scrolled-start {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+    mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+  }
+  .year-nav.yn-scrolled-start.yn-scrolled-end {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 2rem);
+    mask-image: linear-gradient(to right, transparent, black 2rem);
+  }
   /* 15 个过滤按钮在 375px 屏幕上会折行到 5 行，占据大量纵向空间；
      改为横向滚动条带，隐藏滚动条样式保持简洁。
      overscroll-behavior-x: contain 防止滚到条带末端时触发页面横向回弹。

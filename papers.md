@@ -173,6 +173,7 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
   if (!yn) return;
   function checkEnd() {
     yn.classList.toggle('yn-scrolled-end', yn.scrollLeft + yn.clientWidth >= yn.scrollWidth - 2);
+    yn.classList.toggle('yn-scrolled-start', yn.scrollLeft > 2);
   }
   yn.addEventListener('scroll', checkEnd, { passive: true });
   window.addEventListener('resize', checkEnd, { passive: true });

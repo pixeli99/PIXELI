@@ -519,16 +519,15 @@ summary {
   cursor: pointer;
   user-select: none;
   list-style: none;
+  transition: color 0.15s;
 }
 summary::-webkit-details-marker { display: none; }
-summary::before { content: "▸ " / ""; color: var(--muted); font-size: 0.8em; }
+/* inherit parent color so the arrow transitions in sync with the label */
+summary::before { content: "▸ " / ""; color: inherit; font-size: 0.8em; }
 details[open] summary::before { content: "▾ " / ""; }
 summary:hover,
 summary:focus-visible,
 summary:active { color: var(--accent); }
-summary:hover::before,
-summary:focus-visible::before,
-summary:active::before { color: var(--accent); }
 details > :not(summary):first-of-type { margin-top: 0.75em; }
 /* BibTeX details wraps a code block directly — no left-border indent */
 details.bibtex-details { border-left: none; padding-left: 0; }

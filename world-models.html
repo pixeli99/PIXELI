@@ -1586,6 +1586,11 @@ const MODELS = [
 ];
 
 const STATE = { repr:"all", purpose:"all", era:"all", open:"all" };
+// 从 URL 参数恢复过滤状态，支持书签和分享链接
+(function() {
+  const p = new URLSearchParams(location.search);
+  ['repr','purpose','era','open'].forEach(k => { const v = p.get(k); if (v) STATE[k] = v; });
+})();
 const tbody = document.getElementById('wm-master-tbody');
 const summaryEl = document.getElementById('wm-summary');
 
@@ -1692,21 +1697,34 @@ document.querySelectorAll('.wm-filter-row').forEach(row => {
   checkRowScroll();
 });
 
+function syncStateToURL() {
+  const p = new URLSearchParams();
+  ['repr','purpose','era','open'].forEach(k => { if (STATE[k] !== 'all') p.set(k, STATE[k]); });
+  const q = p.toString();
+  history.replaceState(null, '', location.pathname + (q ? '?' + q : ''));
+}
+
+// 把每个 chip 的激活状态与 STATE 对齐（含 URL 加载的初始状态）
+function applyStateToChips() {
+  document.querySelectorAll('.wm-chip').forEach(b => {
+    const active = b.dataset.value === STATE[b.dataset.filter];
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    b.tabIndex = active ? 0 : -1;
+  });
+}
+
 document.querySelectorAll('.wm-chip').forEach(btn => {
-  btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
   btn.addEventListener('click', () => {
     const f = btn.dataset.filter, v = btn.dataset.value;
     STATE[f] = v;
-    document.querySelectorAll(`.wm-chip[data-filter="${f}"]`).forEach(b => {
-      const active = b.dataset.value === v;
-      b.classList.toggle('active', active);
-      b.setAttribute('aria-pressed', active ? 'true' : 'false');
-      b.tabIndex = active ? 0 : -1;
-    });
+    applyStateToChips();
     renderMaster();
+    syncStateToURL();
   });
 });
 
+applyStateToChips();
 renderMaster();
 
 

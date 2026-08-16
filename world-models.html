@@ -1587,10 +1587,22 @@ const MODELS = [
 ];
 
 const STATE = { repr:"all", purpose:"all", era:"all", open:"all" };
-// 从 URL 参数恢复过滤状态，支持书签和分享链接
+// 从 URL 参数恢复过滤状态，支持书签和分享链接；未知值忽略（回退 all），并清理 URL
 (function() {
   const p = new URLSearchParams(location.search);
-  ['repr','purpose','era','open'].forEach(k => { const v = p.get(k); if (v) STATE[k] = v; });
+  let dirty = false;
+  ['repr','purpose','era','open'].forEach(k => {
+    const v = p.get(k);
+    if (!v) return;
+    const valid = new Set(Array.from(document.querySelectorAll(`.wm-chip[data-filter="${k}"]`), b => b.dataset.value));
+    if (valid.has(v)) { STATE[k] = v; } else { dirty = true; }
+  });
+  if (dirty) {
+    const q = new URLSearchParams();
+    ['repr','purpose','era','open'].forEach(k => { if (STATE[k] !== 'all') q.set(k, STATE[k]); });
+    const qs = q.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
+  }
 })();
 const tbody = document.getElementById('wm-master-tbody');
 const summaryEl = document.getElementById('wm-summary');

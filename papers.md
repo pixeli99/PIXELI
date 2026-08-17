@@ -149,6 +149,13 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
     });
   });
   var initialTag = new URLSearchParams(location.search).get('tag') || '';
+  // 校验 tag 参数：若不存在于任何论文的 data-tags，回退到"全部"并清理 URL
+  if (initialTag) {
+    var tagKnown = Array.from(document.querySelectorAll('li[data-tags]')).some(function (li) {
+      return li.getAttribute('data-tags').split(',').indexOf(initialTag) >= 0;
+    });
+    if (!tagKnown) { initialTag = ''; history.replaceState(null, '', location.pathname); }
+  }
   if (initialTag) {
     setActive(initialTag);
     var activeBtn = document.querySelector('.pf-btn.pf-active');

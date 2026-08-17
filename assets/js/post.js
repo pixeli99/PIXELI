@@ -43,7 +43,7 @@ window.addEventListener('resize', function() {
   _rstTimer = setTimeout(addTableScrollHints, 200);
 }, { passive: true });
 
-document.querySelectorAll('.post-body h2[id], .post-body h3[id]').forEach(function(h) {
+document.querySelectorAll('.post-body h2[id], .post-body h3[id], .post-body h4[id]').forEach(function(h) {
   var heading = h.textContent.trim();
   var a = document.createElement('a');
   a.href = '#' + h.id;

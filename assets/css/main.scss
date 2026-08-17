@@ -134,7 +134,7 @@ h3 { font-size: 1.08rem; }
 h4 { font-size: 0.98rem; color: var(--muted); }
 
 /* Hash 跳转时 margin-top 在视口外，标题会贴顶；scroll-margin-top 留出呼吸空间 */
-h2[id], h3[id] { scroll-margin-top: 1.5rem; }
+h2[id], h3[id], h4[id] { scroll-margin-top: 1.5rem; }
 
 p { margin: 1em 0; text-wrap: pretty; }
 
@@ -620,7 +620,8 @@ sup.footnote, a.footnote {
   user-select: none;
 }
 .post-body h2:hover .heading-anchor,
-.post-body h3:hover .heading-anchor { opacity: 1; }
+.post-body h3:hover .heading-anchor,
+.post-body h4:hover .heading-anchor { opacity: 1; }
 .heading-anchor:focus-visible { opacity: 1; }
 /* 直链定位到某节时，给目标标题加淡彩背景——让读者确认落点。
    不限于 post-body：标签页分类标题、论文列表年份标题跳转同样受益。
@@ -631,7 +632,8 @@ sup.footnote, a.footnote {
   to   { background: rgba(138, 51, 36, 0.10); background: color-mix(in srgb, var(--accent) 10%, transparent); }
 }
 h2[id]:target,
-h3[id]:target {
+h3[id]:target,
+h4[id]:target {
   background: rgba(138, 51, 36, 0.10);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   border-radius: 3px;

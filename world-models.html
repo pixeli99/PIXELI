@@ -208,6 +208,16 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   @media (pointer: coarse) {
     .wm-chip { padding-top: 0.4em; padding-bottom: 0.4em; }
   }
+  @media (forced-colors: active) {
+    /* 强制配色下 .active 背景被映射为 ButtonFace，激活态与非激活态无法区分；
+       Highlight / HighlightText 是系统"已选中"语义色，与其他控件行为一致。 */
+    .wm-chip.active,
+    .wm-chip:hover {
+      background: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
+    }
+  }
   .wm-summary {
     font-family: var(--font-sans);
     font-size: 0.78rem;

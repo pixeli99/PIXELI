@@ -7,6 +7,7 @@ sitemap: false
   <ShortName>{{ site.title }}</ShortName>
   <Description>搜索 {{ site.title }} 论文笔记与随笔</Description>
   <Url type="text/html" template="{{ site.url }}{{ site.baseurl }}/search/?q={searchTerms}"/>
+  <Image height="16" width="16" type="image/svg+xml">{{ site.url }}{{ site.baseurl }}/assets/favicon.svg</Image>
   <InputEncoding>UTF-8</InputEncoding>
   <Language>zh-CN</Language>
 </OpenSearchDescription>

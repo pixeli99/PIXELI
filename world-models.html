@@ -1849,27 +1849,37 @@ renderHeatmapTableRowWise('wm-bench-vbench', VB_DATA);
   cells.forEach((c, i) => c.classList.add(cls[i]));
 })();
 
-// 窄屏下表格列被裁掉时补一行滑动提示
-document.querySelectorAll('.wm-tab-wrap').forEach(function(wrap) {
-  if (wrap.scrollWidth > wrap.clientWidth + 1) {
-    var hint = document.createElement('p');
-    hint.className = 'scroll-hint';
-    hint.setAttribute('aria-hidden', 'true');
-    hint.textContent = '← 可左右滑动查看更多列 →';
-    wrap.insertAdjacentElement('afterend', hint);
-  }
-});
-
-// 窄屏下架构图被裁掉时补一行滑动提示
-document.querySelectorAll('.wm-arch-diagram').forEach(function(pre) {
-  if (pre.scrollWidth > pre.clientWidth + 1) {
-    var hint = document.createElement('p');
-    hint.className = 'scroll-hint';
-    hint.setAttribute('aria-hidden', 'true');
-    hint.textContent = '← 可左右滑动查看完整架构图 →';
-    pre.insertAdjacentElement('afterend', hint);
-  }
-});
+// 窄屏下溢出时补滑动提示并加键盘可访问性；窗口 resize 后重算
+function updateWmScrollHints() {
+  var groups = [
+    ['.wm-tab-wrap',     '可横向滚动的对比表', '← 可左右滑动查看更多列 →'],
+    ['.wm-arch-diagram', '可横向滚动的架构图',  '← 可左右滑动查看完整架构图 →']
+  ];
+  groups.forEach(function(g) {
+    document.querySelectorAll(g[0]).forEach(function(el) {
+      var over = el.scrollWidth > el.clientWidth + 1;
+      var next = el.nextElementSibling;
+      var hintEl = (next && next.classList.contains('scroll-hint')) ? next : null;
+      if (over && !hintEl) {
+        var hint = document.createElement('p');
+        hint.className = 'scroll-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.textContent = g[2];
+        el.insertAdjacentElement('afterend', hint);
+      } else if (!over && hintEl) {
+        hintEl.remove();
+      }
+      if (over) { el.setAttribute('tabindex', '0'); el.setAttribute('aria-label', g[1]); }
+      else { el.removeAttribute('tabindex'); el.removeAttribute('aria-label'); }
+    });
+  });
+}
+var _wmRszTimer;
+window.addEventListener('resize', function() {
+  clearTimeout(_wmRszTimer);
+  _wmRszTimer = setTimeout(updateWmScrollHints, 200);
+}, { passive: true });
+updateWmScrollHints();
 
 // TOC scrollspy：随滚动高亮当前章节
 (function () {

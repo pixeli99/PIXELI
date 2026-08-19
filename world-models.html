@@ -1710,6 +1710,13 @@ document.querySelectorAll('.wm-filter-row').forEach(row => {
     chips[next].tabIndex = 0;
     chips[next].focus();
   });
+  // 焦点离开过滤行时，将 tabIndex 重置到激活芯片，与 papers-filter 的行为一致
+  row.addEventListener('focusout', e => {
+    if (row.contains(e.relatedTarget)) return;
+    chips.forEach(b => { b.tabIndex = -1; });
+    var ab = row.querySelector('.wm-chip.active');
+    (ab || chips[0]).tabIndex = 0;
+  });
   // 移动端渐出指示，镜像 papers-filter 的行为
   function checkRowScroll() {
     row.classList.toggle('wm-scroll-end', row.scrollLeft + row.clientWidth >= row.scrollWidth - 2);

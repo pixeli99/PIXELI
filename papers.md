@@ -142,6 +142,16 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
       arr[next].tabIndex = 0;
       arr[next].focus();
     });
+    // 焦点离开过滤栏时，将 tabIndex 重置到当前激活按钮：
+    // 下次 Tab 回到过滤栏时焦点落在已激活项，符合 ARIA radio group 模式。
+    // relatedTarget 为 null（焦点移向不可聚焦元素）时同样视为"已离开"并重置。
+    pfEl.addEventListener('focusout', function (e) {
+      if (pfEl.contains(e.relatedTarget)) return;
+      var arr = Array.from(btns);
+      arr.forEach(function (b) { b.tabIndex = -1; });
+      var ab = pfEl.querySelector('.pf-btn.pf-active');
+      (ab || arr[0]).tabIndex = 0;
+    });
   }
   btns.forEach(function (btn) {
     btn.addEventListener('click', function () {

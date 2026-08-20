@@ -209,6 +209,9 @@ description: World Models 领域论文全景：时间线、方法对比、技术
     .wm-chip { padding-top: 0.4em; padding-bottom: 0.4em; }
   }
   @media (forced-colors: active) {
+    /* color-mix + transparent 在强制色彩下不参与颜色映射，会渲染成透明；
+       按下未激活芯片时改用不透明系统色，与 main.scss 中 pf-btn:active 的处理一致。 */
+    .wm-chip:active { background: ButtonFace; }
     /* 强制配色下 .active 背景被映射为 ButtonFace，激活态与非激活态无法区分；
        Highlight / HighlightText 是系统"已选中"语义色，与其他控件行为一致。 */
     .wm-chip.active,

@@ -106,8 +106,9 @@ document.querySelectorAll('.post-body pre').forEach(function(pre) {
   if (!prevA && !nextA) return;
   document.addEventListener('keydown', function(e) {
     if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
-    var t = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-    if (t === 'input' || t === 'textarea' || document.activeElement.isContentEditable) return;
+    var ae = document.activeElement;
+    var t = ae ? ae.tagName.toLowerCase() : '';
+    if (t === 'input' || t === 'textarea' || (ae && ae.isContentEditable)) return;
     if (e.key === '[' && prevA) { e.preventDefault(); location.href = prevA.href; }
     if (e.key === ']' && nextA) { e.preventDefault(); location.href = nextA.href; }
   });

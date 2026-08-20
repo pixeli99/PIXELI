@@ -975,6 +975,9 @@ main:focus { outline: none; }
     color: HighlightText;
     border-color: Highlight;
   }
+  /* mark（搜索结果高亮）同样使用 color-mix + transparent；
+     强制色彩下透明背景让高亮完全不可见，改用系统 Mark / MarkText 语义色 */
+  mark { background: Mark; color: MarkText; }
 }
 
 /* —— Print —— */

@@ -433,12 +433,17 @@ thead th { border-bottom-width: 2px; }
 /* post-meta 里的标签渲染成芯片，与列表页 entry-tag / 搜索结果保持外观一致 */
 .post-tags a {
   display: inline-block;
+  font-family: var(--font-sans);
   font-size: 0.72rem;
+  color: var(--muted);
   background: var(--code-bg);
+  border-bottom: none;
   border-radius: 2px;
   padding: 0.05em 0.4em;
   margin-right: 0.2rem;
 }
+.post-tags a:hover { color: var(--accent); }
+.post-tags a:visited { color: var(--muted); }
 
 /* 搜索结果 / 笔记列表 entry-tail 内的小标签（span.sr-tag 和 a.entry-tag 共享外观） */
 .sr-tag,

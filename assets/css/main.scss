@@ -958,7 +958,12 @@ main:focus { outline: none; }
 }
 @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {
-    --border: #666660;  /* 3.1:1 on dark --bg; --muted/--faint already pass AA */
+    --border: #666660;  /* 3.1:1 on dark --bg */
+    /* prefers-contrast:more 的浅色值（--muted:#4a4a47 / --faint:#6b6b66）因层叠顺序
+       覆盖了深色模式值，在深色背景 #18181a 上对比度仅 2:1 / 3.4:1，不达标；
+       此处显式恢复为深色背景适用的高对比度值 */
+    --muted:  #c2c0b8;  /* ~10:1 on dark --bg */
+    --faint:  #aaa8a0;  /* ~7.7:1 on dark --bg, passes AA */
   }
 }
 

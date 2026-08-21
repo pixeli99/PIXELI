@@ -978,6 +978,14 @@ main:focus { outline: none; }
   /* mark（搜索结果高亮）同样使用 color-mix + transparent；
      强制色彩下透明背景让高亮完全不可见，改用系统 Mark / MarkText 语义色 */
   mark { background: Mark; color: MarkText; }
+  /* `:target` 落点闪（target-flash）使用 color-mix + transparent，
+     强制色彩下不可见；改用系统 Highlight 描边标记当前锚点，
+     并禁止无效的 animation（动画体同样不可见，运行无意义）。 */
+  h2[id]:target, h3[id]:target, h4[id]:target {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+    animation: none;
+  }
 }
 
 /* —— Print —— */

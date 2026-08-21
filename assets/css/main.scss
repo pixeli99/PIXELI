@@ -991,6 +991,9 @@ main:focus { outline: none; }
     outline-offset: 2px;
     animation: none;
   }
+  /* year-nav 禁用链接（无匹配论文的年份）用 opacity:0.35 标记禁用态；
+     强制色彩下系统接管链接色，opacity 导致颜色语义不清，改用 GrayText。 */
+  .year-nav a[aria-disabled="true"] { color: GrayText; opacity: 1; }
 }
 
 /* —— Print —— */

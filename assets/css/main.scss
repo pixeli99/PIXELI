@@ -1059,6 +1059,37 @@ main:focus { outline: none; }
     color: #555;
     word-break: break-all;
   }
+  /* 暗色模式的语法高亮 token 颜色（如关键字 #e8e6e0、字符串 #addb67）
+     是为深色背景设计的浅色调，打印到白纸上几乎不可见。
+     打印时显式还原到亮色模式值，确保代码可读。 */
+  .highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
+  .highlight .kp, .highlight .kr { color: #1c1c1b; font-weight: 600; }
+  .highlight .o, .highlight .ow { color: #1c1c1b; font-weight: 600; }
+  .highlight .n, .highlight .py, .highlight .l, .highlight .ld,
+  .highlight .g { color: #1c1c1b; }
+  .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh,
+  .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx { color: #099; }
+  .highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl,
+  .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si,
+  .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss { color: #b8460a; }
+  .highlight .na { color: #008080; }
+  .highlight .nb { color: #0086B3; }
+  .highlight .nc { color: #458; font-weight: 600; }
+  .highlight .nd { color: #3c5d99; font-weight: 600; }
+  .highlight .ni { color: #800080; }
+  .highlight .ne { color: #900; font-weight: 600; }
+  .highlight .nf, .highlight .fm, .highlight .nl { color: #900; font-weight: 600; }
+  .highlight .nn { color: #555; }
+  .highlight .nt { color: #000080; }
+  .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi,
+  .highlight .vm { color: #008080; }
+  .highlight .c, .highlight .ch, .highlight .cm, .highlight .c1,
+  .highlight .cs { color: #998; font-style: italic; }
+  .highlight .gp { color: #555; }
+  .highlight .gr, .highlight .gt { color: #a00; }
+  .highlight .gd { color: #000; background-color: #fdd; }
+  .highlight .gi { color: #000; background-color: #dfd; }
+  .highlight .err { color: #a61717; background-color: #e3d2d2; }
 }
 
 /* —— Syntax highlighting (Rouge) — merged from syntax.css —— */

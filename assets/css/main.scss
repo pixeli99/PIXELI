@@ -146,9 +146,7 @@ blockquote {
   padding-left: 1.2em;
   color: var(--muted);
   margin: 1.8em 0;
-  font-style: italic;
 }
-blockquote :is(code, pre, kbd) { font-style: normal; }
 
 ul, ol { padding-left: 1.4em; }
 li { margin: 0.25em 0; text-wrap: pretty; }

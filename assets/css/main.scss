@@ -841,8 +841,8 @@ main:focus { outline: none; }
   }
   .entry-tail { flex-wrap: wrap; }
   /* entry-tail 移到独立行后有整行宽度可用；桌面为紧凑 tail 而设的
-     max-width 截断会让 authors / venue 显示成省略号，而 title 提示
-     tooltip 在触屏上不可见，用户无从看到完整内容。移动端撤销截断。 */
+     max-width 截断与"有 venue 时隐藏 authors"在触屏上都不合适（tooltip
+     不可见、换行后纵向空间充裕），移动端一并撤销。 */
   .entry-authors,
   .entry-venue {
     max-width: none;
@@ -850,6 +850,7 @@ main:focus { outline: none; }
     text-overflow: clip;
     white-space: normal;
   }
+  .entry-tail:has(.entry-venue) .entry-authors { display: revert; }
   .post-title { font-size: 1.5rem; }
   .post-nav {
     flex-direction: column;

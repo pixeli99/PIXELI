@@ -727,17 +727,17 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   <div class="wm-tl-track">
     <div class="wm-era">
       <div class="wm-era-year">2018 — 2020</div>
-      <div class="wm-era-title">latent dreaming</div>
+      <div class="wm-era-title" lang="en">latent dreaming</div>
       <div class="wm-era-models">Ha &amp; Schmidhuber<br>PlaNet · DreamerV1/V2</div>
     </div>
     <div class="wm-era">
       <div class="wm-era-year">2022 — 2023</div>
-      <div class="wm-era-title">tokenized &amp; scaled</div>
+      <div class="wm-era-title" lang="en">tokenized &amp; scaled</div>
       <div class="wm-era-models">IRIS · TWM · DreamerV3<br>I-JEPA · GAIA-1</div>
     </div>
     <div class="wm-era">
       <div class="wm-era-year">2024</div>
-      <div class="wm-era-title">video as world simulator</div>
+      <div class="wm-era-title" lang="en">video as world simulator</div>
       <div class="wm-era-models">Sora · Lumiere · VideoPoet<br>Genie · V-JEPA · Oasis · Genie 2</div>
     </div>
     <div class="wm-era">
@@ -756,23 +756,23 @@ description: World Models 领域论文全景：时间线、方法对比、技术
 <h3 id="sec-2-factions" class="wm-h3">四派一目了然</h3>
 <div class="wm-streams">
   <div class="wm-stream s-latent">
-    <div class="wm-stream-name">Latent</div>
-    <div class="wm-stream-tagline">predict embedding</div>
+    <div class="wm-stream-name" lang="en">Latent</div>
+    <div class="wm-stream-tagline" lang="en">predict embedding</div>
     <div class="wm-stream-desc">RSSM / JEPA 路线，压缩态里预测。省算力、给 controller 直接用，但渲染不回像素。代表 DreamerV3、V-JEPA 2。</div>
   </div>
   <div class="wm-stream s-token">
-    <div class="wm-stream-name">Token</div>
-    <div class="wm-stream-tagline">predict next token</div>
+    <div class="wm-stream-name" lang="en">Token</div>
+    <div class="wm-stream-tagline" lang="en">predict next token</div>
     <div class="wm-stream-desc">VQ + AR transformer。栈与 LLM 同构，天然支持 action token，但 codebook 决定细节上限。代表 IRIS、Genie、GAIA-1。</div>
   </div>
   <div class="wm-stream s-pixel">
-    <div class="wm-stream-name">Pixel</div>
-    <div class="wm-stream-tagline">predict frame</div>
+    <div class="wm-stream-name" lang="en">Pixel</div>
+    <div class="wm-stream-tagline" lang="en">predict frame</div>
     <div class="wm-stream-desc">DiT / latent diffusion 出 RGB 帧。视觉天花板最高，但推理慢、长 horizon 漂移、闭源旗舰为主。代表 Sora、Veo、Wan、Cosmos。</div>
   </div>
   <div class="wm-stream s-3d">
-    <div class="wm-stream-name">Spatial</div>
-    <div class="wm-stream-tagline">predict 3D scene</div>
+    <div class="wm-stream-name" lang="en">Spatial</div>
+    <div class="wm-stream-tagline" lang="en">predict 3D scene</div>
     <div class="wm-stream-desc">直出可导出 3D 资产（gaussian splat / mesh）。空间一致性强，但动态支持弱。代表 Marble、HY-World 2、VGGT-Ω。</div>
   </div>
 </div>

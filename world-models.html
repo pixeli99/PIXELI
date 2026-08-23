@@ -812,7 +812,7 @@ C: linear([z_t; h_t]) ──►  a_t            ←  CMA-ES 演化</pre>
 <div class="wm-arch">
   <div class="wm-arch-head">
     <span class="wm-arch-name">② RSSM / DreamerV3</span>
-    <span class="wm-arch-flow">Recurrent State-Space Model + imagination training</span>
+    <span class="wm-arch-flow" lang="en">Recurrent State-Space Model + imagination training</span>
   </div>
   <div class="wm-arch-body">
 <pre class="wm-arch-diagram">obs_t ──► encoder ──► x_t
@@ -901,7 +901,7 @@ V-JEPA 2-AC 加一个 action-conditioned head：
 <div class="wm-arch">
   <div class="wm-arch-head">
     <span class="wm-arch-name">⑤ Sora / DiT</span>
-    <span class="wm-arch-flow">spacetime patches + Diffusion Transformer</span>
+    <span class="wm-arch-flow" lang="en">spacetime patches + Diffusion Transformer</span>
   </div>
   <div class="wm-arch-body">
 <pre class="wm-arch-diagram">raw video  ──► 3D VAE encoder ──► spacetime latent patches
@@ -1135,11 +1135,11 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
       </tr>
     </thead>
     <tbody>
-      <tr><td rowspan="4"><strong>V-JEPA 2-AC</strong></td><td rowspan="4"><span class="wm-rb wm-rb-latent">Latent</span></td><td>reach</td><td class="hm" data-col="rob" data-val="100">100</td><td rowspan="4" class="num dim">16 s</td></tr>
+      <tr><td rowspan="4"><strong>V-JEPA 2-AC</strong></td><td rowspan="4"><span class="wm-rb wm-rb-latent" lang="en">Latent</span></td><td>reach</td><td class="hm" data-col="rob" data-val="100">100</td><td rowspan="4" class="num dim">16 s</td></tr>
       <tr><td>grasp</td><td class="hm" data-col="rob" data-val="65">65</td></tr>
       <tr><td>reach-with-object</td><td class="hm" data-col="rob" data-val="75">75</td></tr>
       <tr><td>pick-and-place</td><td class="hm" data-col="rob" data-val="65">65</td></tr>
-      <tr><td rowspan="3"><strong>Cosmos Policy</strong></td><td rowspan="3"><span class="wm-rb wm-rb-pixel">Pixel</span></td><td>LIBERO avg</td><td class="hm" data-col="rob" data-val="98.5">98.5</td><td rowspan="3" class="num dim">240 s</td></tr>
+      <tr><td rowspan="3"><strong>Cosmos Policy</strong></td><td rowspan="3"><span class="wm-rb wm-rb-pixel" lang="en">Pixel</span></td><td>LIBERO avg</td><td class="hm" data-col="rob" data-val="98.5">98.5</td><td rowspan="3" class="num dim">240 s</td></tr>
       <tr><td>RoboCasa avg</td><td class="hm" data-col="rob" data-val="67.1">67.1</td></tr>
       <tr><td>ALOHA-2 双臂</td><td class="hm" data-col="rob" data-val="93.6">93.6</td></tr>
     </tbody>
@@ -1176,25 +1176,25 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
     <thead><tr><th scope="col" class="col-stream">流派</th><th scope="col">优势</th><th scope="col">劣势</th><th scope="col">典型用例</th></tr></thead>
     <tbody>
       <tr>
-        <td><span class="stream-name">Latent</span><span class="stream-tag">JEPA / RSSM</span></td>
+        <td><span class="stream-name" lang="en">Latent</span><span class="stream-tag" lang="en">JEPA / RSSM</span></td>
         <td><ul><li>样本效率高（DreamerV3 Atari 100k 击败 model-free）</li><li>直接给 controller / policy 用</li><li>不浪费算力在不可预测内容上（LeCun 论点）</li></ul></td>
         <td><ul><li>无法直接给人看</li><li>表达力受 latent dim 上限</li><li>评测困难（无视觉 ground truth）</li></ul></td>
         <td>RL planning · embodied reasoning</td>
       </tr>
       <tr>
-        <td><span class="stream-name">Token</span><span class="stream-tag">VQ + AR</span></td>
+        <td><span class="stream-name" lang="en">Token</span><span class="stream-tag" lang="en">VQ + AR</span></td>
         <td><ul><li>训练栈与 LLM 完全同构</li><li>天然支持 action token</li><li>推理可接 KV cache</li></ul></td>
         <td><ul><li>codebook 上限决定细节</li><li>离散量化丢高频</li><li>推理仍 sequential</li></ul></td>
         <td>可交互世界（Genie）· 驾驶（GAIA-1）</td>
       </tr>
       <tr>
-        <td><span class="stream-name">Pixel</span><span class="stream-tag">DiT / latent diffusion</span></td>
+        <td><span class="stream-name" lang="en">Pixel</span><span class="stream-tag" lang="en">DiT / latent diffusion</span></td>
         <td><ul><li>视觉天花板最高</li><li>prompt-conditioned 灵活</li><li>2024 后 hype 全在此</li></ul></td>
         <td><ul><li>推理慢（生成 5s 需若干秒到几十秒）</li><li>长 horizon 漂移严重</li><li>物理违反频发</li></ul></td>
         <td>视频生成 · physical AI synthetic data</td>
       </tr>
       <tr>
-        <td><span class="stream-name">Spatial</span><span class="stream-tag">scene-level 3D</span></td>
+        <td><span class="stream-name" lang="en">Spatial</span><span class="stream-tag" lang="en">scene-level 3D</span></td>
         <td><ul><li>输出可导出（Gaussian splat / mesh）</li><li>持久化空间一致性</li><li>下游 3D engine 可用</li></ul></td>
         <td><ul><li>新流派工作少</li><li>评测体系不成熟</li><li>动态物体支持有限</li></ul></td>
         <td>VR / AR · game asset · 3D reconstruction</td>
@@ -1259,15 +1259,15 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
   <div class="wm-filter-row" role="group" aria-labelledby="fl-repr">
     <span class="wm-filter-label" id="fl-repr">表示</span>
     <button class="wm-chip active" data-filter="repr" data-value="all" aria-pressed="true">全部</button>
-    <button class="wm-chip" data-filter="repr" data-value="latent" aria-pressed="false">Latent</button>
-    <button class="wm-chip" data-filter="repr" data-value="token" aria-pressed="false">Token</button>
-    <button class="wm-chip" data-filter="repr" data-value="pixel" aria-pressed="false">Pixel</button>
-    <button class="wm-chip" data-filter="repr" data-value="3d" aria-pressed="false">Spatial</button>
+    <button class="wm-chip" data-filter="repr" data-value="latent" aria-pressed="false" lang="en">Latent</button>
+    <button class="wm-chip" data-filter="repr" data-value="token" aria-pressed="false" lang="en">Token</button>
+    <button class="wm-chip" data-filter="repr" data-value="pixel" aria-pressed="false" lang="en">Pixel</button>
+    <button class="wm-chip" data-filter="repr" data-value="3d" aria-pressed="false" lang="en">Spatial</button>
   </div>
   <div class="wm-filter-row" role="group" aria-labelledby="fl-purpose">
     <span class="wm-filter-label" id="fl-purpose">用途</span>
     <button class="wm-chip active" data-filter="purpose" data-value="all" aria-pressed="true">全部</button>
-    <button class="wm-chip" data-filter="purpose" data-value="rl" aria-pressed="false">RL / Planning</button>
+    <button class="wm-chip" data-filter="purpose" data-value="rl" aria-pressed="false" lang="en">RL / Planning</button>
     <button class="wm-chip" data-filter="purpose" data-value="video" aria-pressed="false">视频生成</button>
     <button class="wm-chip" data-filter="purpose" data-value="game" aria-pressed="false">游戏 / 交互</button>
     <button class="wm-chip" data-filter="purpose" data-value="driving" aria-pressed="false">驾驶</button>
@@ -1288,8 +1288,8 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
   <div class="wm-filter-row" role="group" aria-labelledby="fl-open">
     <span class="wm-filter-label" id="fl-open">开源</span>
     <button class="wm-chip active" data-filter="open" data-value="all" aria-pressed="true">全部</button>
-    <button class="wm-chip" data-filter="open" data-value="open" aria-pressed="false">Open</button>
-    <button class="wm-chip" data-filter="open" data-value="closed" aria-pressed="false">Closed</button>
+    <button class="wm-chip" data-filter="open" data-value="open" aria-pressed="false" lang="en">Open</button>
+    <button class="wm-chip" data-filter="open" data-value="closed" aria-pressed="false" lang="en">Closed</button>
   </div>
   <div class="wm-summary" id="wm-summary" role="status" aria-live="polite" aria-atomic="true"></div>
 </div>
@@ -1638,7 +1638,7 @@ function escapeHTML(s) {
 }
 
 function rowHTML(m, idx) {
-  const purposes = m.purpose.map(p => `<span class="wm-prp">${purposeLabels[p]||p}</span>`).join('');
+  const purposes = m.purpose.map(p => `<span class="wm-prp" lang="en">${purposeLabels[p]||p}</span>`).join('');
   const openCls = m.open ? 'open' : 'closed';
   const openTxt = m.open ? 'Open' : 'Closed';
   return `
@@ -1646,7 +1646,7 @@ function rowHTML(m, idx) {
       <td><span class="chev">▸</span>${escapeHTML(m.title)}</td>
       <td class="dim">${m.date}</td>
       <td>${escapeHTML(m.org)}</td>
-      <td><span class="wm-rb wm-rb-${m.repr}">${reprLabels[m.repr]}</span></td>
+      <td><span class="wm-rb wm-rb-${m.repr}" lang="en">${reprLabels[m.repr]}</span></td>
       <td>${purposes}</td>
       <td><span class="wm-os ${openCls}">${openTxt}</span></td>
       <td class="dim" style="font-size:0.82rem">${escapeHTML(m.bench || '—')}</td>

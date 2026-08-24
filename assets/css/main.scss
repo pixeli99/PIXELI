@@ -278,6 +278,28 @@ thead th { border-bottom-width: 2px; }
   color: var(--faint);
   margin: 0.2rem 0 1.4rem;
   font-variant-numeric: tabular-nums;
+  /* 年份增多时超出容器宽度会折行；统一改为横向滚动条带，不限于小屏。
+     mask 在右侧渐出，提示可右滑；滑到末尾后 JS 加 yn-scrolled-end 去掉渐出。 */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  white-space: nowrap;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 2rem), transparent);
+  mask-image: linear-gradient(to right, black calc(100% - 2rem), transparent);
+}
+.year-nav::-webkit-scrollbar { display: none; }
+.year-nav.yn-scrolled-end {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.year-nav.yn-scrolled-start {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+  mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+}
+.year-nav.yn-scrolled-start.yn-scrolled-end {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 2rem);
+  mask-image: linear-gradient(to right, transparent, black 2rem);
 }
 .year-nav a {
   color: var(--muted);
@@ -860,31 +882,6 @@ main:focus { outline: none; }
     gap: 0.5rem;
   }
   .post-nav-next { text-align: left; }
-  /* 年份导航在 10 个年份时宽约 620px，375px 屏幕下会折行；
-     改为横向滚动，与过滤栏保持一致。白名单 nowrap 防止链接内文字断行。
-     默认 mask 在右侧渐出，提示仍有更早年份可右滑；已滑到末尾时去掉渐出。 */
-  .year-nav {
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    white-space: nowrap;
-    scrollbar-width: none;
-    padding-bottom: 0.25rem;
-    -webkit-mask-image: linear-gradient(to right, black calc(100% - 2rem), transparent);
-    mask-image: linear-gradient(to right, black calc(100% - 2rem), transparent);
-  }
-  .year-nav::-webkit-scrollbar { display: none; }
-  .year-nav.yn-scrolled-end {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-  .year-nav.yn-scrolled-start {
-    -webkit-mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
-    mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
-  }
-  .year-nav.yn-scrolled-start.yn-scrolled-end {
-    -webkit-mask-image: linear-gradient(to right, transparent, black 2rem);
-    mask-image: linear-gradient(to right, transparent, black 2rem);
-  }
   /* 15 个过滤按钮在 375px 屏幕上会折行到 5 行，占据大量纵向空间；
      改为横向滚动条带，隐藏滚动条样式保持简洁。
      overscroll-behavior-x: contain 防止滚到条带末端时触发页面横向回弹。

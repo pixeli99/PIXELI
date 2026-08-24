@@ -443,8 +443,7 @@ thead th { border-bottom-width: 2px; }
 .post-tags a:hover { color: var(--accent); }
 .post-tags a:visited { color: var(--muted); }
 
-/* 搜索结果 / 笔记列表 entry-tail 内的小标签（span.sr-tag 和 a.entry-tag 共享外观） */
-.sr-tag,
+/* 搜索结果 / 笔记 / 首页 entry-tail 内的标签链接 */
 a.entry-tag {
   font-family: var(--font-sans);
   font-size: 0.72rem;

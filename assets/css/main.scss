@@ -132,6 +132,10 @@ h1 { font-size: 1.7rem; }
 h2 { font-size: 1.28rem; }
 h3 { font-size: 1.08rem; }
 h4 { font-size: 0.98rem; color: var(--muted); }
+/* h5/h6 不加 color 重置时浏览器默认尺寸（~0.83em / 0.67em）均小于正文，
+   视觉上比 h4 还低一级却不统一；显式定义尺寸维持层级感。 */
+h5 { font-size: 0.88rem; color: var(--muted); }
+h6 { font-size: 0.83rem; color: var(--faint); }
 
 /* Hash 跳转时 margin-top 在视口外，标题会贴顶；scroll-margin-top 留出呼吸空间 */
 h2[id], h3[id], h4[id] { scroll-margin-top: 1.5rem; }

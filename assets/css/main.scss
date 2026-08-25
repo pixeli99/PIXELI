@@ -998,6 +998,15 @@ main:focus { outline: none; }
   /* year-nav 禁用链接（无匹配论文的年份）用 opacity:0.35 标记禁用态；
      强制色彩下系统接管链接色，opacity 导致颜色语义不清，改用 GrayText。 */
   .year-nav a[aria-disabled="true"] { color: GrayText; opacity: 1; }
+  /* mask-image 渐出（年份导航与论文过滤栏的横向滚动指示）在强制色彩下不会
+     被系统颜色映射，transparent 仍然透明，导致边缘内容可见度不足；
+     直接移除遮罩，所有内容始终完整可见。!important 覆盖 .yn-scrolled-* /
+     .pf-scrolled-* 等状态类的同名规则。 */
+  .year-nav,
+  .papers-filter {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
 }
 
 /* —— Print —— */

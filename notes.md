@@ -7,7 +7,7 @@ description: 随手记下的随笔与综述，按时间倒序排列。
 
 # 笔记
 
-随手记下的东西，按时间倒序排列。
+随手记下的东西，{{ site.notes | where_exp: "n", "n.published != false" | size }} 篇，按时间倒序排列。
 
 <ul class="entry-list" role="list">
 {% assign published_notes = site.notes | where_exp: "n", "n.published != false" | sort: "date" | reverse %}

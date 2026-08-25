@@ -220,6 +220,13 @@ description: World Models 领域论文全景：时间线、方法对比、技术
       color: HighlightText;
       border-color: Highlight;
     }
+    /* mask-image 渐出（移动端过滤栏横向滚动指示）在强制色彩下不被系统颜色映射，
+       transparent 仍然透明，导致边缘芯片可见度不足；直接移除遮罩。
+       与 main.scss 中 .papers-filter 的处理一致。 */
+    .wm-filter-row {
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
   }
   .wm-summary {
     font-family: var(--font-sans);

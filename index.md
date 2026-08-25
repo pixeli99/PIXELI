@@ -39,8 +39,9 @@ layout: default
 {% endfor %}
 </ul>
 
+{% assign _notes_count = all.size | minus: published_papers.size %}
 <p class="more">
-  全部 <a href="{{ '/notes/' | relative_url }}">笔记</a>
-  ／ <a href="{{ '/papers/' | relative_url }}">论文</a>
+  全部 <a href="{{ '/notes/' | relative_url }}">{{ _notes_count }} 篇笔记</a>
+  ／ <a href="{{ '/papers/' | relative_url }}">{{ published_papers.size }} 篇论文</a>
   ／按 <a href="{{ '/tags/' | relative_url }}">标签</a>看
 </p>

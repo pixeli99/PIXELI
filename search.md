@@ -84,13 +84,27 @@ sitemap: false
     if (!text) return '';
     maxLen = maxLen || 160;
     var lower = text.toLowerCase();
-    var best = -1;
-    terms.forEach(function (t) {
-      if (!t) return;
+    var filtered = terms.filter(function(t) { return t; });
+    if (!filtered.length) return text.slice(0, maxLen);
+    // Collect first occurrence of each term as candidate window anchors
+    var candidates = [];
+    filtered.forEach(function(t) {
       var idx = lower.indexOf(t);
-      if (idx >= 0 && (best < 0 || idx < best)) best = idx;
+      if (idx >= 0) candidates.push(idx);
     });
-    if (best < 0) return text.slice(0, maxLen);
+    if (!candidates.length) return text.slice(0, maxLen);
+    // Pick the window that shows the most distinct query terms
+    var best = candidates[0];
+    var bestScore = 0;
+    candidates.forEach(function(pos) {
+      var ws = Math.max(0, pos - 60);
+      var we = ws + maxLen;
+      var score = filtered.filter(function(t) {
+        var i = lower.indexOf(t, ws);
+        return i >= 0 && i < we;
+      }).length;
+      if (score > bestScore) { bestScore = score; best = pos; }
+    });
     var start = Math.max(0, best - 60);
     var end = Math.min(text.length, start + maxLen);
     return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');

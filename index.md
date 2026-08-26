@@ -25,7 +25,7 @@ layout: default
   {%- endif -%}
   <li{% if exc.size > 10 %} class="with-excerpt"{% endif %}>
     <div class="entry-head">
-      <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+      <a href="{{ item.url | relative_url }}"{% if item.collection == 'papers' %} lang="en"{% endif %}>{{ item.title }}</a>
       <span class="entry-tail">
         {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
         {% if item.collection == "papers" and item.authors %}<span class="entry-authors" title="{{ item.authors }}">{{ item.authors }}</span>{% endif %}

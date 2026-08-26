@@ -41,7 +41,7 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
     {%- endif -%}
     <li{% if p_exc.size > 10 %} class="with-excerpt"{% endif %} data-tags="{{ p.tags | join: ',' }}">
       <div class="entry-head">
-        <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+        <a href="{{ p.url | relative_url }}" lang="en">{{ p.title }}</a>
         <span class="entry-tail">
           {% if p.authors %}<span class="entry-authors" title="{{ p.authors }}">{{ p.authors }}</span>{% endif %}
           {% unless p.venue contains 'arXiv' or p.venue contains '博客' or p.venue == nil or p.venue == '' %}

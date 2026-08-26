@@ -212,6 +212,7 @@ pre {
 }
 pre:hover .copy-btn,
 .copy-btn:focus-visible { opacity: 1; }
+.copy-btn:focus-visible { border-radius: 3px; }
 .copy-btn:active { border-color: var(--muted); }
 pre[data-lang] { padding-top: 2rem; }
 pre[data-lang]::before {
@@ -501,6 +502,7 @@ a.entry-tag:visited { color: var(--muted); }
   border-radius: 3px;
 }
 .tag-cloud a:hover { color: var(--accent); }
+.tag-cloud a:focus-visible { border-radius: 3px; }
 .tag-cloud sup {
   color: var(--muted);
   margin-left: 0.25em;

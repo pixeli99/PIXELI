@@ -202,6 +202,7 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   /* active chip (--accent bg): default outline is also --accent and blends into the chip.
      outline-offset: 2px draws the ring on the page background, not the chip;
      --text (near-black light / near-white dark) contrasts well there. */
+  .wm-chip:focus-visible { border-radius: 3px; }
   .wm-chip.active:focus-visible { outline-color: var(--text); }
   /* WCAG 2.5.8: on touch devices the chip's default ~20px height is below the
      24px minimum target size; expand vertical padding so height reaches ~30px */

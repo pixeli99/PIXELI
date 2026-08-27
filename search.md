@@ -129,7 +129,8 @@ sitemap: false
       var tagStr = '';
       if (d.tags && d.tags.length > 0) {
         tagStr = d.tags.slice(0, 2).map(function(t) {
-          return '<a href="{{ "/tags/" | relative_url }}#tag-' + t.replace(/ /g, '-') + '" class="entry-tag">' + highlight(esc(t), terms) + '</a>';
+          var langAttr = /[^\x00-\x7F]/.test(t) ? '' : ' lang="en"';
+          return '<a href="{{ "/tags/" | relative_url }}#tag-' + t.replace(/ /g, '-') + '" class="entry-tag"' + langAttr + '>' + highlight(esc(t), terms) + '</a>';
         }).join('');
       }
       var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' + tagStr + authStr + venueStr +

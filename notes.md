@@ -18,7 +18,7 @@ description: 随手记下的随笔与综述，按时间倒序排列。
       <a href="{{ n.url | relative_url }}">{{ n.title }}</a>
       <span class="entry-tail">
         <span class="kind">笔记</span>
-        {% if n.tags and n.tags.size > 0 %}{% for t in n.tags limit: 2 %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | replace: ' ', '-' }}" class="entry-tag">{{ t }}</a>{% endfor %}{% endif %}
+        {% if n.tags and n.tags.size > 0 %}{% for t in n.tags limit: 2 %}{% assign _tenc = t | url_encode %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | replace: ' ', '-' }}" class="entry-tag"{% unless _tenc contains '%' %} lang="en"{% endunless %}>{{ t }}</a>{% endfor %}{% endif %}
         <time datetime="{{ n.date | date_to_xmlschema }}">{{ n.date | date: "%Y-%m-%d" }}</time>
       </span>
     </div>

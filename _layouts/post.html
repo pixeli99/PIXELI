@@ -22,7 +22,7 @@ layout: default
       {% endif %}
       {% if page.tags and page.tags.size > 0 %}
         <span class="post-tags">
-          {% for t in page.tags %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | replace: " ", "-" }}">{{ t }}</a>{% unless forloop.last %} {% endunless %}{% endfor %}
+          {% for t in page.tags %}{% assign _tenc = t | url_encode %}<a href="{{ '/tags/' | relative_url }}#tag-{{ t | replace: " ", "-" }}"{% unless _tenc contains '%' %} lang="en"{% endunless %}>{{ t }}</a>{% unless forloop.last %} {% endunless %}{% endfor %}
         </span>
       {% endif %}
     </div>

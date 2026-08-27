@@ -67,7 +67,7 @@ description: 按标签浏览全部论文笔记与随笔。
           {% if item.collection == "papers" %}
             {% if item.authors %}<span class="entry-authors" title="{{ item.authors }}">{{ item.authors }}</span>{% endif %}
             {% unless item.venue contains 'arXiv' or item.venue contains '博客' or item.venue == nil or item.venue == '' %}
-              <span class="entry-venue" title="{{ item.venue }}">{{ item.venue }}</span>
+              <span class="entry-venue" lang="en" title="{{ item.venue }}">{{ item.venue }}</span>
             {% endunless %}
           {% endif %}
           <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%Y-%m-%d" }}</time>

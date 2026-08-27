@@ -45,7 +45,7 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
         <span class="entry-tail">
           {% if p.authors %}<span class="entry-authors" title="{{ p.authors }}">{{ p.authors }}</span>{% endif %}
           {% unless p.venue contains 'arXiv' or p.venue contains '博客' or p.venue == nil or p.venue == '' %}
-            <span class="entry-venue" title="{{ p.venue }}">{{ p.venue }}</span>
+            <span class="entry-venue" lang="en" title="{{ p.venue }}">{{ p.venue }}</span>
           {% endunless %}
           <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y-%m-%d" }}</time>
         </span>

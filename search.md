@@ -125,7 +125,7 @@ sitemap: false
         ? '<span class="entry-authors" title="' + esc(d.authors) + '">' + highlight(esc(d.authors), terms) + '</span>' : '';
       var v = d.venue || '';
       var venueStr = (d.collection === 'papers' && v && v.indexOf('arXiv') < 0 && v.indexOf('博客') < 0)
-        ? '<span class="entry-venue" title="' + esc(v) + '">' + highlight(esc(v), terms) + '</span>' : '';
+        ? '<span class="entry-venue" lang="en" title="' + esc(v) + '">' + highlight(esc(v), terms) + '</span>' : '';
       var tagStr = '';
       if (d.tags && d.tags.length > 0) {
         tagStr = d.tags.slice(0, 2).map(function(t) {

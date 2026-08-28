@@ -134,7 +134,7 @@ sitemap: false
         }).join('');
       }
       var tail = '<span class="entry-tail"><span class="kind">' + kind + '</span>' + tagStr + authStr + venueStr +
-                 (d.date ? '<time datetime="' + esc(d.date) + '">' + esc(d.date) + '</time>' : '') + '</span>';
+                 (d.date ? '<time datetime="' + esc(d.date) + '">' + esc(d.date_display || d.date) + '</time>' : '') + '</span>';
       var head = '<div class="entry-head"><a href="' + esc(d.url) + '"' + (d.collection === 'papers' ? ' lang="en"' : '') + '>' + highlight(esc(d.title), terms) + '</a>' + tail + '</div>';
       var excText = d.excerpt || '';
       var excLower = excText.toLowerCase();

@@ -65,7 +65,7 @@ description: 按标签浏览全部论文笔记与随笔。
         <span class="entry-tail">
           {% if item.collection == "papers" %}<span class="kind">论文</span>{% else %}<span class="kind">笔记</span>{% endif %}
           {% if item.collection == "papers" %}
-            {% if item.authors %}<span class="entry-authors" title="{{ item.authors }}">{{ item.authors }}</span>{% endif %}
+            {% if item.authors %}{% assign _aenc = item.authors | url_encode %}<span class="entry-authors"{% unless _aenc contains '%E' %} lang="en"{% endunless %} title="{{ item.authors }}">{{ item.authors }}</span>{% endif %}
             {% unless item.venue contains 'arXiv' or item.venue contains '博客' or item.venue == nil or item.venue == '' %}
               <span class="entry-venue" lang="en" title="{{ item.venue }}">{{ item.venue }}</span>
             {% endunless %}

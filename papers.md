@@ -43,7 +43,7 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
       <div class="entry-head">
         <a href="{{ p.url | relative_url }}" lang="en">{{ p.title }}</a>
         <span class="entry-tail">
-          {% if p.authors %}<span class="entry-authors" title="{{ p.authors }}">{{ p.authors }}</span>{% endif %}
+          {% if p.authors %}{% assign _aenc = p.authors | url_encode %}<span class="entry-authors"{% unless _aenc contains '%E' %} lang="en"{% endunless %} title="{{ p.authors }}">{{ p.authors }}</span>{% endif %}
           {% unless p.venue contains 'arXiv' or p.venue contains '博客' or p.venue == nil or p.venue == '' %}
             <span class="entry-venue" lang="en" title="{{ p.venue }}">{{ p.venue }}</span>
           {% endunless %}

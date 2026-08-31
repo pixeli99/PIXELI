@@ -121,8 +121,9 @@ sitemap: false
       : '找到 ' + results.length + ' 条结果';
     out.innerHTML = results.map(function (d) {
       var kind = d.collection === 'papers' ? '论文' : '笔记';
+      var authLang = /[一-鿿㐀-䶿]/.test(d.authors || '') ? '' : ' lang="en"';
       var authStr = (d.authors && d.collection === 'papers')
-        ? '<span class="entry-authors" title="' + esc(d.authors) + '">' + highlight(esc(d.authors), terms) + '</span>' : '';
+        ? '<span class="entry-authors"' + authLang + ' title="' + esc(d.authors) + '">' + highlight(esc(d.authors), terms) + '</span>' : '';
       var v = d.venue || '';
       var venueStr = (d.collection === 'papers' && v && v.indexOf('arXiv') < 0 && v.indexOf('博客') < 0)
         ? '<span class="entry-venue" lang="en" title="' + esc(v) + '">' + highlight(esc(v), terms) + '</span>' : '';

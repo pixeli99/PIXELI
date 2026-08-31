@@ -11,7 +11,8 @@ layout: default
         </time>
       {% endif %}
       {% if page.authors %}
-        <span>{{ page.authors }}</span>
+        {% assign _aenc = page.authors | url_encode %}
+        <span{% unless _aenc contains '%E' %} lang="en"{% endunless %}>{{ page.authors }}</span>
       {% endif %}
       {% assign words = content | strip_html | number_of_words: "cjk" %}
       {% if words > 0 %}

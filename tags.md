@@ -38,14 +38,14 @@ description: 按标签浏览全部论文笔记与随笔。
   {% assign t = parts[1] %}
   {% assign count = parts[0] | plus: 0 %}
   {% if count >= 15 %}{% assign tc_class = "tc-lg" %}{% elsif count >= 7 %}{% assign tc_class = "tc-md" %}{% else %}{% assign tc_class = "" %}{% endif %}
-  {% assign _tenc = t | url_encode %}<a href="#tag-{{ t | replace: " ", "-" }}" aria-label="{{ t }}，{{ count }} 篇"{% if tc_class != "" %} class="{{ tc_class }}"{% endif %}{% unless _tenc contains '%' %} lang="en"{% endunless %}>{{ t }}<sup aria-hidden="true">{{ count }}</sup></a>
+  {% assign _tenc = t | url_encode %}<a href="#tag-{{ t | replace: " ", "-" }}" aria-label="{{ t }}，{{ count }} 篇"{% if tc_class != "" %} class="{{ tc_class }}"{% endif %}{% unless _tenc contains '%E' %} lang="en"{% endunless %}>{{ t }}<sup aria-hidden="true">{{ count }}</sup></a>
 {% endfor %}
 </nav>
 
 {% for entry in sorted_by_freq %}
   {% assign parts = entry | split: "|" %}
   {% assign t = parts[1] %}
-  {% assign _tenc = t | url_encode %}<h2 id="tag-{{ t | replace: " ", "-" }}"{% unless _tenc contains '%' %} lang="en"{% endunless %}>{{ t }}<sup class="tag-count" aria-hidden="true">{{ parts[0] | plus: 0 }}</sup></h2>
+  {% assign _tenc = t | url_encode %}<h2 id="tag-{{ t | replace: " ", "-" }}"{% unless _tenc contains '%E' %} lang="en"{% endunless %}>{{ t }}<sup class="tag-count" aria-hidden="true">{{ parts[0] | plus: 0 }}</sup></h2>
   <ul class="entry-list" role="list">
   {% assign matched = all | where_exp: "i", "i.tags contains t" | sort: "date" | reverse %}
   {% for item in matched %}

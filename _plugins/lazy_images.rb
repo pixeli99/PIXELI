@@ -4,6 +4,7 @@
 # 范围精确到文档正文，不影响布局模板中的任何元素。
 Jekyll::Hooks.register :documents, :post_convert do |doc|
   next unless doc.output_ext == ".html"
+  next if doc.output.nil?
   doc.output = doc.output.gsub(/<img ([^>]*?)(\s*\/?)>/) do
     attrs = Regexp.last_match(1)
     close = Regexp.last_match(2)

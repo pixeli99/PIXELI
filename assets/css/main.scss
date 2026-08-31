@@ -774,6 +774,9 @@ mark {
   border-radius: 2px;
   padding: 0 0.08em;
   font-style: normal;
+  /* 换行时每段独立渲染圆角与内边距，避免中间行两端出现平角 */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* —— Accessibility utility —— */

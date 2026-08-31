@@ -183,6 +183,7 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
   pf.addEventListener('scroll', checkEnd, { passive: true });
   window.addEventListener('resize', checkEnd, { passive: true });
   checkEnd();
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(checkEnd); }
 })();
 
 (function () {
@@ -195,5 +196,6 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
   yn.addEventListener('scroll', checkEnd, { passive: true });
   window.addEventListener('resize', checkEnd, { passive: true });
   checkEnd();
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(checkEnd); }
 })();
 </script>

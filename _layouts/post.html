@@ -91,13 +91,15 @@ layout: default
   <nav class="post-nav" aria-label="文章导航">
     <span class="post-nav-prev">
       {% if page.previous and page.previous.collection == page.collection and page.previous.published != false %}
-        <a href="{{ page.previous.url | relative_url }}" aria-label="上一篇：{{ page.previous.title }}"><span aria-hidden="true">&#8592;</span> {{ page.previous.title | truncate: 36, "…" }}</a>
+        {% assign _ptenc = page.previous.title | url_encode %}
+        <a href="{{ page.previous.url | relative_url }}"><span class="sr-only">上一篇：<span{% unless _ptenc contains '%E' %} lang="en"{% endunless %}>{{ page.previous.title }}</span></span><span aria-hidden="true">&#8592;</span> <span{% unless _ptenc contains '%E' %} lang="en"{% endunless %} aria-hidden="true">{{ page.previous.title | truncate: 36, "…" }}</span></a>
       {% endif %}
     </span>
     <a class="post-nav-up" href="{{ '/' | append: page.collection | append: '/' | relative_url }}" aria-label="回{{ _list_label }}列表">回列表</a>
     <span class="post-nav-next">
       {% if page.next and page.next.collection == page.collection and page.next.published != false %}
-        <a href="{{ page.next.url | relative_url }}" aria-label="下一篇：{{ page.next.title }}">{{ page.next.title | truncate: 36, "…" }} <span aria-hidden="true">&#8594;</span></a>
+        {% assign _ntenc = page.next.title | url_encode %}
+        <a href="{{ page.next.url | relative_url }}"><span class="sr-only">下一篇：<span{% unless _ntenc contains '%E' %} lang="en"{% endunless %}>{{ page.next.title }}</span></span><span{% unless _ntenc contains '%E' %} lang="en"{% endunless %} aria-hidden="true">{{ page.next.title | truncate: 36, "…" }}</span> <span aria-hidden="true">&#8594;</span></a>
       {% endif %}
     </span>
   </nav>

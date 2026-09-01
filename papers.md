@@ -156,6 +156,11 @@ description: 论文阅读笔记，每篇含一句话概述、方法摘要、个�
   btns.forEach(function (btn) {
     btn.addEventListener('click', function () {
       setActive(btn.getAttribute('data-tag') || '');
+      // 移动端过滤栏横向滚动时，确保激活按钮完整可见（不被 mask 渐出截断）
+      if (pfEl && pfEl.scrollWidth > pfEl.clientWidth) {
+        var ab = pfEl.querySelector('.pf-btn.pf-active');
+        if (ab) ab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+      }
     });
   });
   var initialTag = new URLSearchParams(location.search).get('tag') || '';

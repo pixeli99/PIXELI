@@ -120,7 +120,7 @@ sitemap: false
       ? '显示前 ' + results.length + ' 条（共 ' + total + ' 条）'
       : '找到 ' + results.length + ' 条结果';
     out.innerHTML = results.map(function (d) {
-      var kind = d.collection === 'papers' ? '论文' : '笔记';
+      var kind = d.collection === 'papers' ? '论文' : d.collection === 'notes' ? '笔记' : '全景';
       var authLang = /[一-鿿㐀-䶿]/.test(d.authors || '') ? '' : ' lang="en"';
       var authStr = (d.authors && d.collection === 'papers')
         ? '<span class="entry-authors"' + authLang + ' title="' + esc(d.authors) + '">' + highlight(esc(d.authors), terms) + '</span>' : '';

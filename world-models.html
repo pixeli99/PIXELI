@@ -1736,6 +1736,7 @@ document.querySelectorAll('.wm-filter-row').forEach(row => {
   row.addEventListener('scroll', checkRowScroll, { passive: true });
   window.addEventListener('resize', checkRowScroll, { passive: true });
   checkRowScroll();
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(checkRowScroll); }
 });
 
 function syncStateToURL() {

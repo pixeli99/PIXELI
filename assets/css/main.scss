@@ -946,6 +946,13 @@ main:focus { outline: none; }
   mark { background: rgba(217, 119, 87, 0.40); background: color-mix(in srgb, var(--accent) 40%, transparent); }
   /* 论文截图 / 架构图通常白底，在深色背景下对比刺眼；轻微降低亮度缓解。 */
   .post-body img { opacity: 0.88; }
+  /* @keyframes 内的 rgba() 回退色是亮色模式值（138 51 36），暗色模式下应改用
+     暗色 accent #d97757（217 119 87）。支持 color-mix() 的浏览器会忽略 rgba() 行，
+     此覆盖只影响极少数不支持 color-mix() 但支持 prefers-color-scheme 的旧浏览器。 */
+  @keyframes target-flash {
+    from { background: rgba(217, 119, 87, 0.22); background: color-mix(in srgb, var(--accent) 22%, transparent); }
+    to   { background: rgba(217, 119, 87, 0.10); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  }
 }
 
 /* —— Reduced motion —— */

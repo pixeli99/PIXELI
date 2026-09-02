@@ -1644,19 +1644,21 @@ function matches(m) {
 function escapeHTML(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
+function hasCJK(s) { return /[一-鿿㐀-䶿]/.test(String(s)); }
 
 function rowHTML(m, idx) {
   const purposes = m.purpose.map(p => `<span class="wm-prp" lang="en">${purposeLabels[p]||p}</span>`).join('');
   const openCls = m.open ? 'open' : 'closed';
   const openTxt = m.open ? 'Open' : 'Closed';
+  const orgLang = hasCJK(m.org) ? '' : ' lang="en"';
   return `
     <tr class="row" data-idx="${idx}" tabindex="0" aria-expanded="false">
-      <td><span class="chev">▸</span>${escapeHTML(m.title)}</td>
+      <td><span class="chev">▸</span><span lang="en">${escapeHTML(m.title)}</span></td>
       <td class="dim">${m.date}</td>
-      <td>${escapeHTML(m.org)}</td>
+      <td${orgLang}>${escapeHTML(m.org)}</td>
       <td><span class="wm-rb wm-rb-${m.repr}" lang="en">${reprLabels[m.repr]}</span></td>
       <td>${purposes}</td>
-      <td><span class="wm-os ${openCls}">${openTxt}</span></td>
+      <td><span class="wm-os ${openCls}" lang="en">${openTxt}</span></td>
       <td class="dim" style="font-size:0.82rem">${escapeHTML(m.bench || '—')}</td>
     </tr>
     <tr class="detail" data-idx="${idx}" style="display:none">
@@ -1673,7 +1675,7 @@ function rowHTML(m, idx) {
             <ul>${m.cons.map(c => `<li>${escapeHTML(c)}</li>`).join('')}</ul>
           </div>
           <div class="full">
-            <h4>Benchmark</h4>
+            <h4 lang="en">Benchmark</h4>
             <span class="bench-line">${escapeHTML(m.bench)}</span>
           </div>
           ${m.paper ? `<div class="full links"><a href="${BASE}${m.paper}">详读笔记 →</a></div>` : ''}

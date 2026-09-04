@@ -123,6 +123,7 @@ document.querySelectorAll('.post-body h2').forEach(function(h) {
   details.className = 'bibtex-details';
   var summary = document.createElement('summary');
   summary.textContent = 'BibTeX';
+  summary.lang = 'en';
   details.appendChild(summary);
   next.parentNode.insertBefore(details, next);
   details.appendChild(next);

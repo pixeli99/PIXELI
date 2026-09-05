@@ -932,6 +932,11 @@ main:focus { outline: none; }
   .tag-cloud a     { padding-top: 0.3em; padding-bottom: 0.3em; }
   .post-tags a,
   a.entry-tag      { padding-top: 0.5em; padding-bottom: 0.5em; }
+  /* 年份导航与页脚链接使用 0.82rem 字号；触屏 16px 基准下行高约 23.4px，
+     低于 WCAG 2.5.8 的 24px 下限。补 padding 将可点击区域扩至合规尺寸。
+     year-nav 为行内 inline 元素，padding 不影响行框高度，只扩大命中区域。 */
+  .year-nav a    { padding-top: 0.25em; padding-bottom: 0.25em; }
+  .site-footer a { padding-top: 0.3em;  padding-bottom: 0.3em; }
 }
 
 /* —— Dark mode —— */

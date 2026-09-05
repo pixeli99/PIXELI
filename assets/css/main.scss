@@ -924,6 +924,14 @@ main:focus { outline: none; }
   /* WCAG 2.5.8: raise touch target to ≥24 px */
   .copy-btn { opacity: 0.55; padding-top: 0.4em; padding-bottom: 0.4em; }
   .pf-btn   { padding-top: 0.35em; padding-bottom: 0.35em; }
+  /* 标签芯片（tag cloud、文章 meta、列表 entry-tag）默认纵向 padding 仅约 1–3px，
+     触控目标不足 WCAG 2.5.8 的 24px 下限；在触屏下增高至合规尺寸。
+     tag-cloud a（0.88rem≈15px）加至 0.3em 双侧 ≈ 24px；
+     post-tags / entry-tag（0.72rem≈12px）加至 0.5em 双侧 ≈ 24px，
+     仍在父元素 line-height 内，不撑高行框。 */
+  .tag-cloud a     { padding-top: 0.3em; padding-bottom: 0.3em; }
+  .post-tags a,
+  a.entry-tag      { padding-top: 0.5em; padding-bottom: 0.5em; }
 }
 
 /* —— Dark mode —— */

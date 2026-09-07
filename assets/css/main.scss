@@ -533,6 +533,7 @@ figcaption {
   font-size: 0.86em;
   color: var(--muted);
   line-height: 1.55;
+  text-wrap: pretty;
 }
 
 /* —— Collapsible details —— */
@@ -629,6 +630,7 @@ sup.footnote, a.footnote {
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.5;
+  text-wrap: pretty;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

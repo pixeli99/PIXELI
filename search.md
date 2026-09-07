@@ -12,7 +12,7 @@ sitemap: false
 <noscript><p class="muted search-hint">搜索需要 JavaScript，当前浏览器已禁用。请通过<a href="{{ '/tags/' | relative_url }}">标签</a>或<a href="{{ '/papers/' | relative_url }}">论文列表</a>浏览。</p></noscript>
 <form role="search" onsubmit="return false">
 <label for="q" class="sr-only">搜索</label>
-<input type="search" id="q" placeholder="搜论文、笔记…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" disabled>
+<input type="search" id="q" placeholder="关键词、arXiv ID、年份…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" disabled>
 </form>
 <ul id="results" class="entry-list" role="list"></ul>
 <p id="hint" class="muted" role="status" aria-live="polite" aria-atomic="true">加载中…</p>
@@ -32,7 +32,7 @@ sitemap: false
     .then(function (data) {
       docs = data;
       q.disabled = false;
-      if (initialQ) { doSearch(); } else { hint.textContent = '输入关键词搜索全站'; q.focus(); }
+      if (initialQ) { doSearch(); } else { hint.textContent = '支持关键词、arXiv ID（如 2412.19437）、年份搜索'; q.focus(); }
     })
     .catch(function () { hint.textContent = '索引加载失败'; });
 
@@ -182,7 +182,7 @@ sitemap: false
     var newUrl = raw ? (location.pathname + '?q=' + encodeURIComponent(raw)) : location.pathname;
     history.replaceState(null, '', newUrl);
     document.title = raw ? (raw + ' · 搜索 · {{ site.title }}') : '搜索 · {{ site.title }}';
-    if (!val) { out.innerHTML = ''; hint.textContent = '输入关键词搜索全站'; return; }
+    if (!val) { out.innerHTML = ''; hint.textContent = '支持关键词、arXiv ID（如 2412.19437）、年份搜索'; return; }
     var terms = val.split(/\s+/);
     var scored = docs
       .map(function (d) { return { d: d, s: score(d, terms) }; })

@@ -189,7 +189,7 @@ sitemap: false
       .filter(function (x) { return x.s > 0; })
       .sort(function (a, b) { return b.s - a.s; });
     var total = scored.length;
-    var hits = scored.slice(0, 20).map(function (x) { return x.d; });
+    var hits = scored.slice(0, 100).map(function (x) { return x.d; });
     render(hits, total, terms);
   }
 })();

@@ -1211,9 +1211,12 @@ main:focus { outline: none; }
    @media (prefers-color-scheme: dark) 同特指度，但打印块在前、暗色块在后，
    导致暗色模式打印时暗色 token（浅色调）覆盖打印重置。
    此块移至文件末尾，在暗色块之后出现，取得层叠胜出，同时修复
-   --code-bg 变量在打印时未被还原（pre 背景仍为深色）的问题。 */
+   --code-bg / --muted 变量在打印时未被还原的问题。 */
 @media print {
-  :root { --code-bg: #f4f2ed; }
+  /* 暗色模式 --muted #a8a6a0 在白纸背景上对比度约 2.3:1，远低于 AA（4.5:1），
+     导致 blockquote、h4/h5、footnotes 等浅灰色文本在打印时几乎不可读。
+     --faint（#848280 暗色值约 4.8:1）和 --border（#2a2a27，极深）在白纸上均合格，无需重置。 */
+  :root { --code-bg: #f4f2ed; --muted: #6b6b66; }
   .highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
   .highlight .kp, .highlight .kr { color: #1c1c1b; font-weight: 600; }
   .highlight .o, .highlight .ow { color: #1c1c1b; font-weight: 600; }

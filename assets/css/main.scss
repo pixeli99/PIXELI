@@ -152,7 +152,9 @@ blockquote {
   margin: 1.8em 0;
 }
 
-ul, ol { padding-left: 1.4em; }
+ul { padding-left: 1.4em; }
+/* ol 含两位数序号（10–15 等）时 1.4em（≈24px）偏紧；2em（≈34px）给"15. "留足空间 */
+ol { padding-left: 2em; }
 li { margin: 0.25em 0; text-wrap: pretty; }
 
 hr {

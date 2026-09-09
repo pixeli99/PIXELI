@@ -88,13 +88,15 @@ bundle exec jekyll serve
 _notes/           随笔
 _papers/          论文阅读
 _layouts/         布局
-_plugins/         Jekyll 插件（关闭 smart_quotes、自动抽取论文摘要）
-assets/           CSS、JS、Favicon
+_plugins/         Jekyll 插件（关闭 smart_quotes、图片懒加载、自动抽取论文摘要）
+assets/           CSS、JS、OG 封面图、Favicon
 index.md          首页（合并最近 12 条）
 notes.md          /notes/
 papers.md         /papers/
 tags.md           /tags/
 search.md         /search/（前端全文搜索）
+search.json       搜索索引（Jekyll 构建时生成，含全文）
+opensearch.xml    浏览器搜索引擎集成（地址栏直搜）
 world-models.html /world-models/（World Model 领域全景表）
 about.md          /about/
 404.html

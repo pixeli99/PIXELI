@@ -992,6 +992,10 @@ main:focus { outline: none; }
     --faint:  #6b6b66;  /* 4.6:1 on --bg, hits AA for small text */
     --border: #8a8a87;  /* 3.1:1 on --bg, hits non-text threshold */
   }
+  /* opacity:0.35 标记禁用状态，在高对比度模式下有效对比度 < 2:1，低于 WCAG 非文字
+     阈值 3:1；改用不透明的 --faint，在启用与禁用链接之间保持可分辨的视觉区别。
+     深色 + 高对比度时 --faint 由下方 @media 块覆盖为 #aaa8a0（7.7:1），同样适用。 */
+  .year-nav a[aria-disabled="true"] { opacity: 1; color: var(--faint); }
 }
 @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {

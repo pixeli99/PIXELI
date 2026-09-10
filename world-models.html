@@ -16,25 +16,29 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   .site-content,
   .site-footer { max-width: var(--wm-max); }
 
-  /* 色彩 token —— 在站点 accent 基础上扩出 heatmap 阶梯 */
+  /* 色彩 token —— 在站点 accent 基础上扩出 heatmap 阶梯。
+     cell/hover 用 color-mix(var(--accent)) 推导，随主题 accent 自动跟随；
+     cell-bad / stripe 用中性黑白混合，不随 accent 变化。 */
   :root {
-    --wm-cell-hi:   rgba(138, 51, 36, 0.18);
-    --wm-cell-mid:  rgba(138, 51, 36, 0.09);
-    --wm-cell-lo:   rgba(138, 51, 36, 0.03);
+    --wm-cell-hi:   color-mix(in srgb, var(--accent) 18%, transparent);
+    --wm-cell-mid:  color-mix(in srgb, var(--accent)  9%, transparent);
+    --wm-cell-lo:   color-mix(in srgb, var(--accent)  3%, transparent);
     --wm-cell-bad:  rgba(0, 0, 0, 0.02);
     --wm-stripe:    rgba(0, 0, 0, 0.018);
-    --wm-row-hover: rgba(138, 51, 36, 0.05);
+    --wm-row-hover: color-mix(in srgb, var(--accent)  5%, transparent);
     --wm-ok:        #2f6a3a;
     --wm-warn:      #8a3324;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --wm-cell-hi:   rgba(217, 119, 87, 0.28);
-      --wm-cell-mid:  rgba(217, 119, 87, 0.14);
-      --wm-cell-lo:   rgba(217, 119, 87, 0.05);
+      /* 深色背景可见度低，同视觉权重需要更高不透明度；accent 已切至 #d97757，
+         color-mix 自动跟随，无需再硬编码 RGB 值。 */
+      --wm-cell-hi:   color-mix(in srgb, var(--accent) 28%, transparent);
+      --wm-cell-mid:  color-mix(in srgb, var(--accent) 14%, transparent);
+      --wm-cell-lo:   color-mix(in srgb, var(--accent)  5%, transparent);
       --wm-cell-bad:  rgba(255, 255, 255, 0.02);
       --wm-stripe:    rgba(255, 255, 255, 0.02);
-      --wm-row-hover: rgba(217, 119, 87, 0.08);
+      --wm-row-hover: color-mix(in srgb, var(--accent)  8%, transparent);
       --wm-ok:        #82c891;
       --wm-warn:      #d97757;
     }

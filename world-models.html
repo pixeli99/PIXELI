@@ -213,6 +213,14 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   @media (pointer: coarse) {
     .wm-chip { padding-top: 0.4em; padding-bottom: 0.4em; }
   }
+  /* prefers-contrast: more 下渐出遮罩降低边缘芯片可见度，与高对比度需求相违背；
+     与 main.scss 中 .papers-filter 的处理一致，!important 覆盖 JS 状态类同名规则。 */
+  @media (prefers-contrast: more) {
+    .wm-filter-row {
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+  }
   @media (forced-colors: active) {
     /* color-mix + transparent 在强制色彩下不参与颜色映射，会渲染成透明；
        按下未激活芯片时改用不透明系统色，与 main.scss 中 pf-btn:active 的处理一致。 */

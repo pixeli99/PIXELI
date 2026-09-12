@@ -1004,6 +1004,17 @@ main:focus { outline: none; }
     -webkit-mask-image: none !important;
     mask-image: none !important;
   }
+  /* 标签芯片（tag-cloud、post-tags、entry-tag）以 --code-bg 背景区分正文，
+     但 code-bg (#f4f2ed) 与 bg (#fdfcf8) 的对比度仅约 1.1:1，不满足
+     WCAG 1.4.11 对 UI 组件的 3:1 非文字对比度要求。
+     用 outline（不影响盒模型）补上可见边框；--border 已提升至 #8a8a87（3.1:1），
+     深色 + 高对比度时由后续 @media 块覆盖为 #666660，同样达标。 */
+  .post-tags a,
+  a.entry-tag,
+  .tag-cloud a {
+    outline: 1px solid var(--border);
+    outline-offset: -1px;
+  }
 }
 @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {

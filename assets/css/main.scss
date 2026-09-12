@@ -995,6 +995,15 @@ main:focus { outline: none; }
      阈值 3:1；改用不透明的 --faint，在启用与禁用链接之间保持可分辨的视觉区别。
      深色 + 高对比度时 --faint 由下方 @media 块覆盖为 #aaa8a0（7.7:1），同样适用。 */
   .year-nav a[aria-disabled="true"] { opacity: 1; color: var(--faint); }
+  /* mask-image 渐出用于提示横向可滚动内容，但在高对比度模式下，任何降低文字可见度的
+     效果都与用户的对比度需求相违背。移除遮罩，让边缘内容以完整不透明度显示。
+     !important 覆盖 .yn-scrolled-* / .pf-scrolled-* 等 JS 状态类的同名规则。
+     与 forced-colors: active 块的处理方式一致。 */
+  .year-nav,
+  .papers-filter {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
 }
 @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {

@@ -1015,6 +1015,14 @@ main:focus { outline: none; }
     outline: 1px solid var(--border);
     outline-offset: -1px;
   }
+  /* 搜索结果高亮（mark）正常使用 30% 透明度，非文字对比度约 1.7:1，
+     有意低于 WCAG 3:1 以免视觉过重。高对比度模式下用户明确要求更强可见度：
+     提升至 55% 并补 outline 边框，与上方标签芯片的处理策略一致。 */
+  mark {
+    background: color-mix(in srgb, var(--accent) 55%, transparent);
+    outline: 1px solid var(--accent);
+    outline-offset: -1px;
+  }
 }
 @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {

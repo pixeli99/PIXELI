@@ -2,7 +2,7 @@
 title: "1X World Model: Evaluating Bits, not Atoms"
 date: 2026-01-13
 authors: 1X Technologies
-venue: 博客 / 技术报告
+venue: 博客
 link: https://www.1x.tech/discover/1x-world-model
 tags: [World Model, Robotics, Generative, Video]
 math: false

@@ -459,9 +459,9 @@ thead th { border-bottom-width: 2px; }
   border-bottom: none;
 }
 .post-meta a:hover { color: var(--accent); }
-/* post-meta 里的标签渲染成芯片，与列表页 entry-tag / 搜索结果保持外观一致 */
-.post-tags a {
-  display: inline-block;
+/* 标签芯片：post-meta 行内（.post-tags a）与列表/搜索 entry-tail（a.entry-tag）共享基础样式 */
+.post-tags a,
+a.entry-tag {
   font-family: var(--font-sans);
   font-size: 0.72rem;
   color: var(--muted);
@@ -469,25 +469,15 @@ thead th { border-bottom-width: 2px; }
   border-bottom: none;
   border-radius: 2px;
   padding: 0.05em 0.4em;
-  margin-right: 0.2rem;
 }
-.post-tags a:hover { color: var(--accent); }
-.post-tags a:visited { color: var(--muted); }
-
-/* 搜索结果 / 笔记 / 首页 entry-tail 内的标签链接 */
-a.entry-tag {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  color: var(--muted);
-  background: var(--code-bg);
-  border-radius: 2px;
-  padding: 0.05em 0.4em;
-}
+.post-tags a { display: inline-block; margin-right: 0.2rem; }
 /* .entry-list a 有 flex:1；标签链在 inline-flex 的 entry-tail 里不需要弹性增长 */
-a.entry-tag { border-bottom: none; flex: none; }
+a.entry-tag { flex: none; }
+.post-tags a:hover,
 a.entry-tag:hover { color: var(--accent); }
 /* .entry-list a:visited (0-2-1) 会把 entry-tag 访问后颜色提升为 --link；
    此规则同优先级但在后面，覆盖回 --muted，与未访问状态保持一致。 */
+.post-tags a:visited,
 a.entry-tag:visited { color: var(--muted); }
 
 .tag-cloud {

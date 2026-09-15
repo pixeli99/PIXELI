@@ -1012,6 +1012,11 @@ main:focus { outline: none; }
     outline: 1px solid var(--accent);
     outline-offset: -1px;
   }
+  /* heading-anchor (§) 与 copy-btn（复制代码）正常模式下 opacity:0，
+     仅悬停时显现；高对比度用户明确要求更强可见度，持续隐藏与其需求相违背。
+     强制为 opacity:1，与 pointer:coarse 对这两个元素的处理逻辑一致。 */
+  .heading-anchor { opacity: 1; }
+  .copy-btn { opacity: 1; }
 }
 @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {

@@ -338,6 +338,9 @@ description: World Models 领域论文全景：时间线、方法对比、技术
 
   /* ----- Master 表 + 可展开行 ----- */
   table.wm-master tbody tr.row { cursor: pointer; }
+  /* 悬停与键盘焦点时用与 wm-tab 一致的行高亮，提示可点击 / 可展开 */
+  table.wm-master tbody tr.row:hover td { background: var(--wm-row-hover); }
+  table.wm-master tbody tr.row:focus-visible td { background: var(--wm-row-hover); }
   table.wm-master tbody tr.row td:first-child {
     font-family: var(--font-sans);
     font-weight: 500;

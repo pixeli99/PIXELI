@@ -1276,6 +1276,11 @@ main:focus { outline: none; }
   .highlight .cs { color: #998; font-style: italic; }
   .highlight .gp { color: #555; }
   .highlight .gr, .highlight .gt { color: #a00; }
+  /* 暗色模式块将 .kt/.no 设为浅色（#82aaff/#80cbc4），打印白纸上对比度约 2.3:1/1.9:1，低于 WCAG AA 4.5:1；
+     .hll 暗色值 rgba(255,220,60,0.12) 在白纸上几乎不可见，还原为亮色模式值。 */
+  .highlight .hll { background-color: #fff8c4; }
+  .highlight .kt { color: #458; font-weight: 600; }
+  .highlight .no { color: #008080; }
   .highlight .gd { color: #000; background-color: #fdd; }
   .highlight .gi { color: #000; background-color: #dfd; }
   .highlight .err { color: #a61717; background-color: #e3d2d2; }

@@ -26,7 +26,7 @@
 ---
 title: 标题
 date: 2026-05-20
-tags: [扩散模型, 视频生成]   # 可选
+tags: [Diffusion, Video]     # 可选
 excerpt: 一句话摘要          # 可选，用于列表预览和 SEO description
 math: true                  # 有公式才加（节省 KaTeX 资源）
 published: false            # 可选，草稿不发布时加

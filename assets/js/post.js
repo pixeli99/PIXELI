@@ -74,6 +74,7 @@ document.querySelectorAll('.post-body pre').forEach(function(pre) {
   }
   if (!navigator.clipboard) return;
   var btn = document.createElement('button');
+  btn.type = 'button';
   btn.className = 'copy-btn';
   btn.setAttribute('aria-label', '复制代码');
   btn.textContent = '复制';

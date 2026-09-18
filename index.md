@@ -1,5 +1,6 @@
 ---
 layout: default
+description: "pixeli99 的论文阅读笔记与随笔，聚焦 World Models、MoE、生成模型等 AI 方向，含方法梳理与个人想法。"
 ---
 
 <h1 class="sr-only">{{ site.title }}</h1>

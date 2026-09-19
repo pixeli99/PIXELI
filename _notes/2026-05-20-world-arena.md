@@ -5,7 +5,7 @@ tags: [World Model, Benchmark, 综述]
 excerpt: 先把"World Arena"这个名字搞清楚（清华 WorldArena vs. WorldMark），再串起从 Ha & Schmidhuber 2018 到 Genie 3 / Cosmos / Marble 这条线，重点是几条隐线：定义之争、可控性、评测、数据。
 ---
 
-> 看交互式全景图：[/world-models/](/PIXELI/world-models/)
+> 看交互式全景图：[/world-models/]({{ '/world-models/' | relative_url }})
 
 ## 关于"World Arena"
 

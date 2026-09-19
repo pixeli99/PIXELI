@@ -1846,7 +1846,7 @@ function renderHeatmapTableRowWise(tableId, data) {
     if (!data.rows[key]) return;
     const vals = data.rows[key];
     const cls = heatmapColumn(vals, 'high'); // 行内统一 high better（VBench % 全部高更好）
-    tr.innerHTML = `<td><strong>${key}</strong></td>` + vals.map((v, i) => {
+    tr.innerHTML = `<th scope="row"><strong>${escapeHTML(key)}</strong></th>` + vals.map((v, i) => {
       const display = (v % 1 === 0) ? v : v.toFixed(2);
       return `<td class="hm ${cls[i]}">${display}</td>`;
     }).join('');
@@ -1864,7 +1864,7 @@ function renderHeatmapTableColWise(tableId, data) {
   rows.forEach((tr, ri) => {
     const key = tr.dataset.row;
     const vals = data.rows[key];
-    tr.innerHTML = `<td><strong>${key}</strong></td>` + vals.map((v, ci) => {
+    tr.innerHTML = `<th scope="row"><strong>${escapeHTML(key)}</strong></th>` + vals.map((v, ci) => {
       const display = (v < 10) ? v.toFixed(3) : (v % 1 === 0 ? v : v.toFixed(2));
       return `<td class="hm ${colCls[ci][ri]}">${display}</td>`;
     }).join('');

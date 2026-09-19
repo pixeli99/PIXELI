@@ -252,6 +252,8 @@ th, td {
   text-align: left;
   padding: 0.5em 0.8em;
   border-bottom: 1px solid var(--border);
+  /* body 行距 1.78 对表格列过宽；1.5 更紧凑，与 world-models 页内联样式一致 */
+  line-height: 1.5;
   /* body 继承了 oldstyle proportional；表格列数字需等宽对齐，用 tabular lining */
   font-variant-numeric: tabular-nums lining-nums;
 }

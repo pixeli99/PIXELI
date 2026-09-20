@@ -73,8 +73,8 @@ layout: default
       {% endfor %}
     {% endfor %}
     {% if related_papers.size > 0 %}
-    <aside class="related-papers" aria-label="相关论文">
-      <p class="related-label">相关论文</p>
+    <aside class="related-papers" aria-labelledby="related-papers-label">
+      <h2 class="related-label" id="related-papers-label">相关论文</h2>
       <ul role="list">
         {% for p in related_papers %}
           <li>

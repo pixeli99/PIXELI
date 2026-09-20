@@ -729,6 +729,7 @@ h4[id]:target {
   flex: 1;
   min-width: 0;
 }
+.related-papers li a:visited { color: var(--muted); }
 .related-papers li a:hover { color: var(--accent); }
 .related-date {
   font-size: 0.78rem;

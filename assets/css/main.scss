@@ -1022,6 +1022,25 @@ main:focus { outline: none; }
      强制为 opacity:1，与 pointer:coarse 对这两个元素的处理逻辑一致。 */
   .heading-anchor { opacity: 1; }
   .copy-btn { opacity: 1; }
+  /* 语法高亮：以下 token 颜色在 --code-bg (#f4f2ed) 背景上达不到 WCAG AA 4.5:1，
+     高对比度模式下加深至通过阈值。
+     计算基准：--code-bg L≈0.898，4.5:1 要求前景 L≤0.161。
+     注释 #998 ≈ 2.5:1 → #5c5a53 ≈ 6.9:1
+     数字  #099 ≈ 3.1:1 → #005f5f ≈ 6.4:1
+     内置  #0086B3 ≈ 3.7:1 → #005a7d ≈ 6.7:1
+     属性  #008080 ≈ 4.3:1 → #005f5f ≈ 6.4:1
+     字串  #b8460a ≈ 4.5:1 → #a83c08 ≈ 5.2:1（边界加固） */
+  .highlight .c, .highlight .ch, .highlight .cm, .highlight .c1,
+  .highlight .cs, .highlight .cp, .highlight .cpf { color: #5c5a53; }
+  .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh,
+  .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx { color: #005f5f; }
+  .highlight .nb { color: #005a7d; }
+  .highlight .na, .highlight .no, .highlight .nv, .highlight .vc,
+  .highlight .vg, .highlight .vi, .highlight .vm { color: #005f5f; }
+  .highlight .s, .highlight .sa, .highlight .sb, .highlight .sc,
+  .highlight .dl, .highlight .sd, .highlight .s2, .highlight .se,
+  .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr,
+  .highlight .s1, .highlight .ss { color: #a83c08; }
 }
 @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {

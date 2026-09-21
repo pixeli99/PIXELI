@@ -1099,9 +1099,9 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
         <th scope="col" class="num">平移 err ↓</th>
         <th scope="col" class="num">旋转 err ↓</th>
         <th scope="col" class="num">重投影 err ↓</th>
-        <th scope="col" class="num">state ↑</th>
-        <th scope="col" class="num">content ↑</th>
-        <th scope="col" class="num">style ↑</th>
+        <th scope="col" class="num" lang="en">state ↑</th>
+        <th scope="col" class="num" lang="en">content ↑</th>
+        <th scope="col" class="num" lang="en">style ↑</th>
       </tr>
     </thead>
     <tbody>
@@ -1128,10 +1128,10 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
     <thead>
       <tr>
         <th scope="col">能力维度 (%)</th>
-        <th scope="col" class="num">HunyuanVideo</th>
-        <th scope="col" class="num">CogVideoX-1.5</th>
-        <th scope="col" class="num">Sora</th>
-        <th scope="col" class="num">Kling 1.6</th>
+        <th scope="col" class="num" lang="en">HunyuanVideo</th>
+        <th scope="col" class="num" lang="en">CogVideoX-1.5</th>
+        <th scope="col" class="num" lang="en">Sora</th>
+        <th scope="col" class="num" lang="en">Kling 1.6</th>
       </tr>
     </thead>
     <tbody>
@@ -1243,17 +1243,17 @@ diffusion 或 AR  ControlNet 风格    VLM, 对视频做         在 Predict 上
     <thead><tr><th scope="col">空格</th><th scope="col">为什么空</th><th scope="col">谁可能填上</th></tr></thead>
     <tbody>
       <tr>
-        <th scope="row"><strong>Latent × Content Generation</strong></th>
+        <th scope="row"><strong lang="en">Latent × Content Generation</strong></th>
         <td>latent 不易渲染回像素，消费者看不到</td>
         <td>JEPA 嵌入 + diffusion decoder 配对（V-JEPA → frame decoder）</td>
       </tr>
       <tr>
-        <th scope="row"><strong>Pixel × RL / Planning</strong></th>
+        <th scope="row"><strong lang="en">Pixel × RL / Planning</strong></th>
         <td>pixel 推理太慢，Cosmos 一次 action 240 秒</td>
         <td>Cosmos / SANA-WM 已投入；蒸馏 + 量化能压下来吗</td>
       </tr>
       <tr>
-        <th scope="row"><strong>Latent × Evaluation</strong></th>
+        <th scope="row"><strong lang="en">Latent × Evaluation</strong></th>
         <td>embedding 距离做模型能力评估几乎没人在做</td>
         <td>V-JEPA 2 的 physical reasoning bench 是孤本</td>
       </tr>

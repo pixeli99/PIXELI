@@ -283,6 +283,15 @@ thead th { border-bottom-width: 2px; }
   margin: 0.4em 0 0;
 }
 
+/* scrollbar-width 不继承；各行内滚动容器补 thin，与 html 元素保持一致。
+   scrollbar-color 随 CSS 变量自动跟随亮/暗模式，无需额外 @media 覆盖。 */
+pre,
+.table-scroll,
+.katex-display {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--border);
+}
+
 /* —— Year nav (papers page) —— */
 .year-nav {
   font-family: var(--font-sans);

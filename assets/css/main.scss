@@ -1041,6 +1041,10 @@ main:focus { outline: none; }
   .highlight .dl, .highlight .sd, .highlight .s2, .highlight .se,
   .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr,
   .highlight .s1, .highlight .ss { color: #a83c08; }
+  /* .bp（Python 内置伪：True/False/None/self），亮色 #999 在 --code-bg 上对比度 2.5:1；
+     语义上与 .nb 同类，使用相同加深值。
+     深色模式下此规则被后方 @media (prefers-color-scheme: dark) 块覆盖，不影响深色背景。 */
+  .highlight .bp { color: #005a7d; }
 }
 @media (prefers-color-scheme: dark) and (prefers-contrast: more) {
   :root {
@@ -1248,6 +1252,9 @@ main:focus { outline: none; }
   .highlight .gp { color: #a8a6a0; }
   .highlight .na { color: #80cbc4; }
   .highlight .nb { color: #82aaff; }
+  /* .bp 在 prefers-contrast:more 中被覆盖为 #005a7d（适合亮色背景）；
+     深色背景下此块层叠顺序在后，恢复为可读的深色模式值。 */
+  .highlight .bp { color: #82aaff; }
   .highlight .nc { color: #82aaff; }
   .highlight .no { color: #80cbc4; }
   .highlight .nd { color: #c792ea; }

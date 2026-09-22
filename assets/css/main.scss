@@ -257,6 +257,10 @@ th, td {
   /* body 继承了 oldstyle proportional；表格列数字需等宽对齐，用 tabular lining */
   font-variant-numeric: tabular-nums lining-nums;
 }
+/* td 默认 vertical-align: middle，行高不一时内容垂直居中，读感跳跃；
+   top 对齐更自然，多行单元格（如 world-arena 时间线表的描述列）尤其明显。
+   world-models 全景页自带 vertical-align: middle 覆盖，不受影响。 */
+td { vertical-align: top; }
 th {
   font-family: var(--font-sans);
   font-weight: 600;

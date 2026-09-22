@@ -1059,6 +1059,9 @@ main:focus { outline: none; }
     --muted:  #c2c0b8;  /* ~10:1 on dark --bg */
     --faint:  #aaa8a0;  /* ~7.7:1 on dark --bg, passes AA */
   }
+  /* 暗色模式下图片降至 0.88 opacity 以缓解白底截图对比刺眼；
+     高对比度用户明确要求最大可见度，恢复原始亮度。 */
+  .post-body img { opacity: 1; }
 }
 
 /* —— Forced colors (Windows High Contrast) —— */
@@ -1077,6 +1080,8 @@ main:focus { outline: none; }
   /* mark（搜索结果高亮）同样使用 color-mix + transparent；
      强制色彩下透明背景让高亮完全不可见，改用系统 Mark / MarkText 语义色 */
   mark { background: Mark; color: MarkText; }
+  /* 暗色模式设定的 opacity:0.88 在强制色彩下无意义；系统接管显示控制，图片恢复完整不透明度 */
+  .post-body img { opacity: 1; }
   /* `:target` 落点闪（target-flash）使用 color-mix + transparent，
      强制色彩下不可见；改用系统 Highlight 描边标记当前锚点，
      并禁止无效的 animation（动画体同样不可见，运行无意义）。 */

@@ -978,6 +978,10 @@ main:focus { outline: none; }
     from { background: rgba(217, 119, 87, 0.22); background: color-mix(in srgb, var(--accent) 22%, transparent); }
     to   { background: rgba(217, 119, 87, 0.10); background: color-mix(in srgb, var(--accent) 10%, transparent); }
   }
+  /* 深色背景下 --border (#2a2a27) 与 --bg (#18181a) 对比度约 1.3:1，
+     无法满足 WCAG 1.4.11 对 UI 组件边界的 3:1 要求。
+     --faint (#848280) 对比度约 4.6:1，在可见与低调之间取得平衡。 */
+  #q { border-color: var(--faint); }
 }
 
 /* —— Reduced motion —— */

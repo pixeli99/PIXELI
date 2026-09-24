@@ -69,8 +69,8 @@ body {
 .site-footer {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: max(1.5rem, env(safe-area-inset-left));
+  padding-right: max(1.5rem, env(safe-area-inset-right));
 }
 
 /* —— Header —— */
@@ -846,7 +846,7 @@ main:focus { outline: none; }
 .site-footer {
   margin-top: 6rem;
   padding-top: 1.6rem;
-  padding-bottom: 3rem;
+  padding-bottom: max(3rem, env(safe-area-inset-bottom));
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-family: var(--font-sans);

@@ -1123,6 +1123,19 @@ main:focus { outline: none; }
 
 /* —— Print —— */
 @media print {
+  /* 深色模式下打印时 --muted / --faint 仍为深色模式浅灰值，对白纸对比度不足；
+     在 @media print 里重置全部颜色变量，确保 blockquote、h4/h5、footnotes
+     等使用 var(--muted) 的元素在白纸上可读，不受系统配色方案影响。
+     无需覆盖 --link / --accent：a { color:#000 } 已直接处理链接；
+     accent 仅用于 :focus-visible / ::selection，打印时无意义。 */
+  :root {
+    --text:    #000;
+    --muted:   #4a4a47;  /* 与 prefers-contrast: more 一致，约 7.5:1 on #fff */
+    --faint:   #6b6b66;  /* 约 4.6:1 on #fff */
+    --border:  #ccc;
+    --bg:      #fff;
+    --code-bg: #f0eeea;
+  }
   body { background: #fff; color: #000; }
   a { color: #000; border-bottom: none; }
   .site-nav,
@@ -1267,15 +1280,13 @@ main:focus { outline: none; }
 }
 
 /* —— Print: dark-mode cascade fix —— */
-/* @media print 中的语法高亮重置（见上方 @media print 块）与此处的
-   @media (prefers-color-scheme: dark) 同特指度，但打印块在前、暗色块在后，
+/* @media print 的语法高亮重置与此处的 @media (prefers-color-scheme: dark)
+   同特指度，但打印块在前（见上方 @media print 块）、此暗色块在后，
    导致暗色模式打印时暗色 token（浅色调）覆盖打印重置。
-   此块移至文件末尾，在暗色块之后出现，取得层叠胜出，同时修复
-   --code-bg / --muted 变量在打印时未被还原的问题。 */
+   此块移至文件末尾，在暗色块之后出现，取得层叠胜出。
+   注：--faint / --border / --bg / --text 的打印重置已在上方第一个 @media print 块处理；
+   此块仅保留 --code-bg / --muted（确保最终值正确）与语法高亮 token 颜色。 */
 @media print {
-  /* 暗色模式 --muted #a8a6a0 在白纸背景上对比度约 2.3:1，远低于 AA（4.5:1），
-     导致 blockquote、h4/h5、footnotes 等浅灰色文本在打印时几乎不可读。
-     --faint（#848280 暗色值约 4.8:1）和 --border（#2a2a27，极深）在白纸上均合格，无需重置。 */
   :root { --code-bg: #f4f2ed; --muted: #6b6b66; }
   .highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
   .highlight .kp, .highlight .kr { color: #1c1c1b; font-weight: 600; }

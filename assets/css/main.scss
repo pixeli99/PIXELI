@@ -49,6 +49,8 @@ body {
   font-variant-numeric: oldstyle-nums proportional-nums;
   /* Safari 支持；让行首开括号与行末闭括号悬挂到文字区外，改善 CJK 文本对齐 */
   hanging-punctuation: first last;
+  /* 严格 CJK 换行：禁止 。，！？、）] 等收束标点出现在行首，符合中文排版规范 */
+  line-break: strict;
   /* Source Serif 4 载入时带 opsz 轴（8..60），auto 让浏览器按渲染字号自动选光学尺寸 */
   font-optical-sizing: auto;
 }

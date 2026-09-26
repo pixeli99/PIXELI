@@ -78,8 +78,8 @@ plugins:
 feed:
   path: feed.xml
   # jekyll-feed 默认只输出 10 条；论文 60+ 时，RSS 订阅者永远看不到 10 条之前的记录。
-  # 30 条对 aggregator 体积仍是安全值（每条 excerpt 只有几百字），能覆盖近半年内容。
-  posts_limit: 30
+  # 50 条对 aggregator 体积仍是安全值（每条 excerpt 只有几百字），能覆盖绝大多数记录。
+  posts_limit: 50
   collections:
     notes:
       path: notes.xml

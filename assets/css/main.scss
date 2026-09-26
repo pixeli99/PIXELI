@@ -994,6 +994,11 @@ main:focus { outline: none; }
      两处均升至 --faint (~4.8:1 对 --bg，~4.2:1 对 --code-bg），达到 WCAG 1.4.11 3:1。 */
   pre { border-color: var(--faint); }
   .copy-btn { border-color: var(--faint); }
+  /* details 折叠块左侧导航条（border-left）在关闭态使用 --border；
+     深色背景下 --border (#2a2a27) 对 --bg (#18181a) 对比度约 1.3:1，几乎不可见。
+     details[open] 已用 --faint 覆盖开启态；此规则补齐关闭态，
+     升至 --faint (~4.8:1)，达到 WCAG 1.4.11 3:1。 */
+  details { border-left-color: var(--faint); }
 }
 
 /* —— Reduced motion —— */

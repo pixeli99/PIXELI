@@ -988,6 +988,12 @@ main:focus { outline: none; }
      按钮边界完全不可见；升至 --faint 满足 WCAG 1.4.11 3:1 要求。
      悬停与选中状态已用 --accent 覆盖 border-color，此规则不影响那两种状态。 */
   .pf-btn { border-color: var(--faint); }
+  /* pre（代码块）外框与 copy-btn 边框同样使用 --border，
+     pre 边框在深色背景上对比度约 1.3:1（轮廓几乎不可见），
+     copy-btn 边框对 --code-bg (#232325) 仅约 1.1:1（按钮边界完全消失）。
+     两处均升至 --faint (~4.8:1 对 --bg，~4.2:1 对 --code-bg），达到 WCAG 1.4.11 3:1。 */
+  pre { border-color: var(--faint); }
+  .copy-btn { border-color: var(--faint); }
 }
 
 /* —— Reduced motion —— */

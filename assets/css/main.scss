@@ -954,6 +954,10 @@ main:focus { outline: none; }
      year-nav 为行内 inline 元素，padding 不影响行框高度，只扩大命中区域。 */
   .year-nav a    { padding-top: 0.25em; padding-bottom: 0.25em; }
   .site-footer a { padding-top: 0.3em;  padding-bottom: 0.3em; }
+  /* 主导航与文章前后导航链接（0.9–0.92rem ≈ 14–15px），触屏行高约 22px，
+     同样低于 24px 下限；补 padding 扩大命中区域。 */
+  .site-nav a  { padding-top: 0.3em; padding-bottom: 0.3em; }
+  .post-nav a  { padding-top: 0.3em; padding-bottom: 0.3em; }
 }
 
 /* —— Dark mode —— */

@@ -53,6 +53,9 @@ body {
   line-break: strict;
   /* Source Serif 4 载入时带 opsz 轴（8..60），auto 让浏览器按渲染字号自动选光学尺寸 */
   font-optical-sizing: auto;
+  /* Chrome 119+：按语言学短语边界断行，而非任意字符边界；改善中文长段落的行末对齐。
+     不支持的浏览器静默降级，不影响 line-break: strict 的标点规则。 */
+  word-break: auto-phrase;
 }
 
 ::selection {

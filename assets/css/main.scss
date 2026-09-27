@@ -1011,6 +1011,11 @@ main:focus { outline: none; }
      升至 --faint (~4.8:1)，使表格结构在深色模式下可辨。
      表头粗分隔线（thead th，border-bottom-width: 2px）同样受益。 */
   th, td { border-color: var(--faint); }
+  /* entry-list 与 related-papers 各行之间的虚线分隔（border-bottom dashed）
+     同样使用 --border；深色背景下对比度约 1.3:1，列表结构几乎不可见。
+     升至 --faint (~4.8:1)，与已修复的 pre、details、th/td 等边框保持一致。 */
+  .entry-list li,
+  .related-papers li { border-bottom-color: var(--faint); }
 }
 
 /* —— Reduced motion —— */

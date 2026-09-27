@@ -999,6 +999,11 @@ main:focus { outline: none; }
      details[open] 已用 --faint 覆盖开启态；此规则补齐关闭态，
      升至 --faint (~4.8:1)，达到 WCAG 1.4.11 3:1。 */
   details { border-left-color: var(--faint); }
+  /* 表格单元格行分隔线（border-bottom）同样使用 --border，
+     深色背景下对比度约 1.3:1，行与行之间的分割几乎不可见；
+     升至 --faint (~4.8:1)，使表格结构在深色模式下可辨。
+     表头粗分隔线（thead th，border-bottom-width: 2px）同样受益。 */
+  th, td { border-color: var(--faint); }
 }
 
 /* —— Reduced motion —— */

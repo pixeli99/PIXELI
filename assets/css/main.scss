@@ -30,7 +30,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: stable both-edges;
   scrollbar-width: thin;
   scrollbar-color: var(--muted) var(--border);
 }
@@ -49,8 +49,13 @@ body {
   font-variant-numeric: oldstyle-nums proportional-nums;
   /* Safari 支持；让行首开括号与行末闭括号悬挂到文字区外，改善 CJK 文本对齐 */
   hanging-punctuation: first last;
+  /* 严格 CJK 换行：禁止 。，！？、）] 等收束标点出现在行首，符合中文排版规范 */
+  line-break: strict;
   /* Source Serif 4 载入时带 opsz 轴（8..60），auto 让浏览器按渲染字号自动选光学尺寸 */
   font-optical-sizing: auto;
+  /* Chrome 119+：按语言学短语边界断行，而非任意字符边界；改善中文长段落的行末对齐。
+     不支持的浏览器静默降级，不影响 line-break: strict 的标点规则。 */
+  word-break: auto-phrase;
 }
 
 ::selection {
@@ -69,8 +74,8 @@ body {
 .site-footer {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: max(1.5rem, env(safe-area-inset-left));
+  padding-right: max(1.5rem, env(safe-area-inset-right));
 }
 
 /* —— Header —— */
@@ -846,7 +851,7 @@ main:focus { outline: none; }
 .site-footer {
   margin-top: 6rem;
   padding-top: 1.6rem;
-  padding-bottom: 3rem;
+  padding-bottom: max(3rem, env(safe-area-inset-bottom));
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-family: var(--font-sans);
@@ -949,6 +954,10 @@ main:focus { outline: none; }
      year-nav 为行内 inline 元素，padding 不影响行框高度，只扩大命中区域。 */
   .year-nav a    { padding-top: 0.25em; padding-bottom: 0.25em; }
   .site-footer a { padding-top: 0.3em;  padding-bottom: 0.3em; }
+  /* 主导航与文章前后导航链接（0.9–0.92rem ≈ 14–15px），触屏行高约 22px，
+     同样低于 24px 下限；补 padding 扩大命中区域。 */
+  .site-nav a  { padding-top: 0.3em; padding-bottom: 0.3em; }
+  .post-nav a  { padding-top: 0.3em; padding-bottom: 0.3em; }
 }
 
 /* —— Dark mode —— */
@@ -979,10 +988,39 @@ main:focus { outline: none; }
     to   { background: rgba(217, 119, 87, 0.10); background: color-mix(in srgb, var(--accent) 10%, transparent); }
   }
   /* 深色背景下 --border (#2a2a27) 与 --bg (#18181a) 对比度约 1.3:1，
-     无法满足 WCAG 1.4.11 非文字对比度 3:1 要求。以下所有带边框的
-     UI 组件与页面结构分隔线改用 --faint (#848280，~4.8:1)。*/
-  #q, pre, .copy-btn, .pf-btn, details, kbd,
-  th, td, .entry-list li, .related-papers li,
+     无法满足 WCAG 1.4.11 对 UI 组件边界的 3:1 要求。
+     --faint (#848280) 对比度约 4.6:1，在可见与低调之间取得平衡。 */
+  #q { border-color: var(--faint); }
+  /* 过滤按钮（.pf-btn）边框同样使用 --border，深色模式下对比度约 1:1，
+     按钮边界完全不可见；升至 --faint 满足 WCAG 1.4.11 3:1 要求。
+     悬停与选中状态已用 --accent 覆盖 border-color，此规则不影响那两种状态。 */
+  .pf-btn { border-color: var(--faint); }
+  /* pre（代码块）外框与 copy-btn 边框同样使用 --border，
+     pre 边框在深色背景上对比度约 1.3:1（轮廓几乎不可见），
+     copy-btn 边框对 --code-bg (#232325) 仅约 1.1:1（按钮边界完全消失）。
+     两处均升至 --faint (~4.8:1 对 --bg，~4.2:1 对 --code-bg），达到 WCAG 1.4.11 3:1。 */
+  pre { border-color: var(--faint); }
+  .copy-btn { border-color: var(--faint); }
+  /* details 折叠块左侧导航条（border-left）在关闭态使用 --border；
+     深色背景下 --border (#2a2a27) 对 --bg (#18181a) 对比度约 1.3:1，几乎不可见。
+     details[open] 已用 --faint 覆盖开启态；此规则补齐关闭态，
+     升至 --faint (~4.8:1)，达到 WCAG 1.4.11 3:1。 */
+  details { border-left-color: var(--faint); }
+  /* 表格单元格行分隔线（border-bottom）同样使用 --border，
+     深色背景下对比度约 1.3:1，行与行之间的分割几乎不可见；
+     升至 --faint (~4.8:1)，使表格结构在深色模式下可辨。
+     表头粗分隔线（thead th，border-bottom-width: 2px）同样受益。 */
+  th, td { border-color: var(--faint); }
+  /* entry-list 与 related-papers 各行之间的虚线分隔（border-bottom dashed）
+     同样使用 --border；深色背景下对比度约 1.3:1，列表结构几乎不可见。
+     升至 --faint (~4.8:1)，与已修复的 pre、details、th/td 等边框保持一致。 */
+  .entry-list li,
+  .related-papers li { border-bottom-color: var(--faint); }
+  /* kbd（键盘输入）与页面结构横向分隔线（site-header、hr、footnotes、
+     post-nav、related-papers 区块、site-footer）同样使用 --border；
+     深色背景下对比度约 1.3:1，结构边界几乎不可见。升至 --faint (~4.8:1)，
+     与已修复的其他边框保持一致，补全深色模式全局 WCAG 1.4.11 覆盖。 */
+  kbd,
   .site-header, hr, .footnotes,
   .post-nav, .related-papers, .site-footer { border-color: var(--faint); }
 }
@@ -1122,6 +1160,19 @@ main:focus { outline: none; }
 
 /* —— Print —— */
 @media print {
+  /* 深色模式下打印时 --muted / --faint 仍为深色模式浅灰值，对白纸对比度不足；
+     在 @media print 里重置全部颜色变量，确保 blockquote、h4/h5、footnotes
+     等使用 var(--muted) 的元素在白纸上可读，不受系统配色方案影响。
+     无需覆盖 --link / --accent：a { color:#000 } 已直接处理链接；
+     accent 仅用于 :focus-visible / ::selection，打印时无意义。 */
+  :root {
+    --text:    #000;
+    --muted:   #4a4a47;  /* 与 prefers-contrast: more 一致，约 7.5:1 on #fff */
+    --faint:   #6b6b66;  /* 约 4.6:1 on #fff */
+    --border:  #ccc;
+    --bg:      #fff;
+    --code-bg: #f0eeea;
+  }
   body { background: #fff; color: #000; }
   a { color: #000; border-bottom: none; }
   .site-nav,
@@ -1266,15 +1317,13 @@ main:focus { outline: none; }
 }
 
 /* —— Print: dark-mode cascade fix —— */
-/* @media print 中的语法高亮重置（见上方 @media print 块）与此处的
-   @media (prefers-color-scheme: dark) 同特指度，但打印块在前、暗色块在后，
+/* @media print 的语法高亮重置与此处的 @media (prefers-color-scheme: dark)
+   同特指度，但打印块在前（见上方 @media print 块）、此暗色块在后，
    导致暗色模式打印时暗色 token（浅色调）覆盖打印重置。
-   此块移至文件末尾，在暗色块之后出现，取得层叠胜出，同时修复
-   --code-bg / --muted 变量在打印时未被还原的问题。 */
+   此块移至文件末尾，在暗色块之后出现，取得层叠胜出。
+   注：--faint / --border / --bg / --text 的打印重置已在上方第一个 @media print 块处理；
+   此块仅保留 --code-bg / --muted（确保最终值正确）与语法高亮 token 颜色。 */
 @media print {
-  /* 暗色模式 --muted #a8a6a0 在白纸背景上对比度约 2.3:1，远低于 AA（4.5:1），
-     导致 blockquote、h4/h5、footnotes 等浅灰色文本在打印时几乎不可读。
-     --faint（#848280 暗色值约 4.8:1）和 --border（#2a2a27，极深）在白纸上均合格，无需重置。 */
   :root { --code-bg: #f4f2ed; --muted: #6b6b66; }
   .highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
   .highlight .kp, .highlight .kr { color: #1c1c1b; font-weight: 600; }

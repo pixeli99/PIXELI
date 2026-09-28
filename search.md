@@ -71,13 +71,13 @@ sitemap: false
   }
 
   function highlight(escaped, terms) {
-    var s = escaped;
-    terms.forEach(function (t) {
-      if (!t) return;
-      var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-      s = s.replace(re, '<mark>$1</mark>');
-    });
-    return s;
+    var filtered = terms.filter(Boolean);
+    if (!filtered.length) return escaped;
+    var re = new RegExp(
+      '(' + filtered.map(function(t) { return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')',
+      'gi'
+    );
+    return escaped.replace(re, '<mark>$1</mark>');
   }
 
   function snippet(text, terms, maxLen) {

@@ -56,6 +56,9 @@ body {
   /* Chrome 119+：按语言学短语边界断行，而非任意字符边界；改善中文长段落的行末对齐。
      不支持的浏览器静默降级，不影响 line-break: strict 的标点规则。 */
   word-break: auto-phrase;
+  /* Chrome 123+：汉字与字母/数字之间自动插入 1/8em 的薄空格（如"MoE 模型"、"2024 年"），
+     与手动插入半角空格视觉相近，但完全由浏览器处理；不支持的浏览器静默降级。 */
+  text-autospace: ideograph-alpha ideograph-numeric;
 }
 
 ::selection {

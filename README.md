@@ -50,6 +50,15 @@ published: false            # 可选，草稿不发布时加
 
 论文笔记推荐四段：`## 一句话` / `## 方法` / `## 想法` / `## 引用`。
 
+常用标签（避免拼写分歧，≥ 3 篇的已有 tag）：
+
+```
+World Model  MoE  Generative  Scaling  Routing  Training  Video  Sparse
+DeepSeek  RL  Inference  Diffusion  Open Source  Interactive  Infra
+Benchmark  Long Context  Attention  Self-Supervised  Robotics
+Tool Use  Real-Time  Driving  Tokenizer  Quantization  JEPA
+```
+
 `## 一句话` 的内容会自动用作：列表页摘要、搜索片段、og:description / JSON-LD reviewBody。  
 `## 引用` 下的 bibtex 代码块在文章页自动折叠为可展开的 `▸ BibTeX`。
 

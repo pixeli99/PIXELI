@@ -292,6 +292,11 @@ description: World Models 领域论文全景：时间线、方法对比、技术
   table.wm-tab tbody th { font-weight: normal; text-align: left; }
   table.wm-tab tbody tr:last-child td,
   table.wm-tab tbody tr:last-child th { border-bottom: none; }
+  @media (prefers-color-scheme: dark) {
+    table.wm-tab thead th,
+    table.wm-tab tbody td,
+    table.wm-tab tbody th { border-color: var(--faint); }
+  }
   table.wm-tab tbody tr:nth-child(even) td:not(.hm):not([style*="background"]),
   table.wm-tab tbody tr:nth-child(even) th { background: var(--wm-stripe); }
   table.wm-tab tbody tr:hover td:not(.hm):not([style*="background"]),
